@@ -1,0 +1,55 @@
+// Real-time Online/Offline Charging System (OCS) for Telecom & ISP environments
+// Copyright (C) ITsysCOM GmbH
+//
+// This file contains the default configuration hardcoded into CGRateS.
+// This is what you get when you load CGRateS with an empty configuration file.
+
+{
+
+
+"general": {
+        "connect_attempts": 10,                                                                 // initial server connect attempts
+        "reconnects": 1,
+},
+
+"listen": {
+        "rpc_json": ":3012",                                    // RPC JSON listening address
+        "rpc_gob": ":3013",
+        "http": ":3080"
+},
+////////////////////////////////////SMG///////////////////////////////////////////
+"sessions": {
+        "enabled": true,                                                // starts session manager service: <true|false>
+        //"listen_bijson": "127.0.0.1:2014",            // address where to listen for bidirectional JSON-RPC requests
+        "rals_conns": [ 
+                //{"address": "127.0.0.1:2012","transport":"*json"}
+                {"address": "cgr-lab-ptk-01:2012","transport":"*json"}, // first to try, write
+                {"address": "cgr-lab-hfa-01:2012","transport":"*json"}  // secondary , read (SLAVEOF NO ONE)
+                //{"address": "*internal"}                      // address where to reach the RALs <""|*internal|127.0.0.1:2013>
+        ],
+        "cdrs_conns": [
+                {"address": "127.0.0.1:2012","transport":"*json"}
+                //{"address": "*internal"}                      // address where to reach CDR Server, empty to disable CDR capturing <*internal|x.y.z.y:1234>
+        ],
+        //"resources_conns": [{"address": "127.0.0.1:2012","transport":"*json"}],                              // address where to reach the ResourceS <""|*internal|127.0.0.1:2013>
+        //"thresholds_conns": [{"address": "127.0.0.1:2012","transport":"*json"}],                             // address where to reach the ThresholdS <""|*internal|127.0.0.1:2013>
+        //"stats_conns": [{"address": "127.0.0.1:2012","transport":"*json"}],                                  // address where to reach the StatS <""|*internal|127.0.0.1:2013>
+        //"suppliers_conns": [{"address": "127.0.0.1:2012","transport":"*json"}],                              // address where to reach the SupplierS <""|*internal|127.0.0.1:2013>
+        "attributes_conns": [
+                //{"address": "127.0.0.1:2012","transport":"*json"}                                            // address where to reach the AttributeS <""|*internal|127.0.0.1:2013>
+                {"address": "cgr-lab-ptk-01:2012","transport":"*json"}, // first to try, write
+                {"address": "cgr-lab-hfa-01:2012","transport":"*json"}  // secondary 
+        ],
+        //"session_replication_conns": [{"address": "cgr-replica:2012","transport":"*json"}],           // replicate sessions towards these session services
+        //"debit_interval": "0s",                                       // interval to perform debits on.
+        //"min_call_duration": "0s",                            // only authorize calls with allowed duration higher than this
+        "max_call_duration": "1h",                              // maximum call duration a prepaid call can last
+        "session_ttl": "15m",                                   // time after a session with no updates is terminated, not defined by default
+        //"session_ttl_max_delay": "",                  // activates session_ttl randomization and limits the maximum possible delay
+        //"session_ttl_last_used": "",                  // tweak LastUsed for sessions timing-out, not defined by default
+        //"session_ttl_usage": "",                              // tweak Usage for sessions timing-out, not defined by default
+        "session_indexes": ["Account", "Category"],     // index sessions based on these fields for GetActiveSessions API
+        //"client_protocol": 1.0,                                       // version of protocol to use when acting as JSON-PRC client <"0","1.0">
+        //"channel_sync_interval": "0",                 // sync channels regularly (0 to disable sync session)
+},
+}
