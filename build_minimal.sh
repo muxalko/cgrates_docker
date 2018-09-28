@@ -2,7 +2,7 @@
 echo "Building CGRateS Minimal Dockers..."
 
 cd ./minimal
-cp /home/golan/proj/bin/cgr-* ./bin
+cp /home/golan/proj/bin/static/cgr-* ./bin
 # try to build a docker images
 BIN=cgr-engine make build login push
 BIN=cgr-migrator make build login push
