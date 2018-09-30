@@ -1,44 +1,6 @@
 {
-
-"general": {
-	
-	"rounding_decimals": 5,									// system level precision for floats
-	"default_request_type": "*prepaid",						// default request type to consider when missing from requests: <""|*prepaid|*postpaid|*pseudoprepaid|*rated>
-	"default_tenant": "golant",								// default tenant to consider when missing from requests
-	"connect_attempts": 10,									// initial server connect attempts
-	"reconnects": 1,										// number of retries in case of connection lost
-},
-
-
-"data_db": {								// database used to store runtime data (eg: accounts, cdr stats)
-	//"db_type": "redis",						// data_db type: <redis|mongo>
-	"db_host": "redis-master.redis",					// data_db host address
-	"db_name": "0", 						// data_db database name to connect to
-},
-
-"stor_db": {								// database used to store offline tariff plans and CDRs
-	"db_type": "mysql",						// stor database type to use: <mongo|mysql|postgres>
-	"db_host": "mysql-master-mysql",					// the host to connect to
-	"db_port": 3306,						// the port to reach the stordb
-	"db_user": "cgrates",                 // username to use when connecting to stordb
-    "db_password": "CGRateS.org", 
-	"max_idle_conns": 0,					// maximum database connections idle, not applying for mongo
-	"conn_max_lifetime": 7200, 				// maximum amount of time in seconds a connection may be reused (0 for unlimited), not applying for mongo
-},
-
-"listen": {
-	"rpc_json": ":2012",					// RPC JSON listening address
-	"http": ":2080",						// HTTP listening address
-},
-
-"scheduler": {
-	"enabled": false,						// start Scheduler service: <true|false>
-},
-
-
-"rals": {
-	"enabled": true,						// enable Rater service: <true|false>
-	//"thresholds_conns": [{"address": "127.0.0.1:2012","transport":"*json"}],					// address where to reach the thresholds service, empty to disable thresholds functionality: <""|*internal|x.y.z.y:1234>
-},
-
+	"rals": {
+		"enabled": true,					
+		//"thresholds_conns": [{"address": "127.0.0.1:2012","transport":"*json"}],					// address where to reach the thresholds service, empty to disable thresholds functionality: <""|*internal|x.y.z.y:1234>
+	}
 }

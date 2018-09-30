@@ -1,6 +1,5 @@
 {
 ////////////////////////////////////DIAMETER///////////////////////////////////////////
-
 "diameter_agent": {
         "enabled": true,                                                                                       // enables the diameter agent: <true|false>
         "listen": "da-local-ip:3868",                                                                     // address where to listen for diameter requests <x.y.z.y:1234>
