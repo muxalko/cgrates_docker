@@ -3,6 +3,6 @@ echo "Building CGRateS Developer Docker..."
 
 cd ./devel
 # try to build a docker images
-make build login push
+make create_marker build login push
 
 echo "Finished building devel docker"

@@ -16,6 +16,9 @@ RUN wget -qO- https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz | t
 #install glide
 RUN GOROOT=/root/go GOPATH=/root/code /root/go/bin/go get github.com/Masterminds/glide
 
+# skip caching
+COPY marker /dev/null
+
 # get cgrates from github
 RUN mkdir -p /root/code/src/github.com/cgrates; cd /root/code/src/github.com/cgrates; git clone https://github.com/cgrates/cgrates.git
 
