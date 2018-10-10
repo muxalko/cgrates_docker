@@ -21,7 +21,8 @@ RUN GOROOT=/root/go GOPATH=/root/code /root/go/bin/go get github.com/Masterminds
 COPY marker /dev/null
 
 # get cgrates from github
-RUN mkdir -p /root/code/src/github.com/cgrates; cd /root/code/src/github.com/cgrates; git clone https://github.com/cgrates/cgrates.git
+#RUN mkdir -p /root/code/src/github.com/cgrates; cd /root/code/src/github.com/cgrates; git clone https://github.com/cgrates/cgrates.git
+RUN mkdir -p /root/code/src/github.com/cgrates; cd /root/code/src/github.com/cgrates; git clone git@github.com/cgrates/cgrates.git
 
 # get cgrates configs + tariffplans from gitlab
 #RUN mkdir -p /root/code/src/gitlab-ptk.gt.local/Configs; cd /root/code/src/gitlab-ptk.gt.local/Configs; git clone git@gitlab-ptk.gt.local:Configs/CGRates.git
