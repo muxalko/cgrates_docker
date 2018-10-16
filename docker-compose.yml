@@ -1,55 +1,46 @@
 version: "2"
 services:
-    sh-cassandra:
-        image: golan/sh-cassandra:3.3
-        container_name: sh-cassandra
-        volumes:
-            - /opt/golan/cassandra/etc:/etc/cassandra
-            - /opt/golan/cassandra:/var/lib/cassandra
-        ports:
-            - "7000-7001:7000-7001"
-            - "9042:9042"
-            - "9160:9160"
-            - "7199:7199"
-        environment:
-            - CASSANDRA_CLUSTER_NAME="GOLAN CLUSTER"
-            - CASSANDRA_BROADCAST_ADDRESS="10.224.212.35"
-            - CASSANDRA_SEEDS="10.192.209.35,10.224.212.35"
-        logging:
-            driver: "json-file"
-            options:
-                max-size: "100m"
-                max-file: "1"
+  redis:
+      image: bitnami/redis:latest
+      container_name: redis-master
+      volumes:
+          - /traces/redis:/bitnami/redis
+      ports:
+        - '6379:6379'
+      environment:
+        # ALLOW_EMPTY_PASSWORD is recommended only for development.
+        - ALLOW_EMPTY_PASSWORD=yes
+        - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+      hostname: redis
+      networks:
+        - redis-net
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
 
-    sh-router:
-        image: golan/sh-router
-        volumes:
-            - $PWD:/sh-router/etc
-            - /opt/sh-router-log:/sh-router/log
-        depends_on:
-            - sh-cassandra
-        environment:
-            - SH-SERVICE=sh-router
-        logging:
-            driver: "json-file"
-            options:
-                max-size: "100m"
-                max-file: "1"
+  cgr-engine-diameter:
+      image: gitlab-ptk.gt.local:5005/cgr-engine:76dcc17
+      container_name: cgr-engine-diameter
+      volumes:
+          - $PWD/config/common:/etc/cgrates/common
+          - $PWD/config/diameter:/etc/cgrates/diameter
+      ports:
+          - "3868:3868"
+      depends_on:
+          - redis
+      environment:
+          - CGR-SERVICE=diameter
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
 
-    sh-provision:
-        image: golan/sh-provision
-        container_name: sh-provision
-        volumes:
-            - $PWD:/sh-provision/etc
-            - /opt/sh-provision-log:/sh-provision/log
-        ports:
-            - "8091:8091"
-        depends_on:
-            - sh-cassandra
-        environment:
-            - SH-SERVICE=sh-provision
-        logging:
-            driver: "json-file"
-            options:
-                max-size: "100m"
-                max-file: "1"
+networks:
+  redis-net:
+
+volumes:
+  redis_data:
+    driver: local
