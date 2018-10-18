@@ -1,17 +1,19 @@
-version: "2"
+version: "3.1"
 services:
-  redis:
-      image: bitnami/redis:latest
+  redis-master:
+      image: bitnami/redis:4.0.11
       container_name: redis-master
+      hostname: redis-master
       volumes:
           - /traces/redis:/bitnami/redis
       ports:
         - '6379:6379'
       environment:
+        - REDIS_REPLICATION_MODE=master
+        - REDIS_PASSWORD=QyV9LVnpbm
         # ALLOW_EMPTY_PASSWORD is recommended only for development.
-        - ALLOW_EMPTY_PASSWORD=yes
-        - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
-      hostname: redis
+        #- ALLOW_EMPTY_PASSWORD=yes
+        #- REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
       networks:
         - redis-net
       logging:
@@ -19,17 +21,19 @@ services:
         options:
           max-size: "100m"
           max-file: "1"
+      sysctls:
+        net.core.somaxconn: '1024'
 
   cgr-engine-diameter:
-      image: gitlab-ptk.gt.local:5005/cgr-engine:76dcc17
+      image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
       container_name: cgr-engine-diameter
       volumes:
-          - $PWD/config/common:/etc/cgrates/common
-          - $PWD/config/diameter:/etc/cgrates/diameter
+          - ./config/common:/etc/cgrates/common
+          - ./config/diameter:/etc/cgrates/diameter
       ports:
           - "3868:3868"
       depends_on:
-          - redis
+          - redis-master
       environment:
           - CGR-SERVICE=diameter
       logging:
@@ -41,6 +45,6 @@ services:
 networks:
   redis-net:
 
-volumes:
-  redis_data:
-    driver: local
+#volumes:
+#  redis_data:
+#    driver: local
