@@ -93,7 +93,7 @@ services:
         - sessions-net
         - cdrs-net
       depends_on:
-          - rals-net
+          - rals
       environment:
           - CGR-SERVICE=cdrs
       logging:
