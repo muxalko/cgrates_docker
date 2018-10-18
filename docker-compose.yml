@@ -12,8 +12,6 @@ services:
         # ALLOW_EMPTY_PASSWORD is recommended only for development.
         #- ALLOW_EMPTY_PASSWORD=yes
         #- REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
-      expose:
-          - "6379"
       networks:
         - redis-net
       logging:
@@ -74,6 +72,7 @@ services:
           - ./configs/rals:/etc/cgrates/rals
       networks:
         - rals-net
+        - redis-net 
       depends_on:
           - redis-master
       environment:
