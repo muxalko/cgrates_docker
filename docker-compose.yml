@@ -25,6 +25,7 @@ services:
   diameter:
       image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
       container_name: diameter
+      hostname: diameter
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/diameter:/etc/cgrates/diameter
@@ -45,6 +46,7 @@ services:
   sessions:
       image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
       container_name: sessions
+      hostname: sessions
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/sessions:/etc/cgrates/sessions
@@ -64,6 +66,7 @@ services:
   rals:
       image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
       container_name: rals
+      hostname: rals
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/rals:/etc/cgrates/rals
