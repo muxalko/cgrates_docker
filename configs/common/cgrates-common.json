@@ -8,13 +8,13 @@
 	},
 
 	"data_db": {
-		"db_host": "redis-master.redis",
+		"db_host": "redis-master",
 		"db_name": "0",
 		"db_password": "QyV9LVnpbm"
 	},
 
 	"stor_db": {
-		"db_host": "cgrates-stordb-tp-mysql.mysql",
+		"db_host": "ocs-db-ptk-node-01",
 		"db_user": "cgrates",
 		"db_password": "cgrsecret", 
 		"max_idle_conns": 0,
