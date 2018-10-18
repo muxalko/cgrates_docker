@@ -8,8 +8,8 @@
 	"cdr_requires_session": true,
 	"debit_interval": "10m",
 	"timezone": "",
-	"origin_host": "k8s-cgr-lab-ptk",
-	"origin_realm": "opencloud.com",
+	"origin_host": "ppcc-cgr-ptk-node-01",
+	"origin_realm": "ppcc-cgr-ptk-node-01.local",
 	"vendor_id": 0,
 	"product_name": "FLEXI NG",
 	"request_processors": [
