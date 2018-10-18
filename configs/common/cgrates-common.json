@@ -14,9 +14,9 @@
 	},
 
 	"stor_db": {
-		"db_host": "ocs-db-ptk-node-01",
+		"db_host": "10.224.243.58",
 		"db_user": "cgrates",
-		"db_password": "cgrsecret", 
+		"db_password": "a6a237de16", 
 		"max_idle_conns": 0,
 		"conn_max_lifetime": 7200,
 	},
