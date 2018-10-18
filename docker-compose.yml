@@ -6,8 +6,6 @@ services:
       hostname: redis-master
       volumes:
           - /traces/redis:/bitnami/redis
-      ports:
-        - '6379:6379'
       environment:
         - REDIS_REPLICATION_MODE=master
         - REDIS_PASSWORD=QyV9LVnpbm
@@ -32,8 +30,10 @@ services:
           - ./configs/diameter:/etc/cgrates/diameter
       ports:
           - "3868:3868"
+      networks:
+        - cgr-sessions-net
       depends_on:
-          - redis-master
+          - cgr-engine-sessions
       environment:
           - CGR-SERVICE=diameter
       logging:
@@ -42,8 +42,49 @@ services:
           max-size: "100m"
           max-file: "1"
 
+  cgr-engine-sessions:
+      image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
+      container_name: cgr-engine-sessions
+      volumes:
+          - ./configs/common:/etc/cgrates/common
+          - ./configs/sessions:/etc/cgrates/sessions
+      networks:
+        - cgr-rals-net
+        - cgr-sessions-net
+      depends_on:
+          - cgr-engine-rals
+      environment:
+          - CGR-SERVICE=sessions
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
+
+  cgr-engine-rals:
+      image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
+      container_name: cgr-engine-rals
+      volumes:
+          - ./configs/common:/etc/cgrates/common
+          - ./configs/rals:/etc/cgrates/rals
+      networks:
+        - cgr-rals-net
+      depends_on:
+          - redis-master
+      environment:
+          - CGR-SERVICE=rals
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
+
+
+
 networks:
   redis-net:
+  cgr-rals-net:
+  cgr-sessions-net:
 
 #volumes:
 #  redis_data:
