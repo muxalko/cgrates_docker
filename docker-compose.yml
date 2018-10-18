@@ -28,8 +28,8 @@ services:
       image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
       container_name: cgr-engine-diameter
       volumes:
-          - ./config/common:/etc/cgrates/common
-          - ./config/diameter:/etc/cgrates/diameter
+          - ./configs/common:/etc/cgrates/common
+          - ./configs/diameter:/etc/cgrates/diameter
       ports:
           - "3868:3868"
       depends_on:
