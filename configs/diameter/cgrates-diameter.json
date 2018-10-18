@@ -3,7 +3,7 @@
 	"enabled": true,
 	"listen": ":3868",
 	"dictionaries_dir": "/etc/cgrates/diameter/dict/",
-	"sessions_conns": [ {"address": "sessions:2012","transport":"*gob"}],
+	"sessions_conns": [ {"address": "sessions:2013","transport":"*gob"}],
 	"create_cdr": true,
 	"cdr_requires_session": true,
 	"debit_interval": "10m",
