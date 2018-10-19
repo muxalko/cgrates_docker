@@ -93,6 +93,7 @@ services:
 #       - rals-net
 #       - sessions-net
       depends_on:
+          - rals
           - cdrs
           - attributes
       environment:
@@ -115,7 +116,6 @@ services:
  #       - sessions-net
       depends_on:
           - sessions
-          - attributes
       environment:
           - CGR-SERVICE=diameter
       logging:
