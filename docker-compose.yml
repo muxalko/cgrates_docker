@@ -3,6 +3,7 @@ services:
   redis-master:
       image: bitnami/redis:4.0.11
       container_name: redis-master
+      restart: always
       volumes:
           - /traces/redis:/bitnami/redis
       environment:
@@ -26,6 +27,7 @@ services:
   rals:
       image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
       container_name: rals
+      restart: always
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/rals:/etc/cgrates/rals
@@ -33,7 +35,7 @@ services:
         - rals-net
         - redis-net 
       depends_on:
-          - redis-master
+          #- redis-master
       environment:
           - CGR-SERVICE=rals
       logging:
@@ -46,7 +48,7 @@ services:
   cdrs:
       image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
       container_name: cdrs
-      hostname: cdrs
+      restart: always
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/cdrs:/etc/cgrates/cdrs
@@ -54,7 +56,7 @@ services:
        - rals-net
        - sessions-net
       depends_on:
-          - rals
+          #- rals
       environment:
           - CGR-SERVICE=cdrs
       logging:
@@ -66,6 +68,7 @@ services:
   attributes:
       image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
       container_name: attributes
+      restart: always
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/attributes:/etc/cgrates/attributes
@@ -76,7 +79,7 @@ services:
        - rals-net
        - sessions-net
       depends_on:
-          - redis-master
+          #- redis-master
       environment:
           - CGR-SERVICE=attributes
       logging:
@@ -88,6 +91,7 @@ services:
   sessions:
       image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
       container_name: sessions
+      restart: always
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/sessions:/etc/cgrates/sessions
@@ -95,9 +99,9 @@ services:
        - rals-net
        - sessions-net
       depends_on:
-          - rals
-          - cdrs
-          - attributes
+          #- rals
+          #- cdrs
+          #- attributes
       environment:
           - CGR-SERVICE=sessions
       logging:
@@ -109,6 +113,7 @@ services:
   diameter:
       image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
       container_name: diameter
+      restart: always
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/diameter:/etc/cgrates/diameter
@@ -117,7 +122,7 @@ services:
       networks:
         - sessions-net
       depends_on:
-          - sessions
+          #- sessions
       environment:
           - CGR-SERVICE=diameter
       logging:
