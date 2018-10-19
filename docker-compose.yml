@@ -90,6 +90,7 @@ services:
           - ./configs/common:/etc/cgrates/common
           - ./configs/attributes:/etc/cgrates/attributes
       networks:
+        - redis-net
         - rals-net
         - attributes-net
         - sessions-net
