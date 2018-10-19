@@ -34,7 +34,7 @@ services:
       networks:
         - rals-net
         - redis-net 
-      depends_on:
+      #depends_on:
           #- redis-master
       environment:
           - CGR-SERVICE=rals
@@ -55,7 +55,7 @@ services:
       networks:
        - rals-net
        - sessions-net
-      depends_on:
+      #depends_on:
           #- rals
       environment:
           - CGR-SERVICE=cdrs
@@ -78,7 +78,7 @@ services:
        - redis-net
        - rals-net
        - sessions-net
-      depends_on:
+      #depends_on:
           #- redis-master
       environment:
           - CGR-SERVICE=attributes
@@ -98,7 +98,7 @@ services:
       networks:
        - rals-net
        - sessions-net
-      depends_on:
+      #depends_on:
           #- rals
           #- cdrs
           #- attributes
@@ -121,7 +121,7 @@ services:
           - "3868:3868"
       networks:
         - sessions-net
-      depends_on:
+      #depends_on:
           #- sessions
       environment:
           - CGR-SERVICE=diameter
