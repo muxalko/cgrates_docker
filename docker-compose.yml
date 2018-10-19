@@ -42,24 +42,6 @@ services:
           max-size: "100m"
           max-file: "1"
 
-  sessions:
-      image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
-      container_name: sessions
-      volumes:
-          - ./configs/common:/etc/cgrates/common
-          - ./configs/sessions:/etc/cgrates/sessions
-      networks:
-        - rals-net
-        - sessions-net
-      depends_on:
-          - rals
-      environment:
-          - CGR-SERVICE=sessions
-      logging:
-        driver: "json-file"
-        options:
-          max-size: "100m"
-          max-file: "1"
 
   cdrs:
       image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
@@ -76,6 +58,25 @@ services:
           - rals
       environment:
           - CGR-SERVICE=cdrs
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
+
+  sessions:
+      image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
+      container_name: sessions
+      volumes:
+          - ./configs/common:/etc/cgrates/common
+          - ./configs/sessions:/etc/cgrates/sessions
+      networks:
+        - rals-net
+        - sessions-net
+      depends_on:
+          - cdrs
+      environment:
+          - CGR-SERVICE=sessions
       logging:
         driver: "json-file"
         options:

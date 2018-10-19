@@ -3,7 +3,7 @@
 	"sessions": {
 			"enabled": true,
 			"rals_conns": [ {"address": "rals:2013","transport":"*gob"}],
-			//"cdrs_conns": [ {"address": "cdrs:2013","transport":"*gob"}],
+			"cdrs_conns": [ {"address": "cdrs:2013","transport":"*gob"}],
 			//"resources_conns": [{"address": "127.0.0.1:2012","transport":"*json"}],                              
 			//"thresholds_conns": [{"address": "127.0.0.1:2012","transport":"*json"}],                             
 			//"stats_conns": [{"address": "127.0.0.1:2012","transport":"*json"}],                                  
