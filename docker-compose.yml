@@ -7,9 +7,9 @@ services:
           - /traces/redis:/bitnami/redis
       environment:
         - REDIS_REPLICATION_MODE=master
-        #- REDIS_PASSWORD=QyV9LVnpbm
+        - REDIS_PASSWORD=QyV9LVnpbm
         # ALLOW_EMPTY_PASSWORD is recommended only for development.
-        - ALLOW_EMPTY_PASSWORD=yes
+        #- ALLOW_EMPTY_PASSWORD=yes
         #- REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
       ports:
           - "6379:6379"
@@ -77,6 +77,26 @@ services:
           - cdrs
       environment:
           - CGR-SERVICE=sessions
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
+
+  attributes:
+      image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
+      container_name: attributes
+      volumes:
+          - ./configs/common:/etc/cgrates/common
+          - ./configs/attributes:/etc/cgrates/attributes
+      networks:
+        - rals-net
+        - attributes-net
+        - sessions-net
+      depends_on:
+          - sessions
+      environment:
+          - CGR-SERVICE=attributes
       logging:
         driver: "json-file"
         options:

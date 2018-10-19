@@ -10,7 +10,7 @@
 	"data_db": {
 		"db_host": "redis-master",
 		"db_name": "0",
-		//"db_password": "QyV9LVnpbm"
+		"db_password": "QyV9LVnpbm"
 	},
 
 	"stor_db": {

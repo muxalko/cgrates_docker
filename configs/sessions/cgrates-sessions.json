@@ -8,7 +8,7 @@
 			//"thresholds_conns": [{"address": "127.0.0.1:2012","transport":"*json"}],                             
 			//"stats_conns": [{"address": "127.0.0.1:2012","transport":"*json"}],                                  
 			//"suppliers_conns": [{"address": "127.0.0.1:2012","transport":"*json"}],                              
-			//"attributes_conns": [ {"address": "attributes:2012","transport":"*json"}],
+			"attributes_conns": [ {"address": "attributes:2013","transport":"*gob"}],
 			//"session_replication_conns": [{"address": "cgr-replica:2012","transport":"*json"}],
 			"max_call_duration": "1h",                  
 			"session_ttl": "15m",                                       
