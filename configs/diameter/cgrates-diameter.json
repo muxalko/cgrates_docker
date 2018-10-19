@@ -7,7 +7,7 @@
 		"dictionaries_dir": "/etc/cgrates/diameter/dict/",
 		"sessions_conns": [
 			//	{"address": "*internal"}								// connection towards SessionService
-				{"address": "sessions:2013","transport":"*gob"}
+				{"address": "sessions:2012","transport":"*json"}
 		],
 		//"origin_host": "CGR-DA",										// diameter Origin-Host AVP used in replies
 		"origin_host": "ppcc-cgr-ptk-node-01",
