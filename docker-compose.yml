@@ -93,7 +93,7 @@ services:
         - rals-net
         - sessions-net
       depends_on:
-          - sessions
+          - redis-master
       environment:
           - CGR-SERVICE=attributes
       logging:
