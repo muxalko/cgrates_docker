@@ -69,6 +69,7 @@ services:
           - ./configs/common:/etc/cgrates/common
           - ./configs/cdrs:/etc/cgrates/cdrs
       networks:
+        - rals-net
         - sessions-net
         - cdrs-net
       depends_on:
