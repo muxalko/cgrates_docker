@@ -1,4 +1,8 @@
 {
+	"listen": {
+		"http": ":2080",
+	},
+	
 	"attributes": {								// Attribute service
 		"enabled": true,						// starts attribute service: <true|false>.
 		"string_indexed_fields": [				// query indexes based on these fields for faster processing

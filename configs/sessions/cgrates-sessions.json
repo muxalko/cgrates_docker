@@ -1,5 +1,10 @@
 {
 ////////////////////////////////////SMG///////////////////////////////////////////
+
+	"listen": {
+		"http": ":2080",
+	},
+
 	"sessions": {
 		"enabled": true,						// starts session manager service: <true|false>
 		//"listen_bijson": ":2014",				// address where to listen for bidirectional JSON-RPC requests
