@@ -126,8 +126,10 @@ services:
 networks:
   redis-net:
   rals-net:
-  sessions-net:
   cdrs-net:
+  sessions-net:
+  attributes-net:
+  
 #volumes:
 #  redis_data:
 #    driver: local
