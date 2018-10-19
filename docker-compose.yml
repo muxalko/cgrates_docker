@@ -115,6 +115,7 @@ services:
         - sessions-net
       depends_on:
           - sessions
+          - attributes
       environment:
           - CGR-SERVICE=diameter
       logging:
@@ -127,7 +128,7 @@ networks:
   redis-net:
   rals-net:
   sessions-net:
-  
+
 #volumes:
 #  redis_data:
 #    driver: local
