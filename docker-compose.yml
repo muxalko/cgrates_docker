@@ -53,7 +53,6 @@ services:
       networks:
         - rals-net
         - sessions-net
-        - cdrs-net
       depends_on:
           - rals
       environment:
@@ -92,7 +91,6 @@ services:
       networks:
         - redis-net
         - rals-net
-        - attributes-net
         - sessions-net
       depends_on:
           - sessions
@@ -127,9 +125,7 @@ services:
 networks:
   redis-net:
   rals-net:
-  cdrs-net:
   sessions-net:
-  attributes-net:
   
 #volumes:
 #  redis_data:
