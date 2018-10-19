@@ -24,7 +24,7 @@ COPY marker /dev/null
 RUN mkdir -p /root/code/src/github.com/cgrates; cd /root/code/src/github.com/cgrates; git clone https://github.com/cgrates/cgrates.git
 
 # get cgrates configs + tariffplans from gitlab
-RUN mkdir -p /root/code/src/gitlab-ptk.gt.local/Configs; cd /root/code/src/gitlab-ptk.gt.local/Configs; git clone git@gitlab-ptk.gt.local:Configs/CGRates.git
+#RUN mkdir -p /root/code/src/gitlab-ptk.gt.local/Configs; cd /root/code/src/gitlab-ptk.gt.local/Configs; git clone git@gitlab-ptk.gt.local:Configs/CGRates.git
 
 # create link to cgrates dir
 RUN ln -s /root/code/src/github.com/cgrates/cgrates /root/cgr
@@ -38,8 +38,11 @@ RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin
 # create links
 RUN ln -s /root/code/bin/cgr-engine /usr/bin/
 RUN ln -s /root/code/bin/cgr-loader /usr/bin/
+RUN ln -s /root/code/bin/cgr-console/usr/bin/
+RUN ln -s /root/code/bin/cgr-migrator /usr/bin/
+RUN ln -s /root/code/bin/cgr-tester /usr/bin/
 RUN ln -s /root/code/src/github.com/cgrates/cgrates/data /usr/share/cgrates
-RUN ln -s /root/code/src/gitlab-ptk.gt.local/Configs/CGRates/CSV_Assets/tariff_golan_basic /usr/share/cgrates/golantp
+#RUN ln -s /root/code/src/gitlab-ptk.gt.local/Configs/CGRates/CSV_Assets/tariff_golan_basic /usr/share/cgrates/golantp
 
 #install oh-my-zsh
 #RUN TERM=xterm sh -c "$(wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"; exit 0
