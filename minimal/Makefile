@@ -15,10 +15,10 @@ $(info IMG="$(IMG)")
 build:
 	@docker build -t ${IMG} -f ${BIN}/Dockerfile .
 	@docker tag ${IMG} ${LATEST}
-	@docker tag ${LATEST} ${PRIVATE_REGISTRY}/${NAME}
+	@docker tag ${LATEST} ${PRIVATE_REGISTRY}/${BIN}:${TAG}
 
 push:
-	@docker push ${PRIVATE_REGISTRY}/${NAME}
+	@docker push ${PRIVATE_REGISTRY}/${BIN}:${TAG}
 
 login:
 	@docker login -u ${DOCKER_USER} -p ${DOCKER_PASS} ${PRIVATE_REGISTRY}
