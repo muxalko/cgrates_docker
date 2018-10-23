@@ -1,0 +1,158 @@
+{
+	"diameter_agent": {
+		"enabled": true,												// enables the diameter agent: <true|false>
+		//"listen": "127.0.0.1:3868",									// address where to listen for diameter requests <x.y.z.y:1234>
+		"listen": ":3868",
+		//"dictionaries_path": "/usr/share/cgrates/diameter/dict/",		// path towards directory holding additional dictionaries to load
+		"dictionaries_dir": "/etc/cgrates/diameter/dict/",
+		"sessions_conns": [
+			//	{"address": "*internal"}								// connection towards SessionService
+				{"address": "sessions:2012","transport":"*json"}
+		],
+		//"origin_host": "CGR-DA",										// diameter Origin-Host AVP used in replies
+		"origin_host": "ppcc-cgr-ptk-node-01",
+		//"origin_realm": "cgrates.org",								// diameter Origin-Realm AVP used in replies
+		"origin_realm": "ppcc-cgr-ptk-node-01.local",
+		//"vendor_id": 0,												// diameter Vendor-Id AVP used in replies
+		//"product_name": "CGRateS",									// diameter Product-Name AVP used in replies
+		"product_name": "PPCC",
+		
+		//////////////////////////
+		//??? DEPRECATED ???
+		//"create_cdr": true,
+		//"cdr_requires_session": true,
+		//"debit_interval": "10m",
+		//"timezone": "",
+		//////////////////////////
+		
+		//"templates":{
+		//	"*cca": [
+		//			{"tag": "SessionId", "field_id": "Session-Id", "type": "*composed", 
+		//				"value": "~*req.Session-Id", "mandatory": true},
+		//			{"tag": "OriginHost", "field_id": "Origin-Host", "type": "*composed", 
+		//				"value": "~*vars.OriginHost", "mandatory": true},
+		//			{"tag": "OriginRealm", "field_id": "Origin-Realm", "type": "*composed", 
+		//				"value": "~*vars.OriginRealm", "mandatory": true},
+		//			{"tag": "AuthApplicationId", "field_id": "Auth-Application-Id", "type": "*composed",
+		//				 "value": "~*vars.*appid", "mandatory": true},
+		//			{"tag": "CCRequestType", "field_id": "CC-Request-Type", "type": "*composed", 
+		//				"value": "~*req.CC-Request-Type", "mandatory": true},
+		//			{"tag": "CCRequestNumber", "field_id": "CC-Request-Number", "type": "*composed", 
+		//				"value": "~*req.CC-Request-Number", "mandatory": true},
+		//	]
+		//},
+		"request_processors": [
+		{
+					"id": "data_init",
+					"dry_run": false,
+					"publish_event": false,
+					"request_filter": "Service-Context-Id(@3gpp.org$);CC-Request-Type(1)",
+					"continue_on_success": false,
+					"flags": [ "*accounts", "*attributes"],
+					"ccr_fields":[
+						{"tag": "TOR",          "field_id": "ToR",              "type": "*composed",    "value": "^*data",                "mandatory": true},
+						{"tag": "OriginHost",   "field_id": "OriginHost",       "type": "*composed",    "value": "Origin-Host",           "mandatory": true},
+						{"tag": "OriginID",     "field_id": "OriginID",         "type": "*composed",    "value": "Session-Id",            "mandatory": true},
+						{"tag": "RequestType",  "field_id": "RequestType",      "type": "*composed",    "value": "^*prepaid",             "mandatory": true},
+						{"tag": "Direction",    "field_id": "Direction",        "type": "*composed",    "value": "^*out",                 "mandatory": true},
+						{"tag": "Tenant",       "field_id": "Tenant",           "type": "*composed",    "value": "^golant",               "mandatory": true},
+						{"tag": "Category",     "field_id": "Category",         "type": "*composed",    "value": "^data",                 "mandatory": true},
+						{"tag": "Account",      "field_id": "Account",          "type": "*grouped",     "value": "Subscription-Id>Subscription-Id-Data", "field_filter":"Subscription-Id>Subscription-Id-Type(0)", "mandatory": true},
+						{"tag": "Destination",  "field_id": "Destination",      "type": "*composed",    "value": "Service-Information>PS-Information>3GPP-SGSN-MCC-MNC", "mandatory": true},
+						{"tag": "SetupTime",    "field_id": "SetupTime",        "type": "*composed",    "value": "Event-Timestamp",       "mandatory": true},
+						{"tag": "AnswerTime",   "field_id": "AnswerTime",       "type": "*composed",    "value": "Event-Timestamp",       "mandatory": true},
+						{"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"}
+					],
+					"cca_fields": [
+						{"tag": "GrantedUnits", "field_filter":"*cgrReply>Error(^$)", "field_id": "Multiple-Services-Credit-Control>Granted-Service-Unit>CC-Total-Octets", 
+							"type": "*composed", "value": "*cgrReply>MaxUsage{*duration_nanoseconds}", "mandatory": true},
+						{"tag": "RatingGroup",  "field_id": "Multiple-Services-Credit-Control>Rating-Group",                         "type": "*constant", "value": "1"},
+						{"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control>Service-Identifier",                   "type": "*constant", "value": "1"},
+						{"tag": "ValidityTime", "field_id": "Multiple-Services-Credit-Control>Validity-Time",                        "type": "*constant", "value": "600"},
+						{"tag": "ResultCode",   "field_filter": "*cgrReply>MaxUsage(^0s$)", "field_id": "Result-Code", "type": "*constant", "value": "4010"},
+						{"tag": "ResultCode",   "field_filter": "*cgrReply>Error(!^$)", "field_id": "Result-Code", "type": "*constant", "value": "5030"}
+					]
+				},
+				{
+					"id": "data_update",
+					"dry_run": false,
+					"request_filter": "Service-Context-Id(@3gpp.org$);CC-Request-Type(2);Multiple-Services-Credit-Control>Rating-Group(1)",
+					"continue_on_success": false,
+					"flags": [ "*accounts", "*attributes" ],
+					"ccr_fields":[
+						{"tag": "TOR",                  "field_id": "ToR",            "type": "*composed", "value": "^*data", "mandatory": true},
+						{"tag": "OriginHost",           "field_id": "OriginHost",     "type": "*composed", "value": "Origin-Host",         "mandatory": true},
+						{"tag": "OriginID",             "field_id": "OriginID",       "type": "*composed", "value": "Session-Id",          "mandatory": true},
+						{"tag": "RequestType",          "field_id": "RequestType",    "type": "*composed", "value": "^*prepaid",           "mandatory": true},
+						{"tag": "Direction",            "field_id": "Direction",      "type": "*composed", "value": "^*out",               "mandatory": true},
+						{"tag": "Tenant",               "field_id": "Tenant",         "type": "*composed", "value": "^golant",             "mandatory": true},
+						{"tag": "Category",             "field_id": "Category",       "type": "*composed", "value": "^data",               "mandatory": true},
+						{"tag": "Account",              "field_id": "Account",        "type": "*grouped",  "value": "Subscription-Id>Subscription-Id-Data", "field_filter":"Subscription-Id>Subscription-Id-Type(0)", "mandatory": true},
+						{"tag": "Destination",          "field_id": "Destination",    "type": "*composed", "value": "Service-Information>PS-Information>3GPP-SGSN-MCC-MNC", "mandatory": true},
+						{"tag": "SetupTime",            "field_id": "SetupTime",      "type": "*composed", "value": "Event-Timestamp",     "mandatory": true},
+						{"tag": "AnswerTime",           "field_id": "AnswerTime",     "type": "*composed", "value": "Event-Timestamp",     "mandatory": true},
+						{"tag": "Usage",                "field_id": "Usage",          "type": "*composed", "value": "^*attributes"},
+						{"tag": "LastUsed",             "field_id": "LastUsed",       "type": "*handler",  "handler_id": "*sum", 
+							"value": "Multiple-Services-Credit-Control>Used-Service-Unit>CC-Input-Octets;^|;Multiple-Services-Credit-Control>Used-Service-Unit>CC-Output-Octets",
+							"field_filter":"Multiple-Services-Credit-Control>Rating-Group(1)"}
+					],
+					"cca_fields": [
+						{"tag": "GrantedUnits", "field_filter":"*cgrReply>Error(^$)", "field_id": "Multiple-Services-Credit-Control>Granted-Service-Unit>CC-Total-Octets", 
+								"type": "*composed", "value": "*cgrReply>MaxUsage{*duration_nanoseconds}", "mandatory": true},
+						{"tag": "RatingGroup", "field_id": "Multiple-Services-Credit-Control>Rating-Group",                                "type": "*constant", "value": "1"},
+						{"tag": "ServiceId",   "field_id": "Multiple-Services-Credit-Control>Service-Identifier",                          "type": "*constant", "value": "1"},
+						{"tag": "ValidityTime","field_id": "Multiple-Services-Credit-Control>Validity-Time",                               "type": "*constant", "value": "600"},
+						{"tag": "ResultCode",  "field_filter": "*cgrReply>MaxUsage(^0s$)", "field_id": "Result-Code", "type": "*constant", "value": "4010"},
+						{"tag": "ResultCode",  "field_filter": "*cgrReply>Error(!^$)", "field_id": "Result-Code", "type": "*constant", "value": "5031"}
+					]
+				},
+				{
+					"id": "data_terminate",
+					"dry_run": false,
+					"request_filter": "Service-Context-Id(@3gpp.org$);CC-Request-Type(3)",
+					"continue_on_success": false,
+					"flags": [ "*accounts", "*attributes"],
+					"ccr_fields":[
+						{"tag": "TOR",                                 "field_id": "ToR",                              "type": "*composed",     "value": "^*data",     "mandatory": true},
+						{"tag": "OriginHost",                          "field_id": "OriginHost",                       "type": "*composed",     "value": "Origin-Host",      "mandatory": true},
+						{"tag": "OriginID",                            "field_id": "OriginID",                         "type": "*composed",     "value": "Session-Id",    "mandatory": true},
+						{"tag": "RequestType",                         "field_id": "RequestType",                      "type": "*composed",     "value": "^*prepaid",  "mandatory": true},
+						{"tag": "Direction",                           "field_id": "Direction",                        "type": "*composed",     "value": "^*out",      "mandatory": true},
+						{"tag": "Tenant",                              "field_id": "Tenant",                           "type": "*composed",     "value": "^golant",    "mandatory": true},
+						{"tag": "Category",                            "field_id": "Category",                         "type": "*composed",     "value": "^data",   "mandatory": true},
+						{"tag": "Account",                             "field_id": "Account",                          "type": "*grouped",      "value": "Subscription-Id>Subscription-Id-Data", "field_filter":"Subscription-Id>Subscription-Id-Type(0)", "mandatory": true},
+						{"tag": "Destination",                         "field_id": "Destination",                      "type": "*composed",     "value": "Service-Information>PS-Information>3GPP-SGSN-MCC-MNC", "mandatory": true},
+						{"tag": "SetupTime",                           "field_id": "SetupTime",                        "type": "*composed",     "value": "Event-Timestamp", "mandatory": true},
+						{"tag": "AnswerTime",                          "field_id": "AnswerTime",                       "type": "*composed",     "value": "Event-Timestamp", "mandatory": true},
+						{"tag": "Reporting-Reason",                    "field_id": "Reporting-Reason",                 "type": "*grouped",      "value": "Multiple-Services-Credit-Control>Reporting-Reason", "field_filter":"Multiple-Services-Credit-Control>Rating-Group(1)", "mandatory": false},
+						{"tag": "Termination-Cause",                   "field_id": "Termination-Cause",                "type": "*composed",     "value": "Termination-Cause", "mandatory": false},
+						{"tag": "LastUsed",                     	   "field_id": "LastUsed",                         "type": "*handler",      "handler_id": "*sum", 
+								"value": "Multiple-Services-Credit-Control>Used-Service-Unit>CC-Input-Octets;^|;Multiple-Services-Credit-Control>Used-Service-Unit>CC-Output-Octets",
+								"field_filter":"Multiple-Services-Credit-Control>Rating-Group(1)"},
+						{"tag": "Called-Station-Id",                   "field_id": "Called-Station-Id",                "type": "*composed",     "value": "Service-Information>PS-Information>Called-Station-Id",                    "mandatory": false},
+						{"tag": "3GPP-Charging-Id",                    "field_id": "3GPP-Charging-Id",                 "type": "*composed",     "value": "Service-Information>PS-Information>3GPP-Charging-Id",                     "mandatory": false},
+						{"tag": "3GPP-GPRS-Negotiated-QoS-profile",    "field_id": "3GPP-GPRS-Negotiated-QoS-profile", "type": "*composed",     "value": "Service-Information>PS-Information>3GPP-GPRS-Negotiated-QoS-profile",     "mandatory": false},
+						{"tag": "3GPP-Charging-Characteristics",       "field_id": "3GPP-Charging-Characteristics",    "type": "*composed",     "value": "Service-Information>PS-Information>3GPP-Charging-Characteristics",        "mandatory": false},
+						{"tag": "3GPP-PDP-Type",                       "field_id": "3GPP-PDP-Type",                    "type": "*composed",     "value": "Service-Information>PS-Information>3GPP-PDP-Type",                        "mandatory": false},
+						{"tag": "GPP-SGSN-MCC-MNC",                    "field_id": "3GPP-SGSN-MCC-MNC",                "type": "*composed",     "value": "Service-Information>PS-Information>3GPP-SGSN-MCC-MNC",                    "mandatory": false},
+						{"tag": "3GPP-GGSN-MCC-MNC",                   "field_id": "3GPP-GGSN-MCC-MNC",                "type": "*composed",     "value": "Service-Information>PS-Information>3GPP-GGSN-MCC-MNC",                    "mandatory": false},
+						{"tag": "3GPP-NSAPI",                          "field_id": "3GPP-NSAPI",                       "type": "*composed",     "value": "Service-Information>PS-Information>3GPP-NSAPI",                           "mandatory": false},
+						{"tag": "3GPP-MS-TimeZone",                    "field_id": "3GPP-MS-TimeZone",                 "type": "*composed",     "value": "Service-Information>PS-Information>3GPP-MS-TimeZone",                     "mandatory": false},
+						{"tag": "3GPP-Selection-Mode",                 "field_id": "3GPP-Selection-Mode",              "type": "*composed",     "value": "Service-Information>PS-Information>3GPP-Selection-Mode",                  "mandatory": false},
+						{"tag": "3GPP-RAT-Type",                       "field_id": "3GPP-RAT-Type",                    "type": "*composed",     "value": "Service-Information>PS-Information>3GPP-RAT-Type",                        "mandatory": false},
+						{"tag": "3GPP-User-Location-Info",             "field_id": "3GPP-User-Location-Info",          "type": "*composed",     "value": "Service-Information>PS-Information>3GPP-User-Location-Info",              "mandatory": false},
+						{"tag": "PDP-Address",                         "field_id": "PDP-Address",                      "type": "*composed",     "value": "Service-Information>PS-Information>PDP-Address",                          "mandatory": false},
+						{"tag": "3GPP-IMSI-MCC-MNC",                   "field_id": "3GPP-IMSI-MCC-MNC",                "type": "*composed",     "value": "Service-Information>PS-Information>3GPP-IMSI-MCC-MNC",                    "mandatory": false},
+						{"tag": "GGSN-Address",                        "field_id": "GGSN-Address",                     "type": "*composed",     "value": "Service-Information>PS-Information>GGSN-Address",                         "mandatory": false},
+						{"tag": "SGSN-Address",                        "field_id": "SGSN-Address",                     "type": "*composed",     "value": "Service-Information>PS-Information>SGSN-Address",                         "mandatory": false},
+						{"tag": "Charging-Rule-Base-Name",             "field_id": "Charging-Rule-Base-Name",          "type": "*composed",     "value": "Service-Information>PS-Information>Charging-Rule-Base-Name",              "mandatory": false},
+						{"tag": "PDP-Context-Type",                    "field_id": "PDP-Context-Type",                 "type": "*composed",     "value": "Service-Information>PS-Information>PDP-Context-Type",                     "mandatory": false}
+					],
+					"cca_fields": [
+						{"tag": "ResultCode", "field_id": "Result-Code", "type": "*constant", "value": "^2001"},
+						{"tag": "ResultCode",  "field_filter": "*cgrReply>Error(!^$)", "field_id": "Result-Code", "type": "*constant", "value": "5031"}
+					]
+				}
+		],
+	}
+}
