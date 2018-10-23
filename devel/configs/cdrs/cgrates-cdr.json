@@ -1,6 +1,0 @@
-{
-	"cdrs": {
-		"enabled": true,								
-		"rals_conns": [{"address": "rals:2012","transport":"*gob"}],
-			},
-}

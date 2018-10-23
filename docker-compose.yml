@@ -1,55 +1,141 @@
-version: "2"
+version: "3.7"
 services:
-    sh-cassandra:
-        image: golan/sh-cassandra:3.3
-        container_name: sh-cassandra
-        volumes:
-            - /opt/golan/cassandra/etc:/etc/cassandra
-            - /opt/golan/cassandra:/var/lib/cassandra
-        ports:
-            - "7000-7001:7000-7001"
-            - "9042:9042"
-            - "9160:9160"
-            - "7199:7199"
-        environment:
-            - CASSANDRA_CLUSTER_NAME="GOLAN CLUSTER"
-            - CASSANDRA_BROADCAST_ADDRESS="10.224.212.35"
-            - CASSANDRA_SEEDS="10.192.209.35,10.224.212.35"
-        logging:
-            driver: "json-file"
-            options:
-                max-size: "100m"
-                max-file: "1"
+  redis-master:
+      image: bitnami/redis:4.0.11
+      container_name: redis-master
+      restart: always
+      volumes:
+          - /traces/redis:/bitnami/redis
+      environment:
+        - REDIS_REPLICATION_MODE=master
+        - REDIS_PASSWORD=QyV9LVnpbm
+        # ALLOW_EMPTY_PASSWORD is recommended only for development.
+        #- ALLOW_EMPTY_PASSWORD=yes
+        #- REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+      ports:
+          - "6379:6379"
+      networks:
+        - redis-net
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
+      sysctls:
+        net.core.somaxconn: '1024'
 
-    sh-router:
-        image: golan/sh-router
-        volumes:
-            - $PWD:/sh-router/etc
-            - /opt/sh-router-log:/sh-router/log
-        depends_on:
-            - sh-cassandra
-        environment:
-            - SH-SERVICE=sh-router
-        logging:
-            driver: "json-file"
-            options:
-                max-size: "100m"
-                max-file: "1"
+  rals:
+      image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
+      container_name: rals
+      restart: always
+      volumes:
+          - ./configs/common:/etc/cgrates/common
+          - ./configs/rals:/etc/cgrates/rals
+      networks:
+        - rals-net
+        - redis-net 
+      #depends_on:
+          #- redis-master
+      environment:
+          - CGR-SERVICE=rals
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
 
-    sh-provision:
-        image: golan/sh-provision
-        container_name: sh-provision
-        volumes:
-            - $PWD:/sh-provision/etc
-            - /opt/sh-provision-log:/sh-provision/log
-        ports:
-            - "8091:8091"
-        depends_on:
-            - sh-cassandra
-        environment:
-            - SH-SERVICE=sh-provision
-        logging:
-            driver: "json-file"
-            options:
-                max-size: "100m"
-                max-file: "1"
+
+  cdrs:
+      image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
+      container_name: cdrs
+      restart: always
+      volumes:
+          - ./configs/common:/etc/cgrates/common
+          - ./configs/cdrs:/etc/cgrates/cdrs
+      networks:
+       - rals-net
+       - sessions-net
+      #depends_on:
+          #- rals
+      environment:
+          - CGR-SERVICE=cdrs
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
+
+  attributes:
+      image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
+      container_name: attributes
+      restart: always
+      volumes:
+          - ./configs/common:/etc/cgrates/common
+          - ./configs/attributes:/etc/cgrates/attributes
+      ports:
+          - "32080:2080"
+      networks:
+       - redis-net
+       - rals-net
+       - sessions-net
+      #depends_on:
+          #- redis-master
+      environment:
+          - CGR-SERVICE=attributes
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
+
+  sessions:
+      image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
+      container_name: sessions
+      restart: always
+      volumes:
+          - ./configs/common:/etc/cgrates/common
+          - ./configs/sessions:/etc/cgrates/sessions
+      networks:
+       - rals-net
+       - sessions-net
+      #depends_on:
+          #- rals
+          #- cdrs
+          #- attributes
+      environment:
+          - CGR-SERVICE=sessions
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
+
+  diameter:
+      image: gitlab-ptk.gt.local:5005/cgr-engine:3d5f2ff
+      container_name: diameter
+      restart: always
+      volumes:
+          - ./configs/common:/etc/cgrates/common
+          - ./configs/diameter:/etc/cgrates/diameter
+      ports:
+          - "3868:3868"
+      networks:
+        - sessions-net
+      #depends_on:
+          #- sessions
+      environment:
+          - CGR-SERVICE=diameter
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
+
+networks:
+  redis-net:
+  rals-net:
+  sessions-net:
+
+#volumes:
+#  redis_data:
+#    driver: local
