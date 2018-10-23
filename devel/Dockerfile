@@ -25,6 +25,7 @@ RUN mkdir -p /root/code/src/github.com/cgrates; cd /root/code/src/github.com/cgr
 
 # get cgrates configs + tariffplans from gitlab
 #RUN mkdir -p /root/code/src/gitlab-ptk.gt.local/Configs; cd /root/code/src/gitlab-ptk.gt.local/Configs; git clone git@10.224.228.190:Configs/CGRates.git
+#RUN mkdir -p /root/code/src/gitlab-ptk.gt.local/Configs; cd /root/code/src/gitlab-ptk.gt.local/Configs; git clone git@gitlab-ptk.gt.local:Configs/CGRates.git
 
 # create link to cgrates dir
 RUN ln -s /root/code/src/github.com/cgrates/cgrates /root/cgr
@@ -42,6 +43,9 @@ RUN mkdir $GOROOT/bin/static; cd /root/code/src/github.com/cgrates/cgrates; GORO
 # create links
 RUN ln -s /root/code/bin/cgr-engine /usr/bin/
 RUN ln -s /root/code/bin/cgr-loader /usr/bin/
+RUN ln -s /root/code/bin/cgr-console/usr/bin/
+RUN ln -s /root/code/bin/cgr-migrator /usr/bin/
+RUN ln -s /root/code/bin/cgr-tester /usr/bin/
 RUN ln -s /root/code/src/github.com/cgrates/cgrates/data /usr/share/cgrates
 #RUN ln -s /root/code/src/gitlab-ptk.gt.local/Configs/CGRates/CSV_Assets/tariff_golan_basic /usr/share/cgrates/golantp
 

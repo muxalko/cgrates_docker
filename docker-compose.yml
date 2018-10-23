@@ -3,13 +3,14 @@ services:
   redis-master:
       image: bitnami/redis:4.0.11
       container_name: redis-master
+      restart: always
       volumes:
           - /traces/redis:/bitnami/redis
       environment:
         - REDIS_REPLICATION_MODE=master
-        #- REDIS_PASSWORD=QyV9LVnpbm
+        - REDIS_PASSWORD=QyV9LVnpbm
         # ALLOW_EMPTY_PASSWORD is recommended only for development.
-        - ALLOW_EMPTY_PASSWORD=yes
+        #- ALLOW_EMPTY_PASSWORD=yes
         #- REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
       ports:
           - "6379:6379"
@@ -26,35 +27,17 @@ services:
   rals:
       image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
       container_name: rals
+      restart: always
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/rals:/etc/cgrates/rals
       networks:
         - rals-net
         - redis-net 
-      depends_on:
-          - redis-master
+      #depends_on:
+          #- redis-master
       environment:
           - CGR-SERVICE=rals
-      logging:
-        driver: "json-file"
-        options:
-          max-size: "100m"
-          max-file: "1"
-
-  sessions:
-      image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
-      container_name: sessions
-      volumes:
-          - ./configs/common:/etc/cgrates/common
-          - ./configs/sessions:/etc/cgrates/sessions
-      networks:
-        - rals-net
-        - sessions-net
-      depends_on:
-          - rals
-      environment:
-          - CGR-SERVICE=sessions
       logging:
         driver: "json-file"
         options:
@@ -64,17 +47,62 @@ services:
   cdrs:
       image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
       container_name: cdrs
-      hostname: cdrs
+      restart: always
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/cdrs:/etc/cgrates/cdrs
       networks:
-        - sessions-net
-        - cdrs-net
-      depends_on:
-          - rals
+       - rals-net
+       - sessions-net
+      #depends_on:
+          #- rals
       environment:
           - CGR-SERVICE=cdrs
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
+
+  attributes:
+      image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
+      container_name: attributes
+      restart: always
+      volumes:
+          - ./configs/common:/etc/cgrates/common
+          - ./configs/attributes:/etc/cgrates/attributes
+      ports:
+          - "32080:2080"
+      networks:
+       - redis-net
+       - rals-net
+       - sessions-net
+      #depends_on:
+          #- redis-master
+      environment:
+          - CGR-SERVICE=attributes
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
+
+  sessions:
+      image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
+      container_name: sessions
+      restart: always
+      volumes:
+          - ./configs/common:/etc/cgrates/common
+          - ./configs/sessions:/etc/cgrates/sessions
+      networks:
+       - rals-net
+       - sessions-net
+      #depends_on:
+          #- rals
+          #- cdrs
+          #- attributes
+      environment:
+          - CGR-SERVICE=sessions
       logging:
         driver: "json-file"
         options:
@@ -84,6 +112,7 @@ services:
   diameter:
       image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
       container_name: diameter
+      restart: always
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/diameter:/etc/cgrates/diameter
@@ -91,8 +120,8 @@ services:
           - "3868:3868"
       networks:
         - sessions-net
-      depends_on:
-          - sessions
+      #depends_on:
+          #- sessions
       environment:
           - CGR-SERVICE=diameter
       logging:
@@ -105,7 +134,7 @@ networks:
   redis-net:
   rals-net:
   sessions-net:
-  cdrs-net:
+
 #volumes:
 #  redis_data:
 #    driver: local
