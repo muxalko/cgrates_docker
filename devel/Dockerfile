@@ -43,7 +43,7 @@ RUN mkdir $GOROOT/bin/static; cd /root/code/src/github.com/cgrates/cgrates; GORO
 # create links
 RUN ln -s /root/code/bin/cgr-engine /usr/bin/
 RUN ln -s /root/code/bin/cgr-loader /usr/bin/
-RUN ln -s /root/code/bin/cgr-console/usr/bin/
+RUN ln -s /root/code/bin/cgr-console /usr/bin/
 RUN ln -s /root/code/bin/cgr-migrator /usr/bin/
 RUN ln -s /root/code/bin/cgr-tester /usr/bin/
 RUN ln -s /root/code/src/github.com/cgrates/cgrates/data /usr/share/cgrates
