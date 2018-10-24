@@ -30,9 +30,9 @@
 					{"tag": "CCATemplate", 	"type": "*template", "value": "*cca"},
 					{"tag": "ResultCodeDefaultNegative", 		"field_id": "Result-Code", 							"type": "*constant", "value": "5030"},
 					{"tag": "ResultCode", 	"field_id": "Result-Code", 	"filters": ["*rsr::~*cgrep.Error(^$)"],		"type": "*constant", "value": "2001"},
-					{"tag": "RatingGroup",  "field_id": "Multiple-Services-Credit-Control>Rating-Group",			"type": "*constant", "value": "1"},
-					{"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control>Service-Identifier",		"type": "*constant", "value": "1"},
-					{"tag": "ValidityTime", "field_id": "Multiple-Services-Credit-Control>Validity-Time",			"type": "*constant", "value": "600"},
+					{"tag": "RatingGroup",  "field_id": "Multiple-Services-Credit-Control.Rating-Group",			"type": "*constant", "value": "1"},
+					{"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control.Service-Identifier",		"type": "*constant", "value": "1"},
+					{"tag": "ValidityTime", "field_id": "Multiple-Services-Credit-Control.Validity-Time",			"type": "*constant", "value": "600"},
 			]
 		},
 		
@@ -49,8 +49,8 @@
 					{"tag": "Direction",    "field_id": "Direction",        "type": "*composed",    "value": "^*out",                 "mandatory": true},
 					{"tag": "Tenant",       "field_id": "Tenant",           "type": "*composed",    "value": "^golant",               "mandatory": true},
 					{"tag": "Category",     "field_id": "Category",         "type": "*composed",    "value": "^data",                 "mandatory": true},
-					{"tag": "Account", 		"field_id": "Account", 			"type": "*composed", 	"value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]" , "mandatory": true },
-					{"tag": "Destination",  "field_id": "Destination",      "type": "*composed",    "value": "~*req.Service-Information>PS-Information>3GPP-SGSN-MCC-MNC", 	"mandatory": true},
+					{"tag": "Account", 		"field_id": "Account", 			"type": "*composed", 	"value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]", "mandatory": true },
+					{"tag": "Destination",  "field_id": "Destination",      "type": "*composed",    "value": "~*req.Service-Information.PS-Information.3GPP-SGSN-MCC-MNC", 	"mandatory": true},
 					{"tag": "SetupTime", 	"field_id": "SetupTime", 		"type": "*composed", 	"value": "~*req.Event-Timestamp", "mandatory": true},
 					{"tag": "AnswerTime", 	"field_id": "AnswerTime", 		"type": "*composed", 	"value": "~*req.Event-Timestamp", "mandatory": true},
 					{"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"}
@@ -74,16 +74,16 @@
 						{"tag": "Tenant",       "field_id": "Tenant",     	"type": "*composed", "value": "^golant",             		"mandatory": true},
 						{"tag": "Category",     "field_id": "Category",   	"type": "*composed", "value": "^data",               		"mandatory": true},
 						{"tag": "Account",		"field_id": "Account",		"type": "*composed", "value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]" , "mandatory": true },
-						{"tag": "Destination",  "field_id": "Destination",	"type": "*composed", "value": "~*req.Service-Information>PS-Information>3GPP-SGSN-MCC-MNC", "mandatory": true},
+						{"tag": "Destination",  "field_id": "Destination",	"type": "*composed", "value": "~*req.Service-Information.PS-Information.3GPP-SGSN-MCC-MNC", "mandatory": true},
 						{"tag": "SetupTime", 	"field_id": "SetupTime", 	"type": "*composed", "value": "~*req.Event-Timestamp", 		"mandatory": true},
 						{"tag": "AnswerTime", 	"field_id": "AnswerTime", 	"type": "*composed", "value": "~*req.Event-Timestamp", 		"mandatory": true},
 						{"tag": "Usage",        "field_id": "Usage",      	"type": "*composed", "value": "^*attributes"},
 						{"tag": "LastUsed",     "field_id": "LastUsed",   	"type": "*handler",  "handler_id": "*sum", 
-							"value": "~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Input-Octets;~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets"
+							"value": "~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Input-Octets;~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Output-Octets"
 					],
 					"reply_fields": [
 						{"tag": "CCATemplate", "type": "*template", "value": "cca-default"},
-						{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control>Granted-Service-Unit>CC-Total-Octets", 
+						{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
 							"type": "*composed", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
 					]
 				},
@@ -106,7 +106,7 @@
 						{"tag": "Reporting-Reason",                    "field_id": "Reporting-Reason",                 "type": "*composed",      "value": "Multiple-Services-Credit-Control[~Rating-Group(1)].Reporting-Reason", "mandatory": false},
 						{"tag": "Termination-Cause",                   "field_id": "Termination-Cause",                "type": "*composed",     "value": "~*req.Termination-Cause", "mandatory": false},
 						{"tag": "LastUsed",                     	   "field_id": "LastUsed",                         "type": "*handler",      "handler_id": "*sum", 		      
-								"value": "~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Input-Octets;~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets"
+								"value": "~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Input-Octets;~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Output-Octets"
 						{"tag": "Called-Station-Id",                   "field_id": "Called-Station-Id",                "type": "*composed",     "value": "~*req.Service-Information.PS-Information.Called-Station-Id",                    "mandatory": false},
 						{"tag": "3GPP-Charging-Id",                    "field_id": "3GPP-Charging-Id",                 "type": "*composed",     "value": "~*req.Service-Information.PS-Information.3GPP-Charging-Id",                     "mandatory": false},
 						{"tag": "3GPP-GPRS-Negotiated-QoS-profile",    "field_id": "3GPP-GPRS-Negotiated-QoS-profile", "type": "*composed",     "value": "~*req.Service-Information.PS-Information.3GPP-GPRS-Negotiated-QoS-profile",     "mandatory": false},
@@ -125,10 +125,8 @@
 						{"tag": "SGSN-Address",                        "field_id": "SGSN-Address",                     "type": "*composed",     "value": "~*req.Service-Information.PS-Information.SGSN-Address",                         "mandatory": false},
 						{"tag": "Charging-Rule-Base-Name",             "field_id": "Charging-Rule-Base-Name",          "type": "*composed",     "value": "~*req.Service-Information.PS-Information.Charging-Rule-Base-Name",              "mandatory": false},
 						{"tag": "PDP-Context-Type",                    "field_id": "PDP-Context-Type",                 "type": "*composed",     "value": "~*req.Service-Information.PS-Information.PDP-Context-Type",                     "mandatory": false}
-					],
-					"reply_fields": [
-						{"tag": "CCATemplate", "type": "*template", "value": "cca-default"}
 					]
+					
 				}
 		],
 	}
