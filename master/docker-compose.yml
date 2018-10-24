@@ -31,6 +31,8 @@ services:
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/rals:/etc/cgrates/rals
+      ports:
+          - "22080:2080"
       networks:
         - rals-net
         - redis-net 
@@ -116,7 +118,7 @@ services:
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/diameter:/etc/cgrates/diameter
-          - ./configs/diameter/dict:/etc/cgrates/diameter/dict
+          #- ./configs/diameter/dict:/etc/cgrates/diameter/dict
       ports:
           - "3868:3868"
       networks:

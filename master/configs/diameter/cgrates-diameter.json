@@ -4,7 +4,6 @@
 		//"listen": "127.0.0.1:3868",									// address where to listen for diameter requests <x.y.z.y:1234>
 		"listen": ":3868",
 		"dictionaries_path": "/etc/cgrates/diameter/dict/",		// path towards directory holding additional dictionaries to load
-		
 		"sessions_conns": [
 			//	{"address": "*internal"}								// connection towards SessionService
 				{"address": "sessions:2012","transport":"*json"},
