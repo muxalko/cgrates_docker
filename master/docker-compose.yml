@@ -116,7 +116,7 @@ services:
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/diameter:/etc/cgrates/diameter
-          - ./configs/diameter/dict/:/etc/cgrates/diameter
+          - ./configs/diameter/dict:/etc/cgrates/diameter/dict
       ports:
           - "3868:3868"
       networks:
