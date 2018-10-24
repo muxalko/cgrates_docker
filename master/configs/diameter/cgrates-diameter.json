@@ -79,7 +79,7 @@
 						{"tag": "AnswerTime", 	"field_id": "AnswerTime", 	"type": "*composed", "value": "~*req.Event-Timestamp", 		"mandatory": true},
 						{"tag": "Usage",        "field_id": "Usage",      	"type": "*composed", "value": "^*attributes"},
 						{"tag": "LastUsed",     "field_id": "LastUsed",   	"type": "*handler",  "handler_id": "*sum", 
-							"value": "~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Input-Octets;~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Output-Octets"
+							"value": "~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Input-Octets;~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Output-Octets"}
 					],
 					"reply_fields": [
 						{"tag": "CCATemplate", "type": "*template", "value": "cca-default"},
@@ -106,7 +106,7 @@
 						{"tag": "Reporting-Reason",                    "field_id": "Reporting-Reason",                 "type": "*composed",      "value": "Multiple-Services-Credit-Control[~Rating-Group(1)].Reporting-Reason", "mandatory": false},
 						{"tag": "Termination-Cause",                   "field_id": "Termination-Cause",                "type": "*composed",     "value": "~*req.Termination-Cause", "mandatory": false},
 						{"tag": "LastUsed",                     	   "field_id": "LastUsed",                         "type": "*handler",      "handler_id": "*sum", 		      
-								"value": "~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Input-Octets;~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Output-Octets"
+								"value": "~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Input-Octets;~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Output-Octets"}
 						{"tag": "Called-Station-Id",                   "field_id": "Called-Station-Id",                "type": "*composed",     "value": "~*req.Service-Information.PS-Information.Called-Station-Id",                    "mandatory": false},
 						{"tag": "3GPP-Charging-Id",                    "field_id": "3GPP-Charging-Id",                 "type": "*composed",     "value": "~*req.Service-Information.PS-Information.3GPP-Charging-Id",                     "mandatory": false},
 						{"tag": "3GPP-GPRS-Negotiated-QoS-profile",    "field_id": "3GPP-GPRS-Negotiated-QoS-profile", "type": "*composed",     "value": "~*req.Service-Information.PS-Information.3GPP-GPRS-Negotiated-QoS-profile",     "mandatory": false},
