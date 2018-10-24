@@ -87,9 +87,9 @@ services:
           max-size: "100m"
           max-file: "1"
 
-  sessions-master:
+  sessions:
       image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
-      container_name: sessions-master
+      container_name: sessions
       restart: always
       volumes:
           - ./configs/common:/etc/cgrates/common
@@ -102,7 +102,7 @@ services:
           #- cdrs
           #- attributes
       environment:
-          - CGR-SERVICE=sessions-master
+          - CGR-SERVICE=sessions
       logging:
         driver: "json-file"
         options:
