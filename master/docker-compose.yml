@@ -73,8 +73,6 @@ services:
       volumes:
           - ./configs/common:/etc/cgrates/common
           - ./configs/attributes:/etc/cgrates/attributes
-      ports:
-          - "32080:2080"
       networks:
        - redis-net
        - rals-net
@@ -132,7 +130,27 @@ services:
         options:
           max-size: "100m"
           max-file: "1"
-
+          
+  api:
+      image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
+      container_name: api
+      restart: always
+      volumes:
+          - ./configs/common:/etc/cgrates/common
+          - ./configs/api:/etc/cgrates/api
+      ports:
+          - "2080:2080"
+      networks:
+        - redis-net 
+      #depends_on:
+          #- redis-master
+      environment:
+          - CGR-SERVICE=rals
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
 networks:
   redis-net:
   rals-net:
