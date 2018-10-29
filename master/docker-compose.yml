@@ -1,21 +1,22 @@
 version: "3.7"
 services:
-  redis-master:
-      image: bitnami/redis:4.0.11
-      container_name: redis-master
+  redis: 
+      image: gitlab-ptk.gt.local:5005/redis_dyn:4.0.9
+      container-name: redis
       restart: always
-      volumes:
-          - /traces/redis:/bitnami/redis
       environment:
         - REDIS_REPLICATION_MODE=master
         - REDIS_PASSWORD=QyV9LVnpbm
         # ALLOW_EMPTY_PASSWORD is recommended only for development.
         #- ALLOW_EMPTY_PASSWORD=yes
         #- REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+      volumes:
+          - ./configs/${HOSTNAME}:/etc/dynomite
       ports:
-          - "6379:6379"
-      networks:
-        - redis-net
+          - "8101:8101"
+          - "8102:8102"
+          - "22122:22122"
+          - "22222:22222"
       logging:
         driver: "json-file"
         options:
@@ -23,7 +24,7 @@ services:
           max-file: "1"
       sysctls:
         net.core.somaxconn: '1024'
-
+        
   rals:
       image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
       container_name: rals
