@@ -13,7 +13,7 @@ create_marker:
 	@echo "==> creating marker"
 	echo "$$(date +%FT%T%Z)" > $(file_with_date)
 	cat $(file_with_date)
-	
+
 build:
 	@docker build -t ${IMG_LATEST} ./
 
