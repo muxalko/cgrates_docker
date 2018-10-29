@@ -2,7 +2,7 @@ version: "3.7"
 services:
   redis: 
       image: gitlab-ptk.gt.local:5005/redis_dyn:4.0.9
-      container-name: redis
+      container_name: redis
       restart: always
       environment:
         - REDIS_REPLICATION_MODE=master
