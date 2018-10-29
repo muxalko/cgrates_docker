@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Building Dynomite + Redis Docker..."
 
+cd ./dynomite
 #Workaround: to get latest git pull
 #make create_marker 
 
