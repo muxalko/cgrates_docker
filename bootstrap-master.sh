@@ -1,3 +1,3 @@
-export CGRATES_VERSION_TAG=$(cat ./devel/CGRATES_VERSION_TAG)
+./set-env.sh
 cd master
 docker-compose up -d
