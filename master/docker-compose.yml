@@ -4,7 +4,7 @@ services:
       image: gitlab-ptk.gt.local:5005/redis_dyn:4.0.9
       container_name: redis
       restart: always
-      environment:
+      #environment:
         #- REDIS_REPLICATION_MODE=master
         #- REDIS_PASSWORD=QyV9LVnpbm
         # ALLOW_EMPTY_PASSWORD is recommended only for development.
