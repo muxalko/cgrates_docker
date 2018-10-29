@@ -31,8 +31,8 @@
 	"data_db": {								// database used to store runtime data (eg: accounts, cdr stats)
 		//"db_type": "redis",						// data_db type: <*redis|*mongo|*internal>
 		//"db_host": "127.0.0.1",					// data_db host address
-		"db_host": "redis-master",
-		//"db_port": 6379, 						// data_db port to reach the database
+		"db_host": "redis",
+		"db_port": 8102, 						// data_db port to reach the database
 		//"db_name": "10", 						// data_db database name to connect to
 		"db_name": "0",
 		//"db_user": "cgrates", 					// username to use when connecting to data_db
