@@ -25,6 +25,7 @@ FROM ubuntu
 MAINTAINER Ioannis Papapanagiotou - dynomite@netflix.com
 
 ENV DEBIAN_FRONTEND noninteractive
+
 # Update the repository sources list and Install package Build Essential
 RUN apt-get update && apt-get install -y \
 	autoconf \
@@ -36,6 +37,9 @@ RUN apt-get update && apt-get install -y \
 	software-properties-common \
 	redis-server \
 	tcl
+
+# skip caching
+COPY marker /dev/null
 
 # Clone the Dynomite Git
 RUN git clone https://github.com/Netflix/dynomite.git
