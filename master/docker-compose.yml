@@ -19,6 +19,9 @@ services:
           - "8102:8102"
           - "22122:22122"
           - "22222:22222"
+      extra_hosts:
+          - "ppcc-cgr-ptk-node-01:10.224.243.54"
+          - "ppcc-cgr-hfa-node-01:10.192.211.54"
       logging:
         driver: "json-file"
         options:
@@ -26,7 +29,12 @@ services:
           max-file: "1"
       sysctls:
         net.core.somaxconn: '1024'
-        
+#      healthcheck:
+#        test: ["CMD", "curl", "-f", "http://localhost"]
+#        interval: 1m30s
+#        timeout: 10s
+#        retries: 3
+#        start_period: 40s
   rals:
       image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
       container_name: rals
