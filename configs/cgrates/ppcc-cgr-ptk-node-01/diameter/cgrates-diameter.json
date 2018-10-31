@@ -39,7 +39,8 @@
 		"request_processors": [
 		{
 				"id": "data_init",
-				"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:1", "*rsr::*req.Service-Context-Id(@3gpp.org$)"],
+				"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:1", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],
+				//"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:1", "*rsr::*req.Service-Context-Id(@3gpp.org$)"],
 				"flags": ["*initiate", "*accounts", "*attributes"],
 				"request_fields":[
 					{"tag": "TOR",          "field_id": "ToR",              "type": "*constant",    "value": "*data",                 "mandatory": true},
@@ -63,7 +64,8 @@
 				},
 				{
 					"id": "data_update",
-					"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Multiple-Services-Credit-Control>Rating-Group:1", "*rsr::*req.Service-Context-Id(@3gpp.org$)"],	
+					"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],
+					//"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Multiple-Services-Credit-Control>Rating-Group:1", "*rsr::*req.Service-Context-Id(@3gpp.org$)"],	
 					"flags": ["*update", "*accounts", "*attributes"],
 					"request_fields":[
 						{"tag": "TOR",          "field_id": "ToR",        	"type": "*constant", "value": "*data", 						"mandatory": true},
@@ -89,7 +91,8 @@
 				},
 				{
 					"id": "data_terminate",
-					"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:3","*rsr::*req.Service-Context-Id(@3gpp.org$)"],
+					"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:3", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],
+					//"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:3","*rsr::*req.Service-Context-Id(@3gpp.org$)"],
 					"flags": ["*terminate", "*accounts", "*attributes", "*cdrs"],
 					"request_fields":[
 						{"tag": "TOR",                                 "field_id": "ToR",                              "type": "*constant",     "value": "*data",     			"mandatory": true},

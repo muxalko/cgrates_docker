@@ -9,9 +9,9 @@
 				{"address": "sessions:2012","transport":"*json"},
 		],
 		//"origin_host": "CGR-DA",										// diameter Origin-Host AVP used in replies
-		"origin_host": "ppcc-cgr-ptk-node-01",
+		"origin_host": "ppcc-cgr-hfa-node-01",
 		//"origin_realm": "cgrates.org",								// diameter Origin-Realm AVP used in replies
-		"origin_realm": "ppcc-cgr-ptk-node-01.local",
+		"origin_realm": "ppcc-cgr-hfa-node-01.local",
 		//"vendor_id": 0,												// diameter Vendor-Id AVP used in replies
 		//"product_name": "CGRateS",									// diameter Product-Name AVP used in replies
 		"product_name": "PPCC",
@@ -39,7 +39,8 @@
 		"request_processors": [
 		{
 				"id": "data_init",
-				"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:1", "*rsr::*req.Service-Context-Id(@3gpp.org$)"],
+				"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:1", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],
+				//"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:1", "*rsr::*req.Service-Context-Id(@3gpp.org$)"],
 				"flags": ["*initiate", "*accounts", "*attributes"],
 				"request_fields":[
 					{"tag": "TOR",          "field_id": "ToR",              "type": "*constant",    "value": "*data",                 "mandatory": true},
@@ -62,24 +63,25 @@
 					]
 				},
 				{
-					"id": "data_update",
-					"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Multiple-Services-Credit-Control>Rating-Group:1", "*rsr::*req.Service-Context-Id(@3gpp.org$)"],	
-					"flags": ["*update", "*accounts", "*attributes"],
-					"request_fields":[
-						{"tag": "TOR",          "field_id": "ToR",        	"type": "*constant", "value": "*data", 						"mandatory": true},
-						{"tag": "OriginHost",   "field_id": "OriginHost", 	"type": "*composed", "value": "~*req.Origin-Host",         	"mandatory": true},
-						{"tag": "OriginID",     "field_id": "OriginID",   	"type": "*composed", "value": "~*req.Session-Id",          	"mandatory": true},
-						{"tag": "RequestType",  "field_id": "RequestType",	"type": "*composed", "value": "^*prepaid",           		"mandatory": true},
-						{"tag": "Direction",    "field_id": "Direction",  	"type": "*composed", "value": "^*out",               		"mandatory": true},
-						{"tag": "Tenant",       "field_id": "Tenant",     	"type": "*composed", "value": "^golant",             		"mandatory": true},
-						{"tag": "Category",     "field_id": "Category",   	"type": "*composed", "value": "^data",               		"mandatory": true},
-						{"tag": "Account",		"field_id": "Account",		"type": "*composed", "value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]" , "mandatory": true },
-						{"tag": "Destination",  "field_id": "Destination",	"type": "*composed", "value": "~*req.Service-Information.PS-Information.3GPP-SGSN-MCC-MNC", "mandatory": true},
-						{"tag": "SetupTime", 	"field_id": "SetupTime", 	"type": "*composed", "value": "~*req.Event-Timestamp", 		"mandatory": true},
-						{"tag": "AnswerTime", 	"field_id": "AnswerTime", 	"type": "*composed", "value": "~*req.Event-Timestamp", 		"mandatory": true},
-						{"tag": "Usage",        "field_id": "Usage",      	"type": "*composed", "value": "^*attributes"},
-						{"tag": "LastUsed",     "field_id": "LastUsed",   	"type": "*handler",  "handler_id": "*sum", 
-							"value": "~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Input-Octets;~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Output-Octets"}
+				"id": "data_update",
+				"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],
+				//"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Multiple-Services-Credit-Control>Rating-Group:1", "*rsr::*req.Service-Context-Id(@3gpp.org$)"],	
+				"flags": ["*update", "*accounts", "*attributes"],
+				"request_fields":[
+					{"tag": "TOR",          "field_id": "ToR",        	"type": "*constant", "value": "*data", 						"mandatory": true},
+					{"tag": "OriginHost",   "field_id": "OriginHost", 	"type": "*composed", "value": "~*req.Origin-Host",         	"mandatory": true},
+					{"tag": "OriginID",     "field_id": "OriginID",   	"type": "*composed", "value": "~*req.Session-Id",          	"mandatory": true},
+					{"tag": "RequestType",  "field_id": "RequestType",	"type": "*composed", "value": "^*prepaid",           		"mandatory": true},
+					{"tag": "Direction",    "field_id": "Direction",  	"type": "*composed", "value": "^*out",               		"mandatory": true},
+					{"tag": "Tenant",       "field_id": "Tenant",     	"type": "*composed", "value": "^golant",             		"mandatory": true},
+					{"tag": "Category",     "field_id": "Category",   	"type": "*composed", "value": "^data",               		"mandatory": true},
+					{"tag": "Account",		"field_id": "Account",		"type": "*composed", "value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]" , "mandatory": true },
+					{"tag": "Destination",  "field_id": "Destination",	"type": "*composed", "value": "~*req.Service-Information.PS-Information.3GPP-SGSN-MCC-MNC", "mandatory": true},
+					{"tag": "SetupTime", 	"field_id": "SetupTime", 	"type": "*composed", "value": "~*req.Event-Timestamp", 		"mandatory": true},
+					{"tag": "AnswerTime", 	"field_id": "AnswerTime", 	"type": "*composed", "value": "~*req.Event-Timestamp", 		"mandatory": true},
+					{"tag": "Usage",        "field_id": "Usage",      	"type": "*composed", "value": "^*attributes"},
+					{"tag": "LastUsed",     "field_id": "LastUsed",   	"type": "*handler",  "handler_id": "*sum", 
+						"value": "~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Input-Octets;~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Output-Octets"}
 					],
 					"reply_fields": [
 						{"tag": "CCATemplate", "type": "*template", "value": "cca-default"},
@@ -89,7 +91,8 @@
 				},
 				{
 					"id": "data_terminate",
-					"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:3","*rsr::*req.Service-Context-Id(@3gpp.org$)"],
+					"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:3", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],
+					//"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:3","*rsr::*req.Service-Context-Id(@3gpp.org$)"],
 					"flags": ["*terminate", "*accounts", "*attributes", "*cdrs"],
 					"request_fields":[
 						{"tag": "TOR",                                 "field_id": "ToR",                              "type": "*constant",     "value": "*data",     			"mandatory": true},
