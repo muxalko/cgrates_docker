@@ -45,6 +45,9 @@ services:
       networks:
         - rals-net
         - redis-net 
+      extra_hosts:
+          - "ocs-db-ptk-node-01:10.224.243.58"
+          - "ocs-db-hfa-node-01:10.192.211.58"
       #depends_on:
           #- redis-master
       environment:
@@ -65,6 +68,9 @@ services:
       networks:
        - rals-net
        - sessions-net
+      extra_hosts:
+          - "ocs-db-ptk-node-01:10.224.243.58"
+          - "ocs-db-hfa-node-01:10.192.211.58"
       #depends_on:
           #- rals
       environment:
