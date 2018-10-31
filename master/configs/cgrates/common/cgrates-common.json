@@ -37,7 +37,7 @@
 		"db_name": "0",
 		//"db_user": "cgrates", 					// username to use when connecting to data_db
 		//"db_password": "", 						// password to use when connecting to data_db
-		"db_password": "QyV9LVnpbm"
+		//"db_password": "QyV9LVnpbm"
 		//"redis_sentinel":"",					// redis_sentinel is the name of sentinel
 	},
 
