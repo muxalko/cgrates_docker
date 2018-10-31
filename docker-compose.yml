@@ -40,8 +40,8 @@ services:
       container_name: rals
       restart: always
       volumes:
-          - ./configs/cgrates/common:/etc/cgrates/common
-          - ./configs/cgrates/rals:/etc/cgrates/rals
+          - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
+          - ./configs/cgrates/${HOSTNAME}/rals:/etc/cgrates/rals
       networks:
         - rals-net
         - redis-net 
@@ -60,8 +60,8 @@ services:
       container_name: cdrs
       restart: always
       volumes:
-          - ./configs/cgrates/common:/etc/cgrates/common
-          - ./configs/cgrates/cdrs:/etc/cgrates/cdrs
+          - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
+          - ./configs/cgrates/${HOSTNAME}/cdrs:/etc/cgrates/cdrs
       networks:
        - rals-net
        - sessions-net
@@ -80,8 +80,8 @@ services:
       container_name: attributes
       restart: always
       volumes:
-          - ./configs/cgrates/common:/etc/cgrates/common
-          - ./configs/cgrates/attributes:/etc/cgrates/attributes
+          - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
+          - ./configs/cgrates/${HOSTNAME}/attributes:/etc/cgrates/attributes
       networks:
        - redis-net
        - rals-net
@@ -101,8 +101,8 @@ services:
       container_name: sessions
       restart: always
       volumes:
-          - ./configs/cgrates/common:/etc/cgrates/common
-          - ./configs/cgrates/sessions:/etc/cgrates/sessions
+          - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
+          - ./configs/cgrates/${HOSTNAME}/sessions:/etc/cgrates/sessions
       networks:
        - rals-net
        - sessions-net
@@ -123,8 +123,8 @@ services:
       container_name: diameter
       restart: always
       volumes:
-          - ./configs/cgrates/common:/etc/cgrates/common
-          - ./configs/cgrates/diameter:/etc/cgrates/diameter
+          - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
+          - ./configs/cgrates/${HOSTNAME}/diameter:/etc/cgrates/diameter
           #- ./configs/diameter/dict:/etc/cgrates/diameter/dict
       ports:
           - "3868:3868"
@@ -145,8 +145,8 @@ services:
       container_name: api
       restart: always
       volumes:
-          - ./configs/cgrates/common:/etc/cgrates/common
-          - ./configs/cgrates/api:/etc/cgrates/api
+          - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
+          - ./configs/cgrates/${HOSTNAME}/api:/etc/cgrates/api
       ports:
           - "2080:2080"
       networks:
