@@ -85,8 +85,9 @@
 				],
 				"reply_fields": [
 					{"tag": "CCATemplate", "type": "*template", "value": "cca-default"},
-					{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-						"type": "*composed", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
+					{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "type": "*constant", "value": "10485760"},
+					//{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+					//	"type": "*composed", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
 					]
 				},
 				{
@@ -112,8 +113,9 @@
 					],
 					"reply_fields": [
 						{"tag": "CCATemplate", "type": "*template", "value": "cca-default"},
-						{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-							"type": "*composed", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
+						{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "type": "*constant", "value": "10485760"},
+						//{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+						//	"type": "*composed", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
 					]
 				},
 				{

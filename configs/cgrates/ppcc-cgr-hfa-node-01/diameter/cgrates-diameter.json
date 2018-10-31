@@ -16,21 +16,21 @@
 		//"product_name": "CGRateS",									// diameter Product-Name AVP used in replies
 		"product_name": "PPCC",
 
-		"templates":{
-			"*cca": [
-					{"tag": "SessionId", 			"field_id": "Session-Id", 			"type": "*composed", "value": "~*req.Session-Id", 			"mandatory": true},
-					{"tag": "OriginHost", 			"field_id": "Origin-Host", 			"type": "*composed", "value": "~*vars.OriginHost", 			"mandatory": true},
-					{"tag": "OriginRealm", 			"field_id": "Origin-Realm", 		"type": "*composed", "value": "~*vars.OriginRealm", 		"mandatory": true},
-					{"tag": "AuthApplicationId", 	"field_id": "Auth-Application-Id", 	"type": "*composed", "value": "~*vars.*appid", 				"mandatory": true},
-					{"tag": "CCRequestType", 		"field_id": "CC-Request-Type", 		"type": "*composed", "value": "~*req.CC-Request-Type", 		"mandatory": true},
-					{"tag": "CCRequestNumber", 		"field_id": "CC-Request-Number", 	"type": "*composed", "value": "~*req.CC-Request-Number", 	"mandatory": true},
-						
-			],
-			"cca-default": [
-					{"tag": "CCATemplate", 	"type": "*template", "value": "*cca"},
-					{"tag": "ResultCodeDefaultNegative", "field_id": "Result-Code", "type": "*constant", "value": "5030"},
-					//Try to catch errors from cgr
-					{"tag": "ResultCode", "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(NO_MORE_DATA)"],              "type": "*constant", "value": "5030", "Blocker":true},
+        "templates":{
+            "*cca": [
+                    {"tag": "SessionId", 			"field_id": "Session-Id", 			"type": "*composed", "value": "~*req.Session-Id", 			"mandatory": true},
+                    {"tag": "OriginHost", 			"field_id": "Origin-Host", 			"type": "*composed", "value": "~*vars.OriginHost", 			"mandatory": true},
+                    {"tag": "OriginRealm", 			"field_id": "Origin-Realm", 		"type": "*composed", "value": "~*vars.OriginRealm", 		"mandatory": true},
+                    {"tag": "AuthApplicationId", 	"field_id": "Auth-Application-Id", 	"type": "*composed", "value": "~*vars.*appid", 				"mandatory": true},
+                    {"tag": "CCRequestType", 		"field_id": "CC-Request-Type", 		"type": "*composed", "value": "~*req.CC-Request-Type", 		"mandatory": true},
+                    {"tag": "CCRequestNumber", 		"field_id": "CC-Request-Number", 	"type": "*composed", "value": "~*req.CC-Request-Number", 	"mandatory": true},
+
+            ],
+            "cca-default": [
+                    {"tag": "CCATemplate", 	"type": "*template", "value": "*cca"},
+                    {"tag": "ResultCodeDefaultNegative", "field_id": "Result-Code", "type": "*constant", "value": "5030"},
+                    //Try to catch errors from cgr
+                    {"tag": "ResultCode", "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(NO_MORE_DATA)"],              "type": "*constant", "value": "5030", "Blocker":true},
                     {"tag": "ResultCode", "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(NOT_IMPLEMENTED)"],           "type": "*constant", "value": "5030", "Blocker":true},
                     {"tag": "ResultCode", "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(NOT_FOUND)"],                 "type": "*constant", "value": "5030", "Blocker":true},
                     {"tag": "ResultCode", "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(TIMED_OUT)"],                 "type": "*constant", "value": "5030", "Blocker":true},
@@ -55,14 +55,14 @@
                     {"tag": "ResultCode", "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(PARTIALLY_EXECUTED)"],        "type": "*constant", "value": "5030", "Blocker":true},
                     {"tag": "ResultCode", "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(MAX_USAGE_EXCEEDED)"],        "type": "*constant", "value": "4012", "Blocker":true}, // DIAMETER_CREDIT_LIMIT_REACHED              
                     {"tag": "ResultCode", "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(UNALLOCATED_RESOURCE)"],      "type": "*constant", "value": "5030", "Blocker":true},
-					//Doublecheck everything is OK 
-					{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],		"type": "*constant", "value": "2001"},
-					{"tag": "RatingGroup",  "field_id": "Multiple-Services-Credit-Control.Rating-Group",			"type": "*constant", "value": "1"},
-					{"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control.Service-Identifier",		"type": "*constant", "value": "1"},
-					{"tag": "ValidityTime", "field_id": "Multiple-Services-Credit-Control.Validity-Time",			"type": "*constant", "value": "600"},
-			]
-		},
-		
+                    //Doublecheck everything is OK 
+                    {"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],		"type": "*constant", "value": "2001"},
+                    {"tag": "RatingGroup",  "field_id": "Multiple-Services-Credit-Control.Rating-Group",			"type": "*constant", "value": "1"},
+                    {"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control.Service-Identifier",		"type": "*constant", "value": "1"},
+                    {"tag": "ValidityTime", "field_id": "Multiple-Services-Credit-Control.Validity-Time",			"type": "*constant", "value": "600"},
+            ]
+        },
+
 		"request_processors": [
 		{
 				"id": "data_init",
@@ -85,8 +85,9 @@
 				],
 				"reply_fields": [
 					{"tag": "CCATemplate", "type": "*template", "value": "cca-default"},
-					{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-						"type": "*composed", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
+					{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "type": "*constant", "value": "10485760"},
+					//{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+					//	"type": "*composed", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
 					]
 				},
 				{
@@ -112,8 +113,9 @@
 					],
 					"reply_fields": [
 						{"tag": "CCATemplate", "type": "*template", "value": "cca-default"},
-						{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-							"type": "*composed", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
+						{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "type": "*constant", "value": "10485760"},
+						//{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+						//	"type": "*composed", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
 					]
 				},
 				{
