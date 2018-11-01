@@ -78,10 +78,10 @@
                     {"tag": "Tenant",       "field_id": "Tenant",           "type": "*composed",    "value": "^golant",               "mandatory": true},
                     //{"tag": "Category",     "field_id": "Category",         "type": "*composed",    "value": "^data",                 "mandatory": true},
                     {"tag": "Category",     "field_id": "Category",         "type": "*constant",    "value": "*attributes",           "mandatory": true},
-                    {"tag": "Account",         "field_id": "Account",             "type": "*composed",     "value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]", "mandatory": true },
+                    {"tag": "Account",      "field_id": "Account",             "type": "*composed",     "value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]", "mandatory": true },
                     {"tag": "Destination",  "field_id": "Destination",      "type": "*composed",    "value": "~*req.Service-Information.PS-Information.3GPP-SGSN-MCC-MNC",     "mandatory": true},
-                    {"tag": "SetupTime",     "field_id": "SetupTime",         "type": "*composed",     "value": "~*req.Event-Timestamp", "mandatory": true},
-                    {"tag": "AnswerTime",     "field_id": "AnswerTime",         "type": "*composed",     "value": "~*req.Event-Timestamp", "mandatory": true},
+                    {"tag": "SetupTime",    "field_id": "SetupTime",        "type": "*composed",    "value": "~*req.Event-Timestamp", "mandatory": true},
+                    {"tag": "AnswerTime",   "field_id": "AnswerTime",       "type": "*composed",    "value": "~*req.Event-Timestamp", "mandatory": true},
                     {"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"}
                 ],
                 "reply_fields": [
@@ -110,7 +110,7 @@
                         {"tag": "SetupTime",    "field_id": "SetupTime",      "type": "*composed", "value": "~*req.Event-Timestamp",         "mandatory": true},
                         {"tag": "AnswerTime",   "field_id": "AnswerTime",     "type": "*composed", "value": "~*req.Event-Timestamp",         "mandatory": true},
                         {"tag": "Usage",        "field_id": "Usage",          "type": "*composed", "value": "^*attributes"},
-                        {"tag": "LastUsed",     "field_id": "LastUsed",       "type": "*handler",  "handler_id": "*sum", 
+                        {"tag": "LastUsed",     "field_id": "LastUsed",       "type": "*sum",  
                             "value": "~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Input-Octets;~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Output-Octets"}
                     ],
                     "reply_fields": [
@@ -140,7 +140,7 @@
                         {"tag": "AnswerTime",                          "field_id": "AnswerTime",                       "type": "*composed",     "value": "~*req.Event-Timestamp",     "mandatory": true},
                         {"tag": "Reporting-Reason",                    "field_id": "Reporting-Reason",                 "type": "*composed",      "value": "Multiple-Services-Credit-Control[~Rating-Group(1)].Reporting-Reason", "mandatory": false},
                         {"tag": "Termination-Cause",                   "field_id": "Termination-Cause",                "type": "*composed",     "value": "~*req.Termination-Cause", "mandatory": false},
-                        {"tag": "LastUsed",                            "field_id": "LastUsed",                         "type": "*handler",      "handler_id": "*sum",               
+                        {"tag": "LastUsed",                            "field_id": "LastUsed",                         "type": "*sum",              
                                 "value": "~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Input-Octets;~*req.Multiple-Services-Credit-Control[~Rating-Group(1)].Used-Service-Unit.CC-Output-Octets"},
                         {"tag": "Called-Station-Id",                   "field_id": "Called-Station-Id",                "type": "*composed",     "value": "~*req.Service-Information.PS-Information.Called-Station-Id",                    "mandatory": false},
                         {"tag": "3GPP-Charging-Id",                    "field_id": "3GPP-Charging-Id",                 "type": "*composed",     "value": "~*req.Service-Information.PS-Information.3GPP-Charging-Id",                     "mandatory": false},

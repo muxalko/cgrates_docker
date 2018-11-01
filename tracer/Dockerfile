@@ -1,4 +1,4 @@
 FROM debian:latest
 MAINTAINER Michael Klimenko, mklimenko@golantelecom.co.il 
-RUN apt-get update && apt-get install -y tcpdump
+RUN apt-get update && apt-get install -y tcpdump ngrep
 CMD tcpdump -i eth0
