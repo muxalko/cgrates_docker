@@ -7,3 +7,7 @@
 
 #Building docker images per each binary
 ./build_minimal.sh
+
+git add .
+git commit -m "update version $(cat CGRATES_VERSION_TAG)" 
+git push -u origin master
