@@ -3,7 +3,7 @@ PRIVATE_REGISTRY := gitlab-ptk.gt.local:5005
 DOCKER_USER := rancher
 DOCKER_PASS := rancher2018
 LATEST := latest
-TAG    := 1.0
+TAG    := 1.1
 IMG    := ${NAME}:${TAG}
 IMG_LATEST    := ${NAME}:${LATEST}
 
