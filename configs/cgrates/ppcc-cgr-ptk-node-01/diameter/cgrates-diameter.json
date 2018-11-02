@@ -78,7 +78,7 @@
                     {"tag": "Tenant",       "field_id": "Tenant",           "type": "*composed",    "value": "^golant",               "mandatory": true},
                     //{"tag": "Category",     "field_id": "Category",         "type": "*composed",    "value": "^data",                 "mandatory": true},
                     {"tag": "Category",     "field_id": "Category",         "type": "*constant",    "value": "*attributes",           "mandatory": true},
-                    {"tag": "Account",      "field_id": "Account",             "type": "*composed",     "value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]", "mandatory": true },
+                    {"tag": "Account",      "field_id": "Account",          "type": "*composed",    "value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]", "mandatory": true },
                     {"tag": "Destination",  "field_id": "Destination",      "type": "*composed",    "value": "~*req.Service-Information.PS-Information.3GPP-SGSN-MCC-MNC",     "mandatory": true},
                     {"tag": "SetupTime",    "field_id": "SetupTime",        "type": "*composed",    "value": "~*req.Event-Timestamp", "mandatory": true},
                     {"tag": "AnswerTime",   "field_id": "AnswerTime",       "type": "*composed",    "value": "~*req.Event-Timestamp", "mandatory": true},
@@ -86,9 +86,10 @@
                 ],
                 "reply_fields": [
                     {"tag": "CCATemplate", "type": "*template", "value": "cca-default"},
-                    {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "type": "*constant", "value": "10485760"},
-                    //{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-                    //    "type": "*composed", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
+                    {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "filters": ["*rsr::~*cgrep.MaxUsage(-1)"],
+					    "type": "*constant", "value": "10485760", "mandatory": true},
+                    {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "filters": ["*rsr::~*cgrep.MaxUsage(!-1)"], 
+                        "type": "*constant", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
                     ]
                 },
                 {
@@ -115,10 +116,10 @@
 					        "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[~Rating-Group(1)];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[~Rating-Group(1)]"},
                     ],
                     "reply_fields": [
-                        {"tag": "CCATemplate", "type": "*template", "value": "cca-default"},
-                        {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "type": "*constant", "value": "10485760"},
-                        //{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-                        //    "type": "*composed", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
+                        {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "filters": ["*rsr::~*cgrep.MaxUsage(-1)"],
+					        "type": "*constant", "value": "10485760", "mandatory": true},
+                        {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "filters": ["*rsr::~*cgrep.MaxUsage(!-1)"], 
+                            "type": "*constant", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
                     ]
                 },
                 {
