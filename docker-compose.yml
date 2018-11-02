@@ -93,6 +93,8 @@ services:
        - redis-net
        - rals-net
        - sessions-net
+      ports:
+          - "32080:2080"
       #depends_on:
           #- redis-master
       environment:
@@ -113,6 +115,8 @@ services:
       networks:
        - rals-net
        - sessions-net
+      ports:
+          - "22080:2080"
       #depends_on:
           #- rals
           #- cdrs

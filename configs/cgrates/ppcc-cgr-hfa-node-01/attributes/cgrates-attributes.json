@@ -1,4 +1,9 @@
 {
+	"cache":{
+		"attribute_profiles": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},		// control attribute profile caching
+		"attribute_filter_indexes" : {"limit": -1, "ttl": "", "static_ttl": false}, 				// control attribute filter indexes caching
+	},
+	
 	"attributes": {								// Attribute service
 		"enabled": true,						// starts attribute service: <true|false>.
 		"string_indexed_fields": [				// query indexes based on these fields for faster processing
