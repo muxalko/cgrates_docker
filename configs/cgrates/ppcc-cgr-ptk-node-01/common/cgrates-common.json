@@ -64,6 +64,7 @@
 		//"rpc_gob": "127.0.0.1:2013",			// RPC GOB listening address
 		"rpc_gob": ":2013",
 		//"http": "127.0.0.1:2080",				// HTTP listening address
+		"http": ":2080",
 		//"rpc_json_tls" : "127.0.0.1:2022",		// RPC JSON TLS listening address
 		//"rpc_gob_tls": "127.0.0.1:2023",		// RPC GOB TLS listening address
 		//"http_tls": "127.0.0.1:2280",			// HTTP TLS listening address

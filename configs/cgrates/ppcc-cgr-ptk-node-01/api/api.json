@@ -1,8 +1,4 @@
 {
-	"listen": {
-		"http": ":2080"				
-	},
-	
 	"rals": {
 		"enabled": true
 	}
