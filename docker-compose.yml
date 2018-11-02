@@ -12,6 +12,7 @@ services:
         #- REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
       volumes:
           - ./configs/redis/${HOSTNAME}:/etc/dynomite
+          - /traces/redis:/var/lib/redis
       networks:
         - redis-net
       ports:
