@@ -64,6 +64,7 @@
 		//"rpc_gob": "127.0.0.1:2013",			// RPC GOB listening address
 		"rpc_gob": ":2013",
 		//"http": "127.0.0.1:2080",				// HTTP listening address
+		"http": ":2080",	  
 		//"rpc_json_tls" : "127.0.0.1:2022",		// RPC JSON TLS listening address
 		//"rpc_gob_tls": "127.0.0.1:2023",		// RPC GOB TLS listening address
 		//"http_tls": "127.0.0.1:2280",			// HTTP TLS listening address
@@ -80,5 +81,40 @@
 		//"http_cdrs": "/cdr_http",					// CDRS relative URL ("" to disable)
 		//"use_basic_auth": false,					// use basic authentication
 		//"auth_users": {},							// basic authentication usernames and base64-encoded passwords (eg: { "username1": "cGFzc3dvcmQ=", "username2": "cGFzc3dvcmQy "})
-	}
+	},
+
+	"cache":{
+		  //"destinations": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},			// destination caching
+		  //"reverse_destinations": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},	// reverse destinations index caching
+		  //"rating_plans": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},			// rating plans caching
+		  //"rating_profiles": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},		// rating profiles caching
+		  //"lcr_rules": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},				// lcr rules caching
+		  //"cdr_stats": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},				// cdr stats queues caching
+		  //"actions": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},				// actions caching
+		  //"action_plans": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},			// action plans caching
+		  //"account_action_plans": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},	// account action plans index caching
+		  //"action_triggers": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},		// action triggers caching
+		  //"shared_groups": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},			// shared groups caching
+		  //"aliases": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},				// aliases caching
+		  //"reverse_aliases": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},		// reverse aliases index caching
+		  //"derived_chargers": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},		// derived charging rule caching
+		  //"timings": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},				// timings caching
+		  //"resource_profiles": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},		// control resource profiles caching
+		  //"resources": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},				// control resources caching
+		  //"event_resources": {"limit": -1, "ttl": "1m", "static_ttl": false},							// matching resources to events
+		  //"statqueue_profiles": {"limit": -1, "ttl": "1m", "static_ttl": false, "precache": false},	// statqueue profiles
+		  //"statqueues": {"limit": -1, "ttl": "1m", "static_ttl": false, "precache": false},			// statqueues with metrics
+		  //"threshold_profiles": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},		// control threshold profiles caching
+		  //"thresholds": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},				// control thresholds caching
+		  //"filters": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},				// control filters caching
+		  //"supplier_profiles": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},		// control supplier profile caching
+		  "attribute_profiles": {"limit": -1, "ttl": "0", "static_ttl": false, "precache": false},		// control attribute profile caching
+		  //"charger_profiles": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},		// control charger profile caching
+		  //"resource_filter_indexes" : {"limit": -1, "ttl": "", "static_ttl": false}, 					// control resource filter indexes caching
+		  //"stat_filter_indexes" : {"limit": -1, "ttl": "", "static_ttl": false}, 						// control stat filter indexes caching
+		  //"threshold_filter_indexes" : {"limit": -1, "ttl": "", "static_ttl": false}, 				// control threshold filter indexes caching
+		  //"supplier_filter_indexes" : {"limit": -1, "ttl": "", "static_ttl": false}, 					// control supplier filter indexes caching
+		  "attribute_filter_indexes" : {"limit": -1, "ttl": "0", "static_ttl": false}, 				// control attribute filter indexes caching
+		  //"charger_filter_indexes" : {"limit": -1, "ttl": "", "static_ttl": false}, 					// control charger filter indexes caching
+	},
 }
