@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  cgrates-devel:
+      image: gitlab-ptk.gt.local:5005/cgrates-devel
+      container_name: cgrates-devel
+      volumes:
+          - ./../configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
+          - ./../configs/cgrates/${HOSTNAME}/rals:/etc/cgrates/rals
+          - ./../configs/cgrates/${HOSTNAME}/cdrs:/etc/cgrates/cdrs
+          - ./../configs/cgrates/${HOSTNAME}/sessions:/etc/cgrates/sessions
+          - ./../configs/cgrates/${HOSTNAME}/attributes:/etc/cgrates/attributes
+          - ./../configs/cgrates/${HOSTNAME}/diameter:/etc/cgrates/diameter
+      extra_hosts:
+          - "ocs-db-ptk-node-01:127.0.0.1"
+          - "ocs-db-hfa-node-01:127.0.0.1"
+      environment:
+          - CGR-SERVICE=cgrates-devel
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
