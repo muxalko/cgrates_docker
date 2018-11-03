@@ -64,7 +64,7 @@
 		//"rpc_gob": "127.0.0.1:2013",			// RPC GOB listening address
 		"rpc_gob": ":2013",
 		//"http": "127.0.0.1:2080",				// HTTP listening address
-		"http": ":2080",	  
+		"http": ":2080",
 		//"rpc_json_tls" : "127.0.0.1:2022",		// RPC JSON TLS listening address
 		//"rpc_gob_tls": "127.0.0.1:2023",		// RPC GOB TLS listening address
 		//"http_tls": "127.0.0.1:2280",			// HTTP TLS listening address
@@ -82,7 +82,7 @@
 		//"use_basic_auth": false,					// use basic authentication
 		//"auth_users": {},							// basic authentication usernames and base64-encoded passwords (eg: { "username1": "cGFzc3dvcmQ=", "username2": "cGFzc3dvcmQy "})
 	},
-
+	
 	"cache":{
 		  //"destinations": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},			// destination caching
 		  //"reverse_destinations": {"limit": -1, "ttl": "", "static_ttl": false, "precache": false},	// reverse destinations index caching
