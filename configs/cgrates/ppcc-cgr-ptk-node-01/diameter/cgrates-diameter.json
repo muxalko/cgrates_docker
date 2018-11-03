@@ -85,11 +85,10 @@
                     {"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"}
                 ],
                 "reply_fields": [
-                    {"tag": "CCATemplate", "type": "*template", "value": "cca-default"},
-                    {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets",
-					      "filters": ["*rsr::~*cgrep.MaxUsage(-1)"], "type": "*constant", "value": "10485760", "mandatory": true},
-                    {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets",
-					     "filters": ["*string:~*cgrep.MaxUsage{*duration_nanoseconds}:-1"], "type": "*constant", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
+                        {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+						   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"], "type": "*constant", "value": "10485760", "mandatory": true},
+                        {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+						   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"],  "type": "*constant", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
                     ]
                 },
                 {
@@ -117,9 +116,9 @@
                     ],
                     "reply_fields": [
                         {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-						   "filters": ["*rsr::~*cgrep.MaxUsage(-1)"], "type": "*constant", "value": "10485760", "mandatory": true},
+						   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"], "type": "*constant", "value": "10485760", "mandatory": true},
                         {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-						   "filters": ["*string:~*cgrep.MaxUsage{*duration_nanoseconds}:-1"],  "type": "*constant", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
+						   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"],  "type": "*constant", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
                     ]
                 },
                 {
