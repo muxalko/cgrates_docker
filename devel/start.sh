@@ -3,6 +3,16 @@
 sed -i 's/127.0.0.1/0.0.0.0/g' /etc/redis/redis.conf /etc/mysql/my.cnf
 #echo 'host    all             all             0.0.0.0/32            md5'>>/etc/postgresql/9.4/main/pg_hba.conf
 
+# Set the timezone.
+if [ "$SET_CONTAINER_TIMEZONE" = "true" ]; then
+    echo ${CONTAINER_TIMEZONE} >/etc/timezone && \
+    ln -sf /usr/share/zoneinfo/${CONTAINER_TIMEZONE} /etc/localtime && \
+    dpkg-reconfigure -f noninteractive tzdata
+    echo "Container timezone set to: $CONTAINER_TIMEZONE"
+else
+    echo "Container timezone not modified"
+fi
+
 # start services
 service rsyslog start
 service mysql start

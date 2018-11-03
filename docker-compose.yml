@@ -133,6 +133,9 @@ services:
       image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
       container_name: diameter
       restart: always
+      environment:
+          - DA_ORIGIN_HOST=${hostname}
+          - DA_ORIGIN_REALM=${hostname -a}
       volumes:
           - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
           - ./configs/cgrates/${HOSTNAME}/diameter:/etc/cgrates/diameter
