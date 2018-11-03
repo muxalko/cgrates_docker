@@ -134,8 +134,8 @@ services:
       container_name: diameter
       restart: always
       environment:
-          - DA_ORIGIN_HOST=${hostname}
-          - DA_ORIGIN_REALM=${hostname -a}
+          - DA_ORIGIN_HOST=${HOSTNAME}
+          - DA_ORIGIN_REALM=${HOSTNAME}
       volumes:
           - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
           - ./configs/cgrates/${HOSTNAME}/diameter:/etc/cgrates/diameter
