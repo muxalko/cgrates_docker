@@ -9,7 +9,7 @@
                 {"address": "sessions:2012","transport":"*json"},
         ],
         //"origin_host": "CGR-DA",                                        // diameter Origin-Host AVP used in replies
-        "origin_host": "ppcc-cgr-ptk-node-01",
+        "origin_host": "ppcc-cgr-hfa-node-01",
         //"origin_realm": "cgrates.org",                                // diameter Origin-Realm AVP used in replies
         "origin_realm": "ppcc-cgr-ptk-node-01.local",
         //"vendor_id": 0,                                                // diameter Vendor-Id AVP used in replies
@@ -26,7 +26,7 @@
                     {"tag": "CCRequestNumber",         "field_id": "CC-Request-Number",     "type": "*composed", "value": "~*req.CC-Request-Number",     "mandatory": true},
                         
             ],
-            "cca-default": [
+            "cca-custom": [
                     {"tag": "CCATemplate",     "type": "*template", "value": "*cca"},
                     {"tag": "ResultCodeDefaultNegative", "field_id": "Result-Code", "type": "*constant", "value": "5030"},
                     //Try to catch errors from cgr
@@ -85,6 +85,7 @@
                     {"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"}
                 ],
                 "reply_fields": [
+						{"tag": "CCATemplate", "type": "*template", "value": "cca-custom"},
                         {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
 						   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"], "type": "*constant", "value": "10485760", "mandatory": true},
                         {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
@@ -115,6 +116,7 @@
 					        "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[~Rating-Group(1)];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[~Rating-Group(1)]"},
                     ],
                     "reply_fields": [
+						{"tag": "CCATemplate", "type": "*template", "value": "cca-custom"},
                         {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
 						   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"], "type": "*constant", "value": "10485760", "mandatory": true},
                         {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
