@@ -12,8 +12,8 @@ make build
 echo "$(docker run -it --entrypoint dynomite gitlab-ptk.gt.local:5005/dynomite -V | head -n 1)">DYNOMITE_VERSION
 echo "$(cat DYNOMITE_VERSION | sed -r 's/^.+dynomite-(.+)$/\1/')">DYNOMITE_VERSION_TAG
 
-export DYNOMITE_VERSION=$(cat CGRATES_VERSION)
-export DYNOMITE_VERSION_TAG=$(cat CGRATES_VERSION_TAG)
+export DYNOMITE_VERSION=$(cat DYNOMITE_VERSION)
+export DYNOMITE_VERSION_TAG=$(cat DYNOMITE_VERSION_TAG)
 
 #Tag with actual version
 make tag
