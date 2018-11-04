@@ -19,7 +19,7 @@
 ##########################################################################
 
 # Set the base image to Ubuntu
-FROM debian
+FROM ubuntu
 
 # File Author / Maintainer
 MAINTAINER Ioannis Papapanagiotou - dynomite@netflix.com
