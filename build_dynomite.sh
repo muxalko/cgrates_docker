@@ -9,7 +9,7 @@ cd ./dynomite
 make build
 
 #get git pull version from the latest dynomite 
-echo $(docker run gitlab-ptk.gt.local:5005/dynomite /bin/sh -c "src/dynomite -V") > DYNOMITE_VERSION
+echo $(docker run -it --entrypoint dynomite gitlab-ptk.gt.local:5005/dynomite -V) > DYNOMITE_VERSION
 echo $(cat DYNOMITE_VERSION | sed -r 's/^This\sis\sdynomite-OOO-\d\d-(.+)$/\1/') > DYNOMITE_VERSION_TAG
 
 #Tag with actual version
