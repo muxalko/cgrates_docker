@@ -3,7 +3,7 @@ PRIVATE_REGISTRY := gitlab-ptk.gt.local:5005
 DOCKER_USER := rancher
 DOCKER_PASS := rancher2018
 LATEST := latest
-TAG    := $(if $(DYNOMITE_VERSION_TAG:-=),$(shell echo "${DYNOMITE_VERSION_TAG}"),${LATEST})
+TAG    := $(if $(DYNOMITE_VERSION_TAG:-=),$(shell echo DYNOMITE_VERSION_TAG),${LATEST})
 IMG    := ${NAME}:${TAG}
 IMG_LATEST    := ${NAME}:${LATEST}
 
