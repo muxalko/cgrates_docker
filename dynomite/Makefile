@@ -1,4 +1,4 @@
-NAME   := redis_dyn
+NAME   := dynomite
 PRIVATE_REGISTRY := gitlab-ptk.gt.local:5005
 DOCKER_USER := rancher
 DOCKER_PASS := rancher2018
