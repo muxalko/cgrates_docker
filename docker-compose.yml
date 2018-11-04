@@ -56,7 +56,7 @@ services:
           - ./configs/cgrates/${HOSTNAME}/rals:/etc/cgrates/rals
       networks:
         - dynomite-net
-        - redis-net 
+        - rals-net 
       extra_hosts:
           - "ocs-db-ptk-node-01:10.224.243.58"
           - "ocs-db-hfa-node-01:10.192.211.58"
