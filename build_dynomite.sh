@@ -9,11 +9,11 @@ cd ./dynomite
 make build
 
 #get git pull version from the latest dynomite 
-printf '%s' "$(docker run -it --entrypoint dynomite gitlab-ptk.gt.local:5005/dynomite -V | xargs)">DYNOMITE_VERSION
+printf '%s' "$(docker run -it --entrypoint dynomite gitlab-ptk.gt.local:5005/dynomite -V | head -n 1)">DYNOMITE_VERSION
 printf '%s' "$(cat DYNOMITE_VERSION | sed -r 's/^.+dynomite-(.+)$/\1/')">DYNOMITE_VERSION_TAG
 
 export DYNOMITE_VERSION=$(cat DYNOMITE_VERSION)
-export DYNOMITE_VERSION_TAG=$(cat DYNOMITE_VERSION_TAG)
+export DYNOMITE_VERSION_TAG=$(cat DYNOMITE_VERSION_TAG | sed 's/\r//g')
 
 #Tag with actual version
 make tag
