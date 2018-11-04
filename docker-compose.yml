@@ -189,6 +189,7 @@ services:
           max-size: "100m"
           max-file: "1"
 networks:
+  dynomite-net:
   redis-net:
   rals-net:
   sessions-net:
