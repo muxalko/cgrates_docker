@@ -1,24 +1,42 @@
 version: "3.7"
 services:
-  redis: 
-      image: gitlab-ptk.gt.local:5005/redis_dyn:4.0.9
+  redis:
+      image: bitnami/redis:4.0.11
       container_name: redis
-      restart: always
-      #environment:
-        #- REDIS_REPLICATION_MODE=master
+      hostname: redis
+      volumes:
+          - /traces/redis/data:/bitnami/redis/data
+      environment:
+        - REDIS_REPLICATION_MODE=master
         #- REDIS_PASSWORD=QyV9LVnpbm
         # ALLOW_EMPTY_PASSWORD is recommended only for development.
-        #- ALLOW_EMPTY_PASSWORD=yes
+        - ALLOW_EMPTY_PASSWORD=yes
         #- REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
-      volumes:
-          - ./configs/redis/${HOSTNAME}:/etc/dynomite
-          - /traces/redis:/var/lib/redis
+      expose:
+          - "6379"
       networks:
         - redis-net
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "100m"
+          max-file: "1"
+      sysctls:
+        net.core.somaxconn: '1024'
+
+  dynomite: 
+      image: dynomitedb/dynomite
+      container_name: dynomite
+      restart: always
+      volumes:
+          - ./configs/dynomite/${HOSTNAME}:/etc/dynomite
+      networks:
+        - redis-net
+        - dynomite-net
       ports:
           - "8101:8101"
           - "8102:8102"
-          - "22122:22122"
+          #- "22122:22122"
           - "22222:22222"
       extra_hosts:
           - "ppcc-cgr-ptk-node-01:10.224.243.54"
@@ -28,14 +46,7 @@ services:
         options:
           max-size: "100m"
           max-file: "1"
-      sysctls:
-        net.core.somaxconn: '1024'
-#      healthcheck:
-#        test: ["CMD", "curl", "-f", "http://localhost"]
-#        interval: 1m30s
-#        timeout: 10s
-#        retries: 3
-#        start_period: 40s
+
   rals:
       image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
       container_name: rals
@@ -44,7 +55,7 @@ services:
           - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
           - ./configs/cgrates/${HOSTNAME}/rals:/etc/cgrates/rals
       networks:
-        - rals-net
+        - dynomite-net
         - redis-net 
       extra_hosts:
           - "ocs-db-ptk-node-01:10.224.243.58"
@@ -90,7 +101,7 @@ services:
           - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
           - ./configs/cgrates/${HOSTNAME}/attributes:/etc/cgrates/attributes
       networks:
-       - redis-net
+       - dynomite-net
        - rals-net
        - sessions-net
       ports:
@@ -164,7 +175,7 @@ services:
       ports:
           - "2080:2080"
       networks:
-        - redis-net
+        - dynomite-net
       extra_hosts:
           - "ocs-db-ptk-node-01:10.224.243.58"
           - "ocs-db-hfa-node-01:10.192.211.58"
