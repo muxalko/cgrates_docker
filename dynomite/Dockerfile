@@ -19,7 +19,7 @@
 ##########################################################################
 
 # Set the base image to Ubuntu
-FROM ubuntu
+FROM debian
 
 # File Author / Maintainer
 MAINTAINER Ioannis Papapanagiotou - dynomite@netflix.com
@@ -35,7 +35,7 @@ RUN apt-get update && apt-get install -y \
 	libssl-dev \
 	libtool \
 	software-properties-common \
-	redis-server \
+#	redis-server \
 	tcl
 
 # skip caching
@@ -66,8 +66,8 @@ RUN echo 'Exposing peer port 8101'
 EXPOSE 8101
 
 # Expose the underlying Redis port
-RUN echo 'Exposing Redis port 22122'
-EXPOSE 22122
+#RUN echo 'Exposing Redis port 22122'
+#EXPOSE 22122
 
 # Expose the stats/admin port
 RUN echo 'Exposing stats/admin port 22222'
@@ -79,7 +79,7 @@ EXPOSE 8102
 
 
 # Setting overcommit for Redis to be able to do BGSAVE/BGREWRITEAOF
-RUN sysctl vm.overcommit_memory=1
+#RUN sysctl vm.overcommit_memory=1
 
 # Set the entry-point to be the startup script
 ENTRYPOINT ["/dynomite/startup.sh"]
