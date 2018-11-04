@@ -31,7 +31,7 @@
 	"data_db": {								// database used to store runtime data (eg: accounts, cdr stats)
 		//"db_type": "redis",						// data_db type: <*redis|*mongo|*internal>
 		//"db_host": "127.0.0.1",					// data_db host address
-		"db_host": "redis",
+		"db_host": "dynomite",
 		"db_port": 8102, 						// data_db port to reach the database
 		//"db_name": "10", 						// data_db database name to connect to
 		"db_name": "0",

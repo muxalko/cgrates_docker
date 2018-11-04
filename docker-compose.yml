@@ -5,7 +5,7 @@ services:
       container_name: redis
       hostname: redis
       volumes:
-          - /traces/redis/data:/bitnami/redis/data
+          - /traces/redis:/bitnami/redis
       environment:
         - REDIS_REPLICATION_MODE=master
         #- REDIS_PASSWORD=QyV9LVnpbm
@@ -29,13 +29,13 @@ services:
       container_name: dynomite
       restart: always
       volumes:
-          - ./configs/dynomite/${HOSTNAME}:/etc/dynomite
+          - ./configs/dynomite/${HOSTNAME}:/etc/dynomitedb
       networks:
         - redis-net
         - dynomite-net
       ports:
           - "8101:8101"
-          - "8102:8102"
+          #- "8102:8102"
           #- "22122:22122"
           - "22222:22222"
       extra_hosts:
