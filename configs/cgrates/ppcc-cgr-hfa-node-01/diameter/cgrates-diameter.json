@@ -58,7 +58,7 @@
                     ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:MAX_USAGE_EXCEEDED"],        "type": "*constant", "value": "4012", "Blocker":true}, // DIAMETER_CREDIT_LIMIT_REACHED              
                     ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:UNALLOCATED_RESOURCE"],      "type": "*constant", "value": "5030", "Blocker":true},
                     //Doublecheck everything is OK 
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2001"},
+                    {"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"],      "type": "*constant", "value": "5031"},
                     {"tag": "RatingGroup", "field_id": "Multiple-Services-Credit-Control.Rating-Group",            "type": "*constant", "value": "1"},
                     {"tag": "ServiceId",   "field_id": "Multiple-Services-Credit-Control.Service-Identifier",      "type": "*constant", "value": "1"},
                     {"tag": "ValidityTime","field_id": "Multiple-Services-Credit-Control.Validity-Time",           "type": "*constant", "value": "600"},
