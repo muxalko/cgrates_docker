@@ -7,7 +7,7 @@
 			{"address": "127.0.0.1:2012", "transport": "*json"}
 		],
 		"scheduler_conns": [
-			{"address": "scheduler:2012"}
+			{"address": "127.0.0.1:2012"}
 		],
 	}
 }

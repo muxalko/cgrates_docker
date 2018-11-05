@@ -3,7 +3,7 @@
 		"enabled": true,				// start Scheduler service: <true|false>
 		// To be able to write *cdr_log from action
 		"cdrs_conns": [					// address where to reach CDR Server, empty to disable CDR capturing <*internal|x.y.z.y:1234>
-			{"address": "cdrs:2012","transport":"*json"}
+			{"address": "127.0.0.1:2012","transport":"*json"}
 			],				
 	},
 
