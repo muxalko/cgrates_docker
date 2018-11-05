@@ -88,6 +88,7 @@
                     {"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"}
                 ],
                 "reply_fields": [
+						{"tag": "CCATemplate",     "type": "*template", "value": "*cca"},
 						{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"],      "type": "*constant", "value": "5031", "blocker": true },
 						{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2002"},
 						{"tag": "RatingGroup",  "field_id": "Multiple-Services-Credit-Control.Rating-Group",            "type": "*constant", "value": "1"},
@@ -126,6 +127,7 @@
 					        "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[~Rating-Group(1)];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[~Rating-Group(1)]"},
                     ],
                     "reply_fields": [
+						{"tag": "CCATemplate",     "type": "*template", "value": "*cca"},
 						{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"],      "type": "*constant", "value": "5031", "blocker": true },
 						{"tag": "RatingGroup",  "field_id": "Multiple-Services-Credit-Control.Rating-Group",            "type": "*constant", "value": "1"},
 						{"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control.Service-Identifier",      "type": "*constant", "value": "1"},
@@ -180,6 +182,7 @@
                         {"tag": "PDP-Context-Type",                    "field_id": "PDP-Context-Type",                 "type": "*composed",     "value": "~*req.Service-Information.PS-Information.PDP-Context-Type",                     "mandatory": false}
                     ],
 					"reply_fields": [
+						{"tag": "CCATemplate",     "type": "*template", "value": "*cca"},
 						{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"],      "type": "*constant", "value": "5031", "blocker": true },
 						{"tag": "RatingGroup",  "field_id": "Multiple-Services-Credit-Control.Rating-Group",            "type": "*constant", "value": "1"},
 						{"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control.Service-Identifier",      "type": "*constant", "value": "1"},
