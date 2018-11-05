@@ -10,10 +10,10 @@
         ],
         //"origin_host": "CGR-DA",                                        // diameter Origin-Host AVP used in replies
         //"origin_host": "*env:DA_ORIGIN_HOST",
-		"origin_host": "ppcc-cgr-hfa-node-01",
+		"origin_host": "ppcc-cgr-ptk-node-01",
         //"origin_realm": "cgrates.org",                                // diameter Origin-Realm AVP used in replies
         //"origin_realm": "*env:DA_ORIGIN_REALM",
-		"origin_realm": "ppcc-cgr-hfa-node-01.local",
+		"origin_realm": "ppcc-cgr-ptk-node-01.local",
         //"vendor_id": 0,                                                // diameter Vendor-Id AVP used in replies
         //"product_name": "CGRateS",                                    // diameter Product-Name AVP used in replies
         "product_name": "PPCC",
@@ -26,42 +26,6 @@
                     {"tag": "AuthApplicationId",      "field_id": "Auth-Application-Id",    "type": "*composed", "value": "~*vars.*appid",              "mandatory": true},
                     {"tag": "CCRequestType",          "field_id": "CC-Request-Type",        "type": "*composed", "value": "~*req.CC-Request-Type",      "mandatory": true},
                     {"tag": "CCRequestNumber",        "field_id": "CC-Request-Number",      "type": "*composed", "value": "~*req.CC-Request-Number",    "mandatory": true},
-                        
-            ],
-            "cca-custom": [
-                    {"tag": "CCATemplate",     "type": "*template", "value": "*cca"},
-                    //{"tag": "ResultCodeDefaultNegative", "field_id": "Result-Code", "type": "*constant", "value": "5030"},
-                    //Try to catch more specific error
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:NO_MORE_DATA"],              "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:NOT_IMPLEMENTED"],           "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:NOT_FOUND"],                 "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:TIMED_OUT"],                 "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:SERVER_ERROR"],              "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:MAX_RECURSION_DEPTH"],       "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:MANDATORY_IE_MISSING"],      "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:EXISTS"],                    "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:BROKEN_REFERENCE"],          "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:PARSER_ERROR"],              "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:INVALID_PATH"],              "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:INVALID_KEY"],               "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:UNAUTHORIZED_DESTINATION"],  "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:RATING_PLAN_NOT_FOUND"],     "type": "*constant", "value": "5031", "blocker": true}, // DIAMETER_RATING_FAILED                     
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:ACCOUNT_NOT_FOUND"],         "type": "*constant", "value": "5030", "blocker": true}, // DIAMETER_USER_UNKNOWN                      
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:ACCOUNT_DISABLED"],          "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:USER_NOT_FOUND"],            "type": "*constant", "value": "5030", "blocker": true}, // DIAMETER_USER_UNKNOWN                      
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:INSUFFICIENT_CREDIT"],       "type": "*constant", "value": "4010", "blocker": true}, // DIAMETER_END_USER_SERVICE_DENIED
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:NOT_CONVERTIBLE"],           "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:RESOURCE_UNAVAILABLE"],      "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:RESOURCE_UNAUTHORIZED"],     "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:NO_ACTIVE_SESSION"],         "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:PARTIALLY_EXECUTED"],        "type": "*constant", "value": "5030", "blocker": true},
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:MAX_USAGE_EXCEEDED"],        "type": "*constant", "value": "4012", "blocker": true}, // DIAMETER_CREDIT_LIMIT_REACHED              
-                    ////{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:UNALLOCATED_RESOURCE"],      "type": "*constant", "value": "5030", "blocker": true},
-                    //Doublecheck everything is OK 
-                    {"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"],      "type": "*constant", "value": "5031"},
-                    {"tag": "RatingGroup", "field_id": "Multiple-Services-Credit-Control.Rating-Group",            "type": "*constant", "value": "1"},
-                    {"tag": "ServiceId",   "field_id": "Multiple-Services-Credit-Control.Service-Identifier",      "type": "*constant", "value": "1"},
-                    {"tag": "ValidityTime","field_id": "Multiple-Services-Credit-Control.Validity-Time",           "type": "*constant", "value": "600"},
             ]
         },
         
@@ -89,17 +53,17 @@
                 ],
                 "reply_fields": [
 						{"tag": "CCATemplate",     "type": "*template", "value": "*cca"},
-						{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"],      "type": "*constant", "value": "5031", "blocker": true },
-						//{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2002"},
-						{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+						{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"], "type": "*constant", "value": "5031", "blocker": true },
+						{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],  "type": "*constant", "value": "2002"},
+						{"tag": "RatingGroup",  "field_id": "Multiple-Services-Credit-Control.Rating-Group",        "type": "*constant", "value": "1"},
+						{"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control.Service-Identifier",  "type": "*constant", "value": "1"},
+						{"tag": "ValidityTime", "field_id": "Multiple-Services-Credit-Control.Validity-Time",       "type": "*constant", "value": "600"},
+                        {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
 						    //"filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"],
 							"filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(-1)"],
 							"type": "*constant", "value": "10485760", "mandatory": true},
                        // {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
 						//   "filters": ["*gt:*cgrep.MaxUsage{*duration_nanoseconds}:0"],  "type": "*constant", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
-						{"tag": "RatingGroup",  "field_id": "Multiple-Services-Credit-Control.Rating-Group",            "type": "*constant", "value": "1"},
-						{"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control.Service-Identifier",      "type": "*constant", "value": "1"},
-						{"tag": "ValidityTime", "field_id": "Multiple-Services-Credit-Control.Validity-Time",           "type": "*constant", "value": "600"}
                     ]
                 },
                 {
