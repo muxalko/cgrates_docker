@@ -10,10 +10,10 @@
         ],
         //"origin_host": "CGR-DA",                                        // diameter Origin-Host AVP used in replies
         //"origin_host": "*env:DA_ORIGIN_HOST",
-		"origin_host": "ppcc-cgr-ptk-node-01",
+		"origin_host": "ppcc-cgr-hfa-node-01",
         //"origin_realm": "cgrates.org",                                // diameter Origin-Realm AVP used in replies
         //"origin_realm": "*env:DA_ORIGIN_REALM",
-		"origin_realm": "ppcc-cgr-ptk-node-01.local",
+		"origin_realm": "ppcc-cgr-hfa-node-01.local",
         //"vendor_id": 0,                                                // diameter Vendor-Id AVP used in replies
         //"product_name": "CGRateS",                                    // diameter Product-Name AVP used in replies
         "product_name": "PPCC",
@@ -90,9 +90,10 @@
                 "reply_fields": [
 						{"tag": "CCATemplate", "type": "*template", "value": "cca-custom"},
                         {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-						   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"], "type": "*constant", "value": "10485760", "mandatory": true},
-                        {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-						   "filters": ["*gt:*cgrep.MaxUsage{*duration_nanoseconds}:0"],  "type": "*constant", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
+						    // "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"],
+							"type": "*constant", "value": "10485760", "mandatory": true},
+                       // {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+						//   "filters": ["*gt:*cgrep.MaxUsage{*duration_nanoseconds}:0"],  "type": "*constant", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
                     ]
                 },
                 {
@@ -122,9 +123,10 @@
                     "reply_fields": [
 						{"tag": "CCATemplate", "type": "*template", "value": "cca-custom"},
                         {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-						   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"], "type": "*constant", "value": "10485760", "mandatory": true},
-                        {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-						   "filters": ["*gt:*cgrep.MaxUsage{*duration_nanoseconds}:0"],  "type": "*constant", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
+						  // "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"],
+						   "type": "*constant", "value": "10485760", "mandatory": true},
+                       // {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+						 //  "filters": ["*gt:*cgrep.MaxUsage{*duration_nanoseconds}:0"],  "type": "*constant", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
                     ]
                 },
                 {
