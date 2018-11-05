@@ -26,7 +26,8 @@ service redis-server start
 
 #setup mysql
 cd /usr/share/cgrates/storage/mysql && ./setup_cgr_db.sh root CGRateS.org
-
+echo "Running migrator *set_versions"
+cgr-migrator -stordb_passwd CGRateS.org -migrate=*set_versions -verbose
 # setup postgres
 #cd /usr/share/cgrates/storage/postgres && ./setup_cgr_db.sh
 
