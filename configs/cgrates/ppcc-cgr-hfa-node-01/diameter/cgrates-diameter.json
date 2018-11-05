@@ -9,11 +9,11 @@
                 {"address": "sessions:2012","transport":"*json"},
         ],
         //"origin_host": "CGR-DA",                                        // diameter Origin-Host AVP used in replies
-        "origin_host": "*env:DA_ORIGIN_HOST",
-		//"origin_host": "ppcc-cgr-ptk-node-01",
+        //"origin_host": "*env:DA_ORIGIN_HOST",
+		"origin_host": "ppcc-cgr-hfa-node-01",
         //"origin_realm": "cgrates.org",                                // diameter Origin-Realm AVP used in replies
-        "origin_realm": "*env:DA_ORIGIN_REALM",
-		//"origin_realm": "ppcc-cgr-ptk-node-01.local",
+        //"origin_realm": "*env:DA_ORIGIN_REALM",
+		"origin_realm": "ppcc-cgr-hfa-node-01.local",
         //"vendor_id": 0,                                                // diameter Vendor-Id AVP used in replies
         //"product_name": "CGRateS",                                    // diameter Product-Name AVP used in replies
         "product_name": "PPCC",
