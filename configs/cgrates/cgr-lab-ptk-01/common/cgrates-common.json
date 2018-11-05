@@ -47,7 +47,7 @@
 		//"db_host": "ocs-db-ptk-node-01",
 		//"db_port": 3306,						// the port to reach the stordb
 		//"db_name": "cgrates",					// stor database name
-		"db_user": "root",					// username to use when connecting to stordb
+		//"db_user": "cgrates",					// username to use when connecting to stordb
 		"db_password": "CGRateS.org",						// password to use when connecting to stordb
 		//"db_password": "a6a237de16",
 		//"max_open_conns": 100,					// maximum database connections opened, not applying for mongo
