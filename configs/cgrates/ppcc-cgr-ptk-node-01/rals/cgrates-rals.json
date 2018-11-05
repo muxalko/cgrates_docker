@@ -6,6 +6,10 @@
 			{"address": "cdrs:2012","transport":"*json"}
 			],				
 	},
+	
+	"chargers": {
+		"enabled": true,
+	},
 
 	"rals": {
 		"enabled": true,						// enable Rater service: <true|false>
