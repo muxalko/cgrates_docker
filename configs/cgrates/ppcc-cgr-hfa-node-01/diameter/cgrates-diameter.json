@@ -165,7 +165,7 @@
                         {"tag": "SetupTime",                           "field_id": "SetupTime",                        "type": "*composed",     "value": "~*req.Event-Timestamp",     "mandatory": true},
                         {"tag": "AnswerTime",                          "field_id": "AnswerTime",                       "type": "*composed",     "value": "~*req.Event-Timestamp",     "mandatory": true},
                         //{"tag": "Reporting-Reason",                    "field_id": "Reporting-Reason",                 "type": "*composed",     "value": "~*req.Multiple-Services-Credit-Control.3GPP-Reporting-Reason", "mandatory": false},
-                        {"tag": "Termination-Cause",                   "field_id": "Termination-Cause",                "type": "*composed",     "value": "~*req.Termination-Cause", "mandatory": false},
+                        //{"tag": "Termination-Cause",                   "field_id": "Termination-Cause",                "type": "*composed",     "value": "~*req.Termination-Cause", "mandatory": false},
                         {"tag": "LastUsed",     "field_id": "LastUsed",       "type": "*sum", 
 					       "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[0];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[0]"}, 
 						{"tag": "Called-Station-Id",                   "field_id": "Called-Station-Id",                "type": "*composed",     "value": "~*req.Service-Information.PS-Information.Called-Station-Id",                    "mandatory": false},
