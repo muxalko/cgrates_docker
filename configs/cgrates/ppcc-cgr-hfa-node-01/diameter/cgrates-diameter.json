@@ -89,7 +89,7 @@
                     {"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"}
                 ],
                 "reply_fields": [
-						{"tag": "CCATemplate", "type": "*template", "value": "cca-custom"},
+						
 						//{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"],      "type": "*constant", "value": "5031", "blocker": true },
 						//{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2002"},
 						//{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
@@ -102,6 +102,7 @@
 						//{"tag": "RatingGroup",  "field_id": "Multiple-Services-Credit-Control.Rating-Group",            "type": "*constant", "value": "1"},
 						//{"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control.Service-Identifier",      "type": "*constant", "value": "1"},
 						//{"tag": "ValidityTime", "field_id": "Multiple-Services-Credit-Control.Validity-Time",           "type": "*constant", "value": "600"}
+						{"tag": "CCATemplate", "type": "*template", "value": "cca-custom"},
                    ]
       },
       {
