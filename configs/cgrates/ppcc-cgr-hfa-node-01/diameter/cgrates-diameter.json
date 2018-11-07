@@ -124,7 +124,7 @@
                         //{"tag": "Usage",        "field_id": "Usage",          "type": "*composed", "value": "*attributes"},
 						{"tag": "Usage",        "field_id": "Usage",          "type": "*constant", "value": "10485760"},
 						{"tag": "LastUsed",     "field_id": "LastUsed",       "type": "*sum", 
-					        "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[~Rating-Group(1)];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[~Rating-Group(1)]"},
+					        "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[0];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[0]"},
                     ],
                     "reply_fields": [
 						{"tag": "CCATemplate", "type": "*template", "value": "*cca"},
