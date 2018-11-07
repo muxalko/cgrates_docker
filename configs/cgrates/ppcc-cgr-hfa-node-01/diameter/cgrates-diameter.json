@@ -97,7 +97,8 @@
 							//"filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(-1)"],
 							//"type": "*constant", "value": "10485760", "mandatory": true},
                         {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-						   "filters": ["*gt:*cgrep.MaxUsage{*duration_nanoseconds}:0"],  "type": "*composed", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
+							//"filters": ["*gt:*cgrep.MaxUsage{*duration_nanoseconds}:0"], 
+						    "type": "*composed", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
 						//{"tag": "RatingGroup",  "field_id": "Multiple-Services-Credit-Control.Rating-Group",            "type": "*constant", "value": "1"},
 						//{"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control.Service-Identifier",      "type": "*constant", "value": "1"},
 						//{"tag": "ValidityTime", "field_id": "Multiple-Services-Credit-Control.Validity-Time",           "type": "*constant", "value": "600"}
