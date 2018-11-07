@@ -107,7 +107,7 @@
                     //"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],
                     //"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Multiple-Services-Credit-Control.Rating-Group:1", "*rsr::~*req.Service-Context-Id(@3gpp.org$)"],
 					"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2"],   
-                    "flags": ["*update", "*accounts", "*attributes"],
+                    "flags": ["*update", "*accounts", "*attributes", "*dryrun"],
                     "request_fields":[
                         {"tag": "TOR",          "field_id": "ToR",            "type": "*constant", "value": "*data",                         "mandatory": true},
                         {"tag": "OriginHost",   "field_id": "OriginHost",     "type": "*composed", "value": "~*req.Origin-Host",             "mandatory": true},
@@ -123,11 +123,11 @@
                         {"tag": "AnswerTime",   "field_id": "AnswerTime",     "type": "*composed", "value": "~*req.Event-Timestamp",         "mandatory": true},
                         //{"tag": "Usage",        "field_id": "Usage",          "type": "*composed", "value": "*attributes"},
 						{"tag": "Usage",        "field_id": "Usage",          "type": "*constant", "value": "10485760"},
-						{"tag": "LastUsed",     "field_id": "LastUsed",       "type": "*sum", 
-					        "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[~Rating-Group(1)];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[~Rating-Group(1)]"},
+						//{"tag": "LastUsed",     "field_id": "LastUsed",       "type": "*sum", 
+					    //    "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[~Rating-Group(1)];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[~Rating-Group(1)]"},
                     ],
                     "reply_fields": [
-						{"tag": "CCATemplate", "type": "*template", "value": "*cca"},
+						//{"tag": "CCATemplate", "type": "*template", "value": "*cca"},
 						//{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"],      "type": "*constant", "value": "5031", "blocker": true },
 						//{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2002"},
 						{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
