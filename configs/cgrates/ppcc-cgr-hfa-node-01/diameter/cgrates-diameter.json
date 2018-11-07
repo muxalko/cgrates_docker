@@ -127,7 +127,7 @@
 					    //    "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[~Rating-Group(1)];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[~Rating-Group(1)]"},
                     ],
                     "reply_fields": [
-						//{"tag": "CCATemplate", "type": "*template", "value": "*cca"},
+						{"tag": "CCATemplate", "type": "*template", "value": "*cca"},
 						//{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"],      "type": "*constant", "value": "5031", "blocker": true },
 						//{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2002"},
 						{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
