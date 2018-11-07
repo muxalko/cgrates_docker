@@ -95,8 +95,8 @@
 						    "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"],
 							//"filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(-1)"],
 							"type": "*constant", "value": "10485760", "mandatory": true},
-                       // {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-						//   "filters": ["*gt:*cgrep.MaxUsage{*duration_nanoseconds}:0"],  "type": "*constant", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
+                        {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+						   "filters": ["*gt:*cgrep.MaxUsage{*duration_nanoseconds}:0"],  "type": "*constant", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
 						//{"tag": "RatingGroup",  "field_id": "Multiple-Services-Credit-Control.Rating-Group",            "type": "*constant", "value": "1"},
 						//{"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control.Service-Identifier",      "type": "*constant", "value": "1"},
 						//{"tag": "ValidityTime", "field_id": "Multiple-Services-Credit-Control.Validity-Time",           "type": "*constant", "value": "600"}
@@ -106,7 +106,7 @@
                     "id": "data_update",
                     //"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],
                     //"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Multiple-Services-Credit-Control.Rating-Group:1", "*rsr::~*req.Service-Context-Id(@3gpp.org$)"],
-					"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*rsr::~*req.Service-Context-Id(@3gpp.org$)"],   
+					"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*rsr::~*req.Service-Context-Id(@3gpp.org)"],   
                     "flags": ["*update", "*accounts", "*attributes"],
                     "request_fields":[
                         {"tag": "TOR",          "field_id": "ToR",            "type": "*constant", "value": "*data",                         "mandatory": true},
