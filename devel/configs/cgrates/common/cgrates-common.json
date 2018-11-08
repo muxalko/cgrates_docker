@@ -31,6 +31,7 @@
 	"data_db": {								// database used to store runtime data (eg: accounts, cdr stats)
 		//"db_type": "redis",						// data_db type: <*redis|*mongo|*internal>
 		//"db_host": "127.0.0.1",					// data_db host address
+		//"db_host": "dynomite",
 		//"db_port": 8102, 						// data_db port to reach the database
 		//"db_name": "10", 						// data_db database name to connect to
 		"db_name": "0",
@@ -43,13 +44,12 @@
 	"stor_db": {								// database used to store offline tariff plans and CDRs
 		//"db_type": "mysql",						// stor database type to use: <*mongo|*mysql|*postgres|*internal>
 		//"db_host": "127.0.0.1",					// the host to connect to
-		"db_host": "localhost",
-		//"db_host": "ocs-db-ptk-node-01",
+		"db_host": "ocs-db-ptk-node-01",
 		//"db_port": 3306,						// the port to reach the stordb
 		//"db_name": "cgrates",					// stor database name
 		//"db_user": "cgrates",					// username to use when connecting to stordb
-		"db_password": "CGRateS.org",						// password to use when connecting to stordb
-		//"db_password": "a6a237de16",
+		//"db_password": "",						// password to use when connecting to stordb
+		"db_password": "CGRateS.org",
 		//"max_open_conns": 100,					// maximum database connections opened, not applying for mongo
 		//"max_idle_conns": 10,					// maximum database connections idle, not applying for mongo
 		"max_idle_conns": 0,

@@ -3,16 +3,16 @@
 "sessions": {
 		"enabled": true,						// starts session manager service: <true|false>
 		//"listen_bijson": ":2014",				// address where to listen for bidirectional JSON-RPC requests
-		//"chargers_conns": [						// address where to reach the charger service, empty to disable charger functionality: <""|*internal|x.y.z.y:1234>
-		//	{"address": "chargers:2012","transport":"*json"}
-		//],					
+		"chargers_conns": [						// address where to reach the charger service, empty to disable charger functionality: <""|*internal|x.y.z.y:1234>
+			{"address": "rals:2012","transport":"*json"}
+		],					
 		"rals_conns": [
 			//{"address": "*internal"}			// address where to reach the RALs <""|*internal|127.0.0.1:2013>
-			{"address": "127.0.0.1:2012","transport":"*json"}
+			{"address": "rals:2012","transport":"*json"}
 		],
 		"cdrs_conns": [
 			//{"address": "*internal"}			// address where to reach CDR Server, empty to disable CDR capturing <*internal|x.y.z.y:1234>
-			{"address": "127.0.0.1:2012","transport":"*json"}
+			{"address": "cdrs:2012","transport":"*json"}
 		],
 		//"resources_conns": [],					// address where to reach the ResourceS <""|*internal|127.0.0.1:2013>
 		//"thresholds_conns": [],					// address where to reach the ThresholdS <""|*internal|127.0.0.1:2013>
@@ -20,12 +20,12 @@
 		//"suppliers_conns": [],					// address where to reach the SupplierS <""|*internal|127.0.0.1:2013>
 		"attributes_conns": [
 			//{"address": "*internal"} 			// address where to reach the AttributeS <""|*internal|127.0.0.1:2013>
-			{"address": "127.0.0.1:2012","transport":"*json"}
+			{"address": "attributes:2012","transport":"*json"}
 		],					
 		//"session_replication_conns": [],		// replicate sessions towards these session services
 		//"debit_interval": "0s",				// interval to perform debits on.
 		//"min_call_duration": "0s",			// only authorize calls with allowed duration higher than this
-		"max_call_duration": "1h",				// maximum call duration a prepaid call can last
+		//"max_call_duration": "1h",				// maximum call duration a prepaid call can last
 		"session_ttl": "15m",					// time after a session with no updates is terminated, not defined by default
 		//"session_ttl_max_delay": "",			// activates session_ttl randomization and limits the maximum possible delay
 		//"session_ttl_last_used": "",			// tweak LastUsed for sessions timing-out, not defined by default
