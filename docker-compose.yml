@@ -1,199 +1,165 @@
-version: "3.7"
+version: '3.7'
 services:
   redis:
-      image: bitnami/redis:4.0.11
-      container_name: redis
-      hostname: redis
-      volumes:
-          - /traces/redis:/bitnami/redis
-      environment:
-        - REDIS_REPLICATION_MODE=master
-        #- REDIS_PASSWORD=QyV9LVnpbm
-        # ALLOW_EMPTY_PASSWORD is recommended only for development.
-        - ALLOW_EMPTY_PASSWORD=yes
-        #- REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
-      expose:
-          - "6379"
-      networks:
-        - redis-net
-      logging:
-        driver: "json-file"
-        options:
-          max-size: "100m"
-          max-file: "1"
-      sysctls:
-        net.core.somaxconn: '1024'
-
-  dynomite: 
-      image: gitlab-ptk.gt.local:5005/dynomite
-      container_name: dynomite
-      restart: always
-      volumes:
-          - ./configs/dynomite/${HOSTNAME}:/etc/dynomite
-      networks:
-        - redis-net
-        - dynomite-net
-      ports:
-          - "8101:8101"
-          #- "8102:8102"
-          #- "22122:22122"
-          - "22222:22222"
-      extra_hosts:
-          - "ppcc-cgr-ptk-node-01:10.224.243.54"
-          - "ppcc-cgr-hfa-node-01:10.192.211.54"
-      logging:
-        driver: "json-file"
-        options:
-          max-size: "100m"
-          max-file: "1"
-
+    image: 'bitnami/redis:4.0.11'
+    container_name: redis
+    hostname: redis
+    volumes:
+      - '/traces/redis:/bitnami/redis'
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - ALLOW_EMPTY_PASSWORD=yes
+    expose:
+      - '6379'
+    networks:
+      - redis-net
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: '1'
+    sysctls:
+      net.core.somaxconn: '1024'
+  dynomite:
+    image: 'gitlab-ptk.gt.local:5005/dynomite'
+    container_name: dynomite
+    restart: always
+    volumes:
+      - './configs/dynomite/${HOSTNAME}:/etc/dynomite'
+    networks:
+      - redis-net
+      - dynomite-net
+    ports:
+      - '8101:8101'
+      - '22222:22222'
+    extra_hosts:
+      - 'ppcc-cgr-ptk-node-01:10.224.243.54'
+      - 'ppcc-cgr-hfa-node-01:10.192.211.54'
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: '1'
   rals:
-      image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
-      container_name: rals
-      restart: always
-      volumes:
-          - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
-          - ./configs/cgrates/${HOSTNAME}/rals:/etc/cgrates/rals
-      networks:
-        - dynomite-net
-        - rals-net 
-      extra_hosts:
-          - "ocs-db-ptk-node-01:10.224.243.58"
-          - "ocs-db-hfa-node-01:10.192.211.58"
-      #depends_on:
-          #- redis-master
-      environment:
-          - CGR-SERVICE=rals
-      logging:
-        driver: "json-file"
-        options:
-          max-size: "100m"
-          max-file: "1"
-
+    image: 'gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}'
+    container_name: rals
+    restart: always
+    volumes:
+      - './configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common'
+      - './configs/cgrates/${HOSTNAME}/rals:/etc/cgrates/rals'
+    networks:
+      - dynomite-net
+      - rals-net
+    extra_hosts:
+      - 'ocs-db-ptk-node-01:10.224.243.58'
+      - 'ocs-db-hfa-node-01:10.192.211.58'
+    environment:
+      - CGR-SERVICE=rals
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: '1'
   cdrs:
-      image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
-      container_name: cdrs
-      restart: always
-      volumes:
-          - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
-          - ./configs/cgrates/${HOSTNAME}/cdrs:/etc/cgrates/cdrs
-      networks:
-       - rals-net
-       - sessions-net
-      extra_hosts:
-          - "ocs-db-ptk-node-01:10.224.243.58"
-          - "ocs-db-hfa-node-01:10.192.211.58"
-      #depends_on:
-          #- rals
-      environment:
-          - CGR-SERVICE=cdrs
-      logging:
-        driver: "json-file"
-        options:
-          max-size: "100m"
-          max-file: "1"
-
+    image: 'gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}'
+    container_name: cdrs
+    restart: always
+    volumes:
+      - './configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common'
+      - './configs/cgrates/${HOSTNAME}/cdrs:/etc/cgrates/cdrs'
+    networks:
+      - rals-net
+      - sessions-net
+    extra_hosts:
+      - 'ocs-db-ptk-node-01:10.224.243.58'
+      - 'ocs-db-hfa-node-01:10.192.211.58'
+    environment:
+      - CGR-SERVICE=cdrs
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: '1'
   attributes:
-      image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
-      container_name: attributes
-      restart: always
-      volumes:
-          - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
-          - ./configs/cgrates/${HOSTNAME}/attributes:/etc/cgrates/attributes
-      networks:
-       - dynomite-net
-       - rals-net
-       - sessions-net
-      ports:
-          - "32080:2080"
-      #depends_on:
-          #- redis-master
-      environment:
-          - CGR-SERVICE=attributes
-      logging:
-        driver: "json-file"
-        options:
-          max-size: "100m"
-          max-file: "1"
-
+    image: 'gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}'
+    container_name: attributes
+    restart: always
+    volumes:
+      - './configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common'
+      - './configs/cgrates/${HOSTNAME}/attributes:/etc/cgrates/attributes'
+    networks:
+      - dynomite-net
+      - rals-net
+      - sessions-net
+    ports:
+      - '32080:2080'
+    environment:
+      - CGR-SERVICE=attributes
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: '1'
   sessions:
-      image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
-      container_name: sessions
-      restart: always
-      volumes:
-          - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
-          - ./configs/cgrates/${HOSTNAME}/sessions:/etc/cgrates/sessions
-      networks:
-       - rals-net
-       - sessions-net
-      ports:
-          - "22080:2080"
-      #depends_on:
-          #- rals
-          #- cdrs
-          #- attributes
-      environment:
-          - CGR-SERVICE=sessions
-      logging:
-        driver: "json-file"
-        options:
-          max-size: "100m"
-          max-file: "1"
-
+    image: 'gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}'
+    container_name: sessions
+    restart: always
+    volumes:
+      - './configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common'
+      - './configs/cgrates/${HOSTNAME}/sessions:/etc/cgrates/sessions'
+    networks:
+      - rals-net
+      - sessions-net
+    ports:
+      - '22080:2080'
+    environment:
+      - CGR-SERVICE=sessions
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: '1'
   diameter:
-      image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
-      container_name: diameter
-      restart: always
-      environment:
-          - DA_ORIGIN_HOST=test-da
-          - DA_ORIGIN_REALM=test-da
-      volumes:
-          - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
-          - ./configs/cgrates/${HOSTNAME}/diameter:/etc/cgrates/diameter
-          #- ./configs/diameter/dict:/etc/cgrates/diameter/dict
-      ports:
-          - "3868:3868"
-      networks:
-        - sessions-net
-      #depends_on:
-          #- sessions
-      environment:
-          - CGR-SERVICE=diameter
-      logging:
-        driver: "json-file"
-        options:
-          max-size: "100m"
-          max-file: "1"
-          
+    image: 'gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}'
+    container_name: diameter
+    restart: always
+    environment:
+      - CGR-SERVICE=diameter
+    volumes:
+      - './configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common'
+      - './configs/cgrates/${HOSTNAME}/diameter:/etc/cgrates/diameter'
+    ports:
+      - '3868:3868'
+    networks:
+      - sessions-net
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: '1'
   api:
-      image: gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
-      container_name: api
-      restart: always
-      volumes:
-          - ./configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common
-          - ./configs/cgrates/${HOSTNAME}/api:/etc/cgrates/api
-      ports:
-          - "2080:2080"
-      networks:
-        - dynomite-net
-      extra_hosts:
-          - "ocs-db-ptk-node-01:10.224.243.58"
-          - "ocs-db-hfa-node-01:10.192.211.58"
-      #depends_on:
-          #- redis-master
-      environment:
-          - CGR-SERVICE=api
-      logging:
-        driver: "json-file"
-        options:
-          max-size: "100m"
-          max-file: "1"
+    image: 'gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}'
+    container_name: api
+    restart: always
+    volumes:
+      - './configs/cgrates/${HOSTNAME}/common:/etc/cgrates/common'
+      - './configs/cgrates/${HOSTNAME}/api:/etc/cgrates/api'
+    ports:
+      - '2080:2080'
+    networks:
+      - dynomite-net
+    extra_hosts:
+      - 'ocs-db-ptk-node-01:10.224.243.58'
+      - 'ocs-db-hfa-node-01:10.192.211.58'
+    environment:
+      - CGR-SERVICE=api
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: '1'
 networks:
-  dynomite-net:
-  redis-net:
-  rals-net:
-  sessions-net:
-
-#volumes:
-#  redis_data:
-#    driver: local
+  dynomite-net: null
+  redis-net: null
+  rals-net: null
+  sessions-net: null
