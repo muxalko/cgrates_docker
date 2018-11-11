@@ -1,8 +1,9 @@
 {
     "diameter_agent": {
-        "enabled": true,                                                // enables the diameter agent: <true|false>
-        //"listen": "127.0.0.1:3868",                                    // address where to listen for diameter requests <x.y.z.y:1234>
-        "listen": ":3868",
+        "enabled": true,                                            // enables the diameter agent: <true|false>
+        //"listen": "127.0.0.1:3868",                               // address where to listen for diameter requests <x.y.z.y:1234>
+        "listen_net":"sctp",										// transport type for diameter <tcp|sctp>
+		"listen": ":3868",
         "dictionaries_path": "/etc/cgrates/diameter/dict/",        // path towards directory holding additional dictionaries to load
         "sessions_conns": [
             //    {"address": "*internal"}                                // connection towards SessionService
@@ -101,12 +102,12 @@
 						{"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control.Service-Identifier",      "type": "*constant", "value": "1"},
 						{"tag": "ValidityTime", "field_id": "Multiple-Services-Credit-Control.Validity-Time",           "type": "*constant", "value": "600"}
                    ]
-                },
-                {
+      },
+      {
                     "id": "data_update",
                     //"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],
                     //"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Multiple-Services-Credit-Control.Rating-Group:1", "*rsr::~*req.Service-Context-Id(@3gpp.org$)"],
-					"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2"],    
+					"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2"],   
                     "flags": ["*update", "*accounts", "*attributes"],
                     "request_fields":[
                         {"tag": "TOR",          "field_id": "ToR",            "type": "*constant", "value": "*data",                         "mandatory": true},
@@ -140,8 +141,8 @@
 						{"tag": "ServiceId",    "field_id": "Multiple-Services-Credit-Control.Service-Identifier",      "type": "*constant", "value": "1"},
 						{"tag": "ValidityTime", "field_id": "Multiple-Services-Credit-Control.Validity-Time",           "type": "*constant", "value": "600"}
                    ]
-                },
-                {
+      },
+      {
                     "id": "data_terminate",
                     //"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:3", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],
                     //"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:3","*rsr::*req.Service-Context-Id(@3gpp.org$)"],
