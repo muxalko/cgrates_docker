@@ -31,7 +31,8 @@
 	"data_db": {								// database used to store runtime data (eg: accounts, cdr stats)
 		"db_type": "*env:DATADB_TYPE",			// data_db type: <*redis|*mongo|*internal>
 		"db_host": "*env:DATADB_HOST",			// data_db host address
-		"db_port": "*env:DATADB_PORT", 			// data_db port to reach the database				
+		//"db_port": "*env:DATADB_PORT", 			// data_db port to reach the database				
+		"db_port": "8102", 
 		"db_name": "*env:DATADB_NAME",			// data_db database name to connect to
 		//"db_user": "*env:DATADB_USER", 			// username to use when connecting to data_db
 		//"db_password": "*env:DATADB_PASS",	// password to use when connecting to data_db
