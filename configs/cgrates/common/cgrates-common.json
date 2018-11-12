@@ -33,8 +33,8 @@
 		"db_host": "*env:DATADB_HOST",			// data_db host address
 		"db_port": "*env:DATADB_PORT", 			// data_db port to reach the database				
 		"db_name": "*env:DATADB_NAME",			// data_db database name to connect to
-		"db_user": "*env:DATADB_USER", 			// username to use when connecting to data_db
-		"db_password": "*env:DATADB_PASS",	// password to use when connecting to data_db
+		//"db_user": "*env:DATADB_USER", 			// username to use when connecting to data_db
+		//"db_password": "*env:DATADB_PASS",	// password to use when connecting to data_db
 		//"redis_sentinel":"",					// redis_sentinel is the name of sentinel
 	},
 
