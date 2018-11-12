@@ -1,4 +1,11 @@
 version: '3.7'
+x-logging:
+  &default-logging
+  options:
+    max-size: '100m'
+    max-file: '1'
+  driver: json-file
+  
 services:
   redis:
     image: 'bitnami/redis:4.0.11'
@@ -159,9 +166,3 @@ networks:
   redis-net: null
   rals-net: null
   sessions-net: null
-x-logging:
-  &default-logging
-  options:
-    max-size: '100m'
-    max-file: '1'
-  driver: json-file
