@@ -33,7 +33,7 @@
 		"session_indexes": [					// index sessions based on these fields for GetActiveSessions API
 			"Account", 
 			"Category"
-			],					
+			],				
 		//"client_protocol": 1.0,				// version of protocol to use when acting as JSON-PRC client <"0","1.0">
 		//"channel_sync_interval": "0",			// sync channels regularly (0 to disable sync session)
 	}
