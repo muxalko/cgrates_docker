@@ -125,6 +125,7 @@ services:
     restart: always
     env_file:
       - ./env/${HOSTNAME}/common.env
+      - ./env/${HOSTNAME}/diameter.env
     environment:
       - CGR-SERVICE=diameter
     volumes:
