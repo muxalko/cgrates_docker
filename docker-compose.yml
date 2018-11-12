@@ -24,6 +24,8 @@ services:
     restart: always
     env_file:
       - ./env/${HOSTNAME}.env
+    environment:
+      - HOSTNAME
     volumes:
       - './configs/dynomite/${HOSTNAME}:/etc/dynomite'
     networks:
@@ -48,7 +50,6 @@ services:
     restart: always
     env_file:
       - ./env/${HOSTNAME}.env
-    
     volumes:
       - './configs/cgrates/common:/etc/cgrates/common'
       - './configs/cgrates/rals:/etc/cgrates/rals'
