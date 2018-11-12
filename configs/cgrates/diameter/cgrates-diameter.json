@@ -3,7 +3,7 @@
         "enabled": true,                                                // enables the diameter agent: <true|false>                                 
 		"listen_net":"*env:DA_LISTEN_NET",
         "listen": "*env:DA_LISTEN",									// address where to listen for diameter requests <x.y.z.y:1234>
-        "dictionaries_path": "/etc/cgrates/diameter/dict/",        // path towards directory holding additional dictionaries to load
+		"dictionaries_path": "/etc/cgrates/diameter/dict/",        // path towards directory holding additional dictionaries to load
         "sessions_conns": [
             //    {"address": "*internal"}                                // connection towards SessionService
                 {"address": "*env:SESS_ADDR","transport":"*json"},
