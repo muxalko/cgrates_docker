@@ -14,7 +14,7 @@ services:
     volumes:
       - '/traces/redis:/bitnami/redis'
     env_file:
-      - ./../env/${HOSTNAME}/dynomite.env
+      - ./env/${HOSTNAME}/dynomite.env
     environment:
       - REDIS_REPLICATION_MODE=master
       - ALLOW_EMPTY_PASSWORD=yes
@@ -29,7 +29,7 @@ services:
     container_name: dynomite
     restart: always
     env_file:
-      - ./../env/${HOSTNAME}/dynomite.env
+      - ./env/${HOSTNAME}/dynomite.env
     networks:
       - redis-net
       - dynomite-net
@@ -48,10 +48,10 @@ services:
     container_name: rals
     restart: always
     env_file:
-      - ./../env/${HOSTNAME}/common.env
+      - ./env/${HOSTNAME}/common.env
     volumes:
-      - './../configs/cgrates/common:/etc/cgrates/common'
-      - './../configs/cgrates/rals:/etc/cgrates/rals'
+      - './configs/cgrates/common:/etc/cgrates/common'
+      - './configs/cgrates/rals:/etc/cgrates/rals'
     networks:
       - dynomite-net
       - rals-net
@@ -69,10 +69,10 @@ services:
     container_name: cdrs
     restart: always
     env_file:
-      - ./../env/${HOSTNAME}/common.env
+      - ./env/${HOSTNAME}/common.env
     volumes:
-      - './../configs/cgrates/common:/etc/cgrates/common'
-      - './../configs/cgrates/cdrs:/etc/cgrates/cdrs'
+      - './configs/cgrates/common:/etc/cgrates/common'
+      - './configs/cgrates/cdrs:/etc/cgrates/cdrs'
     networks:
       - rals-net
       - sessions-net
@@ -90,10 +90,10 @@ services:
     container_name: attributes
     restart: always
     env_file:
-      - ./../env/${HOSTNAME}/common.env
+      - ./env/${HOSTNAME}/common.env
     volumes:
-      - './../configs/cgrates/common:/etc/cgrates/common'
-      - './../configs/cgrates/attributes:/etc/cgrates/attributes'
+      - './configs/cgrates/common:/etc/cgrates/common'
+      - './configs/cgrates/attributes:/etc/cgrates/attributes'
     networks:
       - dynomite-net
       - rals-net
@@ -109,10 +109,10 @@ services:
     container_name: sessions
     restart: always
     env_file:
-      - ./../env/${HOSTNAME}/common.env
+      - ./env/${HOSTNAME}/common.env
     volumes:
-      - './../configs/cgrates/common:/etc/cgrates/common'
-      - './../configs/cgrates/sessions:/etc/cgrates/sessions'
+      - './configs/cgrates/common:/etc/cgrates/common'
+      - './configs/cgrates/sessions:/etc/cgrates/sessions'
     networks:
       - rals-net
       - sessions-net
@@ -127,12 +127,12 @@ services:
     container_name: diameter
     restart: always
     env_file:
-      - ./../env/${HOSTNAME}/common.env
+      - ./env/${HOSTNAME}/common.env
     environment:
       - CGR-SERVICE=diameter
     volumes:
-      - './../configs/cgrates/common:/etc/cgrates/common'
-      - './../configs/cgrates/diameter:/etc/cgrates/diameter'
+      - './configs/cgrates/common:/etc/cgrates/common'
+      - './configs/cgrates/diameter:/etc/cgrates/diameter'
     ports:
       - '${EXPOSE_DA}:${LISTEN_DA}'
     networks:
@@ -144,10 +144,10 @@ services:
     container_name: api
     restart: always
     env_file:
-      - ./../env/${HOSTNAME}/common.env
+      - ./env/${HOSTNAME}/common.env
     volumes:
-      - './../configs/cgrates/common:/etc/cgrates/common'
-      - './../configs/cgrates/api:/etc/cgrates/api'
+      - './configs/cgrates/common:/etc/cgrates/common'
+      - './configs/cgrates/api:/etc/cgrates/api'
     ports:
       - '${EXPOSE_API}:${LISTEN_HTTP}'
     networks:
