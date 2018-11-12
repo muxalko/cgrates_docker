@@ -14,10 +14,7 @@ services:
     volumes:
       - '/traces/redis:/bitnami/redis'
     env_file:
-      - ./env/${HOSTNAME}/dynomite.env
-    environment:
-      - REDIS_REPLICATION_MODE=master
-      - ALLOW_EMPTY_PASSWORD=yes
+      - ./env/${HOSTNAME}/redis.env
     networks:
       - redis-net
     sysctls:
@@ -34,7 +31,7 @@ services:
       - redis-net
       - dynomite-net
     ports:
-      - '${EXPOSE_DYNO_CLIENT}:${DYNOMITE_DYN_PORT}'
+      - '${EXPOSE_DYNO_CLIENT}:8101'
       - '${EXPOSE_DYNO_STATS}:22222'
     extra_hosts:
       - 'cgr-lab-ptk-01:10.224.228.188'
@@ -99,7 +96,7 @@ services:
       - rals-net
       - sessions-net
     ports:
-      - '${EXPOSE_ATTR}:${LISTEN_HTTP}'
+      - '${EXPOSE_ATTR}:2080'
     environment:
       - CGR-SERVICE=attributes
     logging: *default-logging
@@ -117,7 +114,7 @@ services:
       - rals-net
       - sessions-net
     ports:
-      - '${EXPOSE_SESS}:${LISTEN_HTTP}'
+      - '${EXPOSE_SESS}:2080'
     environment:
       - CGR-SERVICE=sessions
     logging: *default-logging
@@ -134,7 +131,7 @@ services:
       - './configs/cgrates/common:/etc/cgrates/common'
       - './configs/cgrates/diameter:/etc/cgrates/diameter'
     ports:
-      - '${EXPOSE_DA}:${LISTEN_DA}'
+      - '${EXPOSE_DA}:3868'
     networks:
       - sessions-net
     logging: *default-logging
@@ -149,7 +146,7 @@ services:
       - './configs/cgrates/common:/etc/cgrates/common'
       - './configs/cgrates/api:/etc/cgrates/api'
     ports:
-      - '${EXPOSE_API}:${LISTEN_HTTP}'
+      - '${EXPOSE_API}:2080'
     networks:
       - dynomite-net
     extra_hosts:
