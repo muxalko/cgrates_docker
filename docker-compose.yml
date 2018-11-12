@@ -10,7 +10,6 @@ services:
   redis:
     image: 'bitnami/redis:4.0.11'
     container_name: redis
-    hostname: redis
     volumes:
       - '/traces/redis:/bitnami/redis'
     env_file:
@@ -27,6 +26,8 @@ services:
     restart: always
     env_file:
       - ./env/${HOSTNAME}/dynomite.env
+    volumes:
+      - './configs/dynomite/${HOSTNAME}:/etc/dynomite'
     networks:
       - redis-net
       - dynomite-net
