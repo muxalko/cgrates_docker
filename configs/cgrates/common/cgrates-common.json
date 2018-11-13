@@ -9,17 +9,13 @@
 		//"tpexport_dir": "/var/spool/cgrates/tpe",				// path towards export folder for offline Tariff Plans
 		//"poster_attempts": 3,									// number of attempts before considering post request failed (eg: *call_url, CDR replication)
 		//"failed_posts_dir": "/var/spool/cgrates/failed_posts",	// directory path where we store failed requests
-		//"default_request_type": "*rated",						// default request type to consider when missing from requests: <""|*prepaid|*postpaid|*pseudoprepaid|*rated>
-		"default_request_type": "*prepaid",
+		"default_request_type": "*prepaid",						// default request type to consider when missing from requests: <""|*prepaid|*postpaid|*pseudoprepaid|*rated>
 		//"default_category": "call",								// default category to consider when missing from requests
-		//"default_tenant": "cgrates.org",						// default tenant to consider when missing from requests
-		"default_tenant": "golant",
+		"default_tenant": "golant",								// default tenant to consider when missing from requests
 		//"default_timezone": "Local",							// default timezone for timestamps where not specified <""|UTC|Local|$IANA_TZ_DB>
-		//"connect_attempts": 3,									// initial server connect attempts
-		"connect_attempts": 10,
-		//"reconnects": -1,										// number of retries in case of connection lost
-		"reconnects": 1,
-		//"connect_timeout": "1s",								// consider connection unsuccessful on timeout, 0 to disable the feature
+		"connect_attempts": 10,									// initial server connect attempts
+		"reconnects": 3,										// number of retries in case of connection lost
+		"connect_timeout": "3s",								// consider connection unsuccessful on timeout, 0 to disable the feature
 		//"reply_timeout": "2s",									// consider connection down for replies taking longer than this value
 		//"response_cache_ttl": "0s",								// the life span of a cached response
 		//"internal_ttl": "2m",									// maximum duration to wait for internal connections before giving up
