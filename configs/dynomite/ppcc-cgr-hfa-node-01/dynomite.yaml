@@ -9,7 +9,7 @@ dyn_o_mite:
   servers:
   - redis:6379:1
   tokens: '3221225471'
-  secure_server_option: datacenter
+  secure_server_option: no
   pem_key_file: conf/dynomite.pem
   data_store: 0
   stats_listen: 0.0.0.0:22222
