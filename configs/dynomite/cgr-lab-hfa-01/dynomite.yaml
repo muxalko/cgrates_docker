@@ -1,7 +1,7 @@
 dyn_o_mite:
   datacenter: ppcc_dc_hfa_lab
   rack: rack1
-  dyn_listen: 0.0.0.0:28101
+  dyn_listen: 0.0.0.0:8101
   dyn_seeds:
   - cgr-lab-ptk-01:28101:rack1:ppcc_dc_ptk_lab:3221225471
   dyn_seed_provider: simple_provider
