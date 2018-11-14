@@ -53,6 +53,8 @@ services:
     networks:
       - dynomite-net
       - rals-net
+    ports:
+      - '${EXPOSE_RALS}:2080'
     extra_hosts:
       - 'cgr-lab-ptk-01:10.224.228.188'
       - 'cgr-lab-hfa-01:10.192.196.188'
