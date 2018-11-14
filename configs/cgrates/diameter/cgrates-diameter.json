@@ -25,11 +25,11 @@
             ],
             "cca-custom": [
                     {"tag": "CCATemplate",     "type": "*template", "value": "*cca"},
-                    {"tag": "ResultCodeDefaultNegative", "field_id": "Result-Code", "type": "*constant", "value": "5030"},
+                    {"tag": "ResultCodeDefaultNegative", "field_id": "Result-Code", "type": "*constant", "filters": ["*rsr::~*cgrep.Error(!^$)"], "value": "5030", "blocker": true},
                     //Try to catch more specific error
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:NO_MORE_DATA"],              "type": "*constant", "value": "5030", "blocker": true},
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:NOT_IMPLEMENTED"],           "type": "*constant", "value": "5030", "blocker": true},
-                    {"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:NOT_FOUND"],                 "type": "*constant", "value": "5031", "blocker": true},
+                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:NOT_FOUND"],                 "type": "*constant", "value": "5031", "blocker": true},
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:TIMED_OUT"],                 "type": "*constant", "value": "5030", "blocker": true},
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:SERVER_ERROR"],              "type": "*constant", "value": "5030", "blocker": true},
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:MAX_RECURSION_DEPTH"],       "type": "*constant", "value": "5030", "blocker": true},
