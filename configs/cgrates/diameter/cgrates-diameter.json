@@ -21,11 +21,10 @@
                     {"tag": "AuthApplicationId",      "field_id": "Auth-Application-Id",    "type": "*composed", "value": "~*vars.*appid",              "mandatory": true},
                     {"tag": "CCRequestType",          "field_id": "CC-Request-Type",        "type": "*composed", "value": "~*req.CC-Request-Type",      "mandatory": true},
                     {"tag": "CCRequestNumber",        "field_id": "CC-Request-Number",      "type": "*composed", "value": "~*req.CC-Request-Number",    "mandatory": true},
-                        
+                    {"tag": "ResultCode", 			"field_id": "Result-Code", "type": "*constant", "filters": ["*rsr::~*cgrep.Error(!^$)"], "value": "5030", "blocker": true},    
             ],
             "cca-custom": [
-                    {"tag": "CCATemplate",     "type": "*template", "value": "*cca"},
-                    {"tag": "ResultCodeDefaultNegative", "field_id": "Result-Code", "type": "*constant", "filters": ["*rsr::~*cgrep.Error(!^$)"], "value": "5030", "blocker": true},
+                    
                     //Try to catch more specific error
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:NO_MORE_DATA"],              "type": "*constant", "value": "5030", "blocker": true},
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:NOT_IMPLEMENTED"],           "type": "*constant", "value": "5030", "blocker": true},
@@ -53,10 +52,11 @@
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:MAX_USAGE_EXCEEDED"],        "type": "*constant", "value": "4012", "blocker": true}, // DIAMETER_CREDIT_LIMIT_REACHED              
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:UNALLOCATED_RESOURCE"],      "type": "*constant", "value": "5030", "blocker": true},
                     //Doublecheck everything is OK 
-                    {"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2001"},
+                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2001"},
                     {"tag": "RatingGroup", "field_id": "Multiple-Services-Credit-Control.Rating-Group",            "type": "*constant", "value": "1"},
                     {"tag": "ServiceId",   "field_id": "Multiple-Services-Credit-Control.Service-Identifier",      "type": "*constant", "value": "1"},
                     {"tag": "ValidityTime","field_id": "Multiple-Services-Credit-Control.Validity-Time",           "type": "*constant", "value": "600"},
+					
             ]
         },
         
@@ -83,7 +83,7 @@
                     {"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"}
                 ],
                 "reply_fields": [
-						
+						{"tag": "CCATemplate", "type": "*template", "value": "*cca"},
 						//{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"],      "type": "*constant", "value": "5031", "blocker": true },
 						//{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2002"},
 						//{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
