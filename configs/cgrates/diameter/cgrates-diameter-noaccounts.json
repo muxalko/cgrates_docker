@@ -34,9 +34,7 @@
         "request_processors": [
         {
                 "id": "data_init",
-                //"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:1", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],
-                //"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:1", "*rsr::~*req.Service-Context-Id(@3gpp.org$)"],
-				"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:1"],
+                "filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:1", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],
                 "flags": ["*initiate", "*attributes"],
                 "request_fields":[
                     {"tag": "TOR",          "field_id": "ToR",              "type": "*constant",    "value": "*data",                 "mandatory": true},
@@ -55,8 +53,6 @@
                 ],
                 "reply_fields": [
 						{"tag": "CCATemplate", "type": "*template", "value": "*cca"},
-						//{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"],      "type": "*constant", "value": "5031", "blocker": true },
-						//{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2002"},
 						{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
 							"type": "*constant", "value": "10485760", "mandatory": true},
 						{"tag": "CCATemplate", "type": "*template", "value": "cca-custom"},
@@ -64,9 +60,7 @@
       },
       {
                     "id": "data_update",
-                    "filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],
-                    //"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Multiple-Services-Credit-Control.Rating-Group:1", "*rsr::~*req.Service-Context-Id(@3gpp.org$)"],
-					//"filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*rsr::~*req.Service-Context-Id(@3gpp.org)"],   
+                    "filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],   
                     "flags": ["*update", "*attributes"],
                     "request_fields":[
                         {"tag": "TOR",          "field_id": "ToR",            "type": "*constant", "value": "*data",                         "mandatory": true},
@@ -135,8 +129,8 @@
                         //{"tag": "PDP-Context-Type",                    "field_id": "PDP-Context-Type",                 "type": "*composed",     "value": "~*req.Service-Information.PS-Information.PDP-Context-Type",                     "mandatory": false}
                     ],
 					"reply_fields": [
-						{"tag": "CCATemplate", "type": "*template", "value": "*cca"}
-						{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"],      "type": "*constant", "value": "5031"},
+						{"tag": "CCATemplate", "type": "*template", "value": "*cca"},
+						{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"], "type": "*constant", "value": "5031"},
 						{"tag": "CCATemplate", "type": "*template", "value": "cca-custom"},
 						]
                 }
