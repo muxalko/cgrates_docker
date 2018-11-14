@@ -21,7 +21,9 @@
                     {"tag": "AuthApplicationId",      "field_id": "Auth-Application-Id",    "type": "*composed", "value": "~*vars.*appid",              "mandatory": true},
                     {"tag": "CCRequestType",          "field_id": "CC-Request-Type",        "type": "*composed", "value": "~*req.CC-Request-Type",      "mandatory": true},
                     {"tag": "CCRequestNumber",        "field_id": "CC-Request-Number",      "type": "*composed", "value": "~*req.CC-Request-Number",    "mandatory": true},
-                    {"tag": "ResultCode", 			  "field_id": "Result-Code",            "type": "*constant", "filters": ["*rsr::~*cgrep.Error(!^$)"], "value": "5030", "blocker": true},    
+                    {"tag": "ResultCode", 			  "field_id": "Result-Code",            "type": "*constant", "filters": ["*rsr::~*cgrep.Error(!^$)"], "value": "5031", "blocker": true},
+					{"tag": "ResultCode", 			  "field_id": "Result-Code",            "type": "*constant", "filters": ["*rsr::~*cgrep.Attributes.Category(^$)"], "value": "5030", "blocker": true},
+					
             ],
             "cca-custom": [
                     {"tag": "RatingGroup", "field_id": "Multiple-Services-Credit-Control.Rating-Group",            "type": "*constant", "value": "1"},
