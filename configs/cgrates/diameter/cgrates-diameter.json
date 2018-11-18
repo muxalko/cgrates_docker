@@ -185,7 +185,7 @@
                         //{"tag": "PDP-Context-Type",                    "field_id": "PDP-Context-Type",                 "type": "*composed",     "value": "~*req.Service-Information.PS-Information.PDP-Context-Type",                     "mandatory": false}
                     ],
 					"reply_fields": [
-						{"tag": "CCATemplate", "type": "*template", "value": "*cca"}
+						{"tag": "CCATemplate", "type": "*template", "value": "*cca"},
 						{"tag": "ResultCode",   "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(!^$)"],      "type": "*constant", "value": "5031"},
 						{"tag": "CCATemplate", "type": "*template", "value": "cca-custom"},
 						]
