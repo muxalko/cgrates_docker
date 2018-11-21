@@ -40,7 +40,7 @@
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:INVALID_KEY"],               "type": "*constant", "value": "5030", "blocker": true},
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:UNAUTHORIZED_DESTINATION"],  "type": "*constant", "value": "5030", "blocker": true},
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:RATING_PLAN_NOT_FOUND"],     "type": "*constant", "value": "5031", "blocker": true}, // DIAMETER_RATING_FAILED                     
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:ACCOUNT_NOT_FOUND"],         "type": "*constant", "value": "5030", "blocker": true}, // DIAMETER_USER_UNKNOWN                      
+                    {"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:ACCOUNT_NOT_FOUND"],         "type": "*constant", "value": "5012", "blocker": true}, // DIAMETER_UNABLE_TO_COMPLY                      
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:ACCOUNT_DISABLED"],          "type": "*constant", "value": "5030", "blocker": true},
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:USER_NOT_FOUND"],            "type": "*constant", "value": "5030", "blocker": true}, // DIAMETER_USER_UNKNOWN                      
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:INSUFFICIENT_CREDIT"],       "type": "*constant", "value": "4010", "blocker": true}, // DIAMETER_END_USER_SERVICE_DENIED
