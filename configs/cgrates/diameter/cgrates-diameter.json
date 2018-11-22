@@ -98,21 +98,22 @@
                     "filters": ["*string:*vars.*cmd:CCR", "*string:*req.CC-Request-Type:2", "*string:*req.Service-Context-Id:7.32251@3gpp.org"],  
                     "flags": ["*update", "*accounts", "*attributes"],
                     "request_fields":[
-                        {"tag": "TOR",          "field_id": "ToR",            "type": "*constant", "value": "*data",                         "mandatory": true},
-                        {"tag": "OriginHost",   "field_id": "OriginHost",     "type": "*composed", "value": "~*req.Origin-Host",             "mandatory": true},
-                        {"tag": "OriginID",     "field_id": "OriginID",       "type": "*composed", "value": "~*req.Session-Id",              "mandatory": true},
-                        {"tag": "RequestType",  "field_id": "RequestType",    "type": "*composed", "value": "*prepaid",                     "mandatory": true},
-                        {"tag": "Direction",    "field_id": "Direction",      "type": "*composed", "value": "*out",                         "mandatory": true},
-                        {"tag": "Tenant",       "field_id": "Tenant",         "type": "*composed", "value": "golant",                       "mandatory": true},
-                        {"tag": "Category",     "field_id": "Category",       "type": "*constant", "value": "*attributes",                   "mandatory": true},
-                        {"tag": "Account",      "field_id": "Account",        "type": "*composed", "value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]" , "mandatory": true },
-                        {"tag": "Destination",  "field_id": "Destination",    "type": "*composed", "value": "~*req.Service-Information.PS-Information.3GPP-SGSN-MCC-MNC", "mandatory": true},
-                        {"tag": "SetupTime",    "field_id": "SetupTime",      "type": "*composed", "value": "~*req.Event-Timestamp",         "mandatory": true},
-                        {"tag": "AnswerTime",   "field_id": "AnswerTime",     "type": "*composed", "value": "~*req.Event-Timestamp",         "mandatory": true},
-                        //{"tag": "Usage",        "field_id": "Usage",          "type": "*composed", "value": "*attributes"},
+                        {"tag": "TOR",              "field_id": "ToR",            "type": "*constant", "value": "*data",                         "mandatory": true},
+                        {"tag": "OriginHost",       "field_id": "OriginHost",     "type": "*composed", "value": "~*req.Origin-Host",             "mandatory": true},
+                        {"tag": "OriginID",         "field_id": "OriginID",       "type": "*composed", "value": "~*req.Session-Id",              "mandatory": true},
+                        {"tag": "RequestType",      "field_id": "RequestType",    "type": "*composed", "value": "*prepaid",                     "mandatory": true},
+                        {"tag": "Direction",        "field_id": "Direction",      "type": "*composed", "value": "*out",                         "mandatory": true},
+                        {"tag": "Tenant",           "field_id": "Tenant",         "type": "*composed", "value": "golant",                       "mandatory": true},
+                        {"tag": "Category",         "field_id": "Category",       "type": "*constant", "value": "*attributes",                   "mandatory": true},
+                        {"tag": "Account",          "field_id": "Account",        "type": "*composed", "value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]" , "mandatory": true },
+                        {"tag": "Destination",      "field_id": "Destination",    "type": "*composed", "value": "~*req.Service-Information.PS-Information.3GPP-SGSN-MCC-MNC", "mandatory": true},
+                        {"tag": "SetupTime",        "field_id": "SetupTime",      "type": "*composed", "value": "~*req.Event-Timestamp",         "mandatory": true},
+                        {"tag": "AnswerTime",       "field_id": "AnswerTime",     "type": "*composed", "value": "~*req.Event-Timestamp",         "mandatory": true},
+                        {"tag": "Reporting-Reason", "field_id": "Reporting-Reason", "type": "*composed", "value": "~*req.Multiple-Services-Credit-Control.3GPP-Reporting-Reason[~Rating-Group(1)]", "mandatory": true},
+						//{"tag": "Usage",        "field_id": "Usage",          "type": "*composed", "value": "*attributes"},
 						{"tag": "Usage",        "field_id": "Usage",          "type": "*constant", "value": "10485760"},
 						{"tag": "LastUsed",     "field_id": "LastUsed",       "type": "*sum", 
-					        "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[~Rating-Group(1)];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[~Rating-Group(1)]"},
+					        "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[~Rating-Group(1)];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[~Rating-Group(1)]", "mandatory": true},
                     ],
                     "reply_fields": [
 						{"tag": "CCATemplate", "type": "*template", "value": "*cca"},
@@ -142,8 +143,8 @@
                         {"tag": "Destination",                         "field_id": "Destination",                      "type": "*composed",     "value": "~*req.Service-Information.PS-Information.3GPP-SGSN-MCC-MNC", "mandatory": true},
                         {"tag": "SetupTime",                           "field_id": "SetupTime",                        "type": "*composed",     "value": "~*req.Event-Timestamp",     "mandatory": true},
                         {"tag": "AnswerTime",                          "field_id": "AnswerTime",                       "type": "*composed",     "value": "~*req.Event-Timestamp",     "mandatory": true},
-                        {"tag": "Reporting-Reason",                    "field_id": "Reporting-Reason",                 "type": "*composed",     "value": "~*req.Multiple-Services-Credit-Control.3GPP-Reporting-Reason[~Rating-Group(1)]", "mandatory": false},
-                        {"tag": "Termination-Cause",                   "field_id": "Termination-Cause",                "type": "*composed",     "value": "~*req.Termination-Cause", "mandatory": false},
+                        {"tag": "Reporting-Reason",                    "field_id": "Reporting-Reason",                 "type": "*composed",     "value": "~*req.Multiple-Services-Credit-Control.3GPP-Reporting-Reason[~Rating-Group(1)]", "mandatory": true},
+                        {"tag": "Termination-Cause",                   "field_id": "Termination-Cause",                "type": "*composed",     "value": "~*req.Termination-Cause", "mandatory": true},
                         {"tag": "LastUsed",     "field_id": "LastUsed",       "type": "*sum", 
 					       "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[~Rating-Group(1)];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[~Rating-Group(1)]"}, 
 						{"tag": "Called-Station-Id",                   "field_id": "Called-Station-Id",                "type": "*composed",     "value": "~*req.Service-Information.PS-Information.Called-Station-Id",                    "mandatory": false},
@@ -165,10 +166,7 @@
                         {"tag": "SGSN-Address",                        "field_id": "SGSN-Address",                     "type": "*composed",     "value": "~*req.Service-Information.PS-Information.SGSN-Address",                         "mandatory": false},
                         //{"tag": "Charging-Rule-Base-Name",             "field_id": "Charging-Rule-Base-Name",          "type": "*composed",     "value": "~*req.Service-Information.PS-Information.Charging-Rule-Base-Name",              "mandatory": false},
                         //{"tag": "PDP-Context-Type",                    "field_id": "PDP-Context-Type",                 "type": "*composed",     "value": "~*req.Service-Information.PS-Information.PDP-Context-Type",                     "mandatory": false}
-                    ],
-					"reply_fields": [
-						{"tag": "CCATemplate", "type": "*template", "value": "*cca"}
-						]
+                    ]
                 }
         ],
     }
