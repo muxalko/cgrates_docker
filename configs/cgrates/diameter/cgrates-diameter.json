@@ -166,7 +166,10 @@
                         {"tag": "SGSN-Address",                        "field_id": "SGSN-Address",                     "type": "*composed",     "value": "~*req.Service-Information.PS-Information.SGSN-Address",                         "mandatory": false},
                         //{"tag": "Charging-Rule-Base-Name",             "field_id": "Charging-Rule-Base-Name",          "type": "*composed",     "value": "~*req.Service-Information.PS-Information.Charging-Rule-Base-Name",              "mandatory": false},
                         //{"tag": "PDP-Context-Type",                    "field_id": "PDP-Context-Type",                 "type": "*composed",     "value": "~*req.Service-Information.PS-Information.PDP-Context-Type",                     "mandatory": false}
-                    ]
+                    ],
+                    "reply_fields": [
+						{"tag": "CCATemplate", "type": "*template", "value": "*cca"}
+                   ]
                 }
         ],
     }
