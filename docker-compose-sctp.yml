@@ -159,7 +159,7 @@ services:
     - --name=diameter
     - --env-file=/home/golan/cgrates_docker/env/${HOSTNAME}/common.env
     - --env-file=/home/golan/cgrates_docker/env/${HOSTNAME}/diameter.env
-    - --port=3868:3868/sctp
+    - --expose=3868:3868/sctp
     - --volume=/home/golan/cgrates_docker/configs/cgrates/common:/etc/cgrates/common
     - --volume=/home/golan/cgrates_docker/configs/cgrates/diameter:/etc/cgrates/diameter
     - --network=ppcc_sessions-net
