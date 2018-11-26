@@ -147,6 +147,7 @@ services:
   diameter_wrapper:
     image: 'gitlab-ptk.gt.local:5005/docker'
     container_name: diameter_wrapper
+    restart: always
     volumes: 
       - '/var/run/docker.sock:/var/run/docker.sock'
       - './env/${HOSTNAME}/common.env:/env/common.env'
@@ -157,7 +158,6 @@ services:
     entrypoint:
     - docker
     - run
-    - --restart=always
     - --rm
     - --name=diameter
     - --env-file=/env/common.env
