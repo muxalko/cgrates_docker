@@ -158,7 +158,8 @@ services:
     - run
     - --rm
     - --name="diameter"
-    - -p 3868:3868/sctp
+    - -p 
+    - 3868:3868/sctp
     - -v /home/golan/cgrates_docker/configs/cgrates/common:/etc/cgrates/common
     - -v /home/golan/cgrates_docker/configs/cgrates/diameter:/etc/cgrates/diameter
     - --network="ppcc_sessions-net"
