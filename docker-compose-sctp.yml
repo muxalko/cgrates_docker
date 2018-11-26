@@ -163,8 +163,8 @@ services:
     - --env-file=/env/diameter.env
     - -p
     - 3868:3868/sctp
-    - --volume=./configs/cgrates/common:/etc/cgrates/common
-    - --volume=./configs/cgrates/diameter:/etc/cgrates/diameter
+    - --volume=/home/golan/cgrates_docker/configs/cgrates/common:/etc/cgrates/common
+    - --volume=/home/golan/cgrates_docker/configs/cgrates/diameter:/etc/cgrates/diameter
     - --network=ppcc_sessions-net
     - gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
           
