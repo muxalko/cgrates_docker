@@ -149,6 +149,8 @@ services:
     container_name: diameter_wrapper
     volumes: 
       - '/var/run/docker.sock:/var/run/docker.sock'
+      - '/home/golan/cgrates_docker/env/${HOSTNAME}/common.env:./env/${HOSTNAME}/common.env'
+      - '/home/golan/cgrates_docker/env/${HOSTNAME}/diameter.env:./env/${HOSTNAME}/diameter.env'
     networks:
       - sessions-net
     logging: *default-logging
