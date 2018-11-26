@@ -158,11 +158,11 @@ services:
     - run
     - --rm
     - --name="diameter"
-    - '-p 3868:3868/sctp'
-    - '-v /home/golan/cgrates_docker/configs/cgrates/common:/etc/cgrates/common'
-    - '-v /home/golan/cgrates_docker/configs/cgrates/diameter:/etc/cgrates/diameter'
+    - -p 3868:3868/sctp
+    - -v /home/golan/cgrates_docker/configs/cgrates/common:/etc/cgrates/common
+    - -v /home/golan/cgrates_docker/configs/cgrates/diameter:/etc/cgrates/diameter
     - --network="ppcc_sessions-net"
-    - 'gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}'
+    - gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
           
 networks:
   dynomite-net: null
