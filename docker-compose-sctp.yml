@@ -147,6 +147,8 @@ services:
   diameter_wrapper:
     image: 'gitlab-ptk.gt.local:5005/docker'
     container_name: diameter_wrapper
+    volumes: 
+      - '/var/run/docker.sock:/var/run/docker.sock'
     env_file:
       - ./env/${HOSTNAME}/common.env
       - ./env/${HOSTNAME}/diameter.env
