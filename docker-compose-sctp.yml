@@ -149,8 +149,8 @@ services:
     container_name: diameter_wrapper
     volumes: 
       - '/var/run/docker.sock:/var/run/docker.sock'
-      - './env/${HOSTNAME}/common.env:/home/golan/cgrates_docker/env/common.env'
-      - './env/${HOSTNAME}/diameter.env:/home/golan/cgrates_docker/env/diameter.env'
+      - './env/${HOSTNAME}/common.env:/env/common.env'
+      - './env/${HOSTNAME}/diameter.env:/env/diameter.env'
     networks:
       - sessions-net
     logging: *default-logging
@@ -159,12 +159,12 @@ services:
     - run
     - --rm
     - --name=diameter
-    - --env-file=/home/golan/cgrates_docker/env/common.env
-    - --env-file=/home/golan/cgrates_docker/env/diameter.env
+    - --env-file=/env/common.env
+    - --env-file=/env/diameter.env
     - -p
     - 3868:3868/sctp
-    - --volume=/home/golan/cgrates_docker/configs/cgrates/common:/etc/cgrates/common
-    - --volume=/home/golan/cgrates_docker/configs/cgrates/diameter:/etc/cgrates/diameter
+    - --volume=./configs/cgrates/common:/etc/cgrates/common
+    - --volume=./configs/cgrates/diameter:/etc/cgrates/diameter
     - --network=ppcc_sessions-net
     - gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
           
