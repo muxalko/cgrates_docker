@@ -157,6 +157,7 @@ services:
     entrypoint:
     - docker
     - run
+    - --restart=always
     - --rm
     - --name=diameter
     - --env-file=/env/common.env
