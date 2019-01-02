@@ -3,7 +3,7 @@ echo "Building Dynomite + Redis Docker..."
 
 cd ./dynomite
 #Workaround: to get latest git pull
-#make create_marker 
+make create_marker 
 
 # try to build images
 make build
