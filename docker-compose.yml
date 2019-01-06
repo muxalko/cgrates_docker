@@ -124,6 +124,7 @@ services:
       - sessions-net
     ports:
       - '${EXPOSE_SESS}:2080'
+      - '${EXPOSE_SESS_REPL}:2012'
     environment:
       - CGR-SERVICE=sessions
     logging: *default-logging
