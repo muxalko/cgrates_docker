@@ -159,6 +159,7 @@ services:
     ports:
       - '${EXPOSE_API}:2080'
     networks:
+      - rals-net
       - dynomite-net
     extra_hosts:
       - 'cgr-lab-ptk-01:10.224.228.188'
