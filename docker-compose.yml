@@ -39,6 +39,8 @@ services:
       - 'cgr-lab-hfa-01:10.192.196.188'
       - 'ppcc-cgr-ptk-node-01:10.224.243.54'
       - 'ppcc-cgr-hfa-node-01:10.192.211.54'
+      - 'prepaid-01-ptk:10.224.243.141'
+      - 'prepaid-01-hfa:10.192.211.141'
     logging: *default-logging
     
   rals:
@@ -60,6 +62,8 @@ services:
       - 'cgr-lab-hfa-01:10.192.196.188'
       - 'ocs-db-ptk-node-01:10.224.243.58'
       - 'ocs-db-hfa-node-01:10.192.211.58'
+      - 'prepaid-01-ptk:10.224.243.141'
+      - 'prepaid-01-hfa:10.192.211.141'
     environment:
       - CGR-SERVICE=rals
     logging: *default-logging
@@ -81,6 +85,8 @@ services:
       - 'cgr-lab-hfa-01:10.192.196.188'
       - 'ocs-db-ptk-node-01:10.224.243.58'
       - 'ocs-db-hfa-node-01:10.192.211.58'
+      - 'prepaid-01-ptk:10.224.243.141'
+      - 'prepaid-01-hfa:10.192.211.141'
     environment:
       - CGR-SERVICE=cdrs
     logging: *default-logging
@@ -118,6 +124,7 @@ services:
       - sessions-net
     ports:
       - '${EXPOSE_SESS}:2080'
+      - '${EXPOSE_SESS_REPL}:2012'
     environment:
       - CGR-SERVICE=sessions
     logging: *default-logging
@@ -152,12 +159,15 @@ services:
     ports:
       - '${EXPOSE_API}:2080'
     networks:
+      - rals-net
       - dynomite-net
     extra_hosts:
       - 'cgr-lab-ptk-01:10.224.228.188'
       - 'cgr-lab-hfa-01:10.192.196.188'
       - 'ocs-db-ptk-node-01:10.224.243.58'
       - 'ocs-db-hfa-node-01:10.192.211.58'
+      - 'prepaid-01-ptk:10.224.243.141'
+      - 'prepaid-01-hfa:10.192.211.141'
     environment:
       - CGR-SERVICE=api
     logging: *default-logging

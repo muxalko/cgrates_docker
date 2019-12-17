@@ -16,6 +16,7 @@ build:
 	@docker build -t ${IMG} -f ${BIN}/Dockerfile .
 	@docker tag ${IMG} ${LATEST}
 	@docker tag ${LATEST} ${PRIVATE_REGISTRY}/${BIN}:${TAG}
+	@docker tag ${LATEST} ${PRIVATE_REGISTRY}/${BIN}:latest
 
 push:
 	@docker push ${PRIVATE_REGISTRY}/${BIN}:${TAG}
