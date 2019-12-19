@@ -27,7 +27,8 @@ RUN useradd -c CGRateS -d /var/run/cgrates -s /bin/false -r cgrates
 
 # install golang
 #RUN wget -qO- https://storage.googleapis.com/golang/go1.8.linux-amd64.tar.gz | tar xzf - -C /root/
-RUN wget -qO- https://storage.googleapis.com/golang/go1.11.linux-amd64.tar.gz | tar xzf - -C /root/
+#RUN wget -qO- https://storage.googleapis.com/golang/go1.11.linux-amd64.tar.gz | tar xzf - -C /root/
+RUN wget -qO- https://storage.googleapis.com/golang/go1.13.5.linux-amd64.tar.gz | tar xzf - -C /root/
 
 #install glide
 RUN GOROOT=/root/go GOPATH=/root/code /root/go/bin/go get github.com/Masterminds/glide
@@ -44,14 +45,15 @@ RUN mkdir -p /root/code/src/github.com/cgrates; cd /root/code/src/github.com/cgr
 
 # create link to cgrates dir
 RUN ln -s /root/code/src/github.com/cgrates/cgrates /root/cgr
-RUN ls -ltrah /root/cgr/
-RUN cd /root/cgr; pwd; ls -ltrah
+
+#RUN ls -ltrah /root/cgr/
+#RUN cd /root/cgr; pwd; ls -ltrah
 # Start a new workspace and create glide.yaml
-RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide create --non-interactive
-# update
-RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide up
+#RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide create --non-interactive
 # get deps
-RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide install
+#RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide install
+# update
+#RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide up
 
 # build cgrates
 RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH ./build.sh
