@@ -1,11 +1,26 @@
 FROM debian:latest
 MAINTAINER Michael Klimenko, mklimenko@golantelecom.co.il
 
-# set mysql password
-RUN echo 'mysql-server mysql-server/root_password password CGRateS.org' | debconf-set-selections && echo 'mysql-server mysql-server/root_password_again password CGRateS.org' | debconf-set-selections
+# set mysql version and root password
+RUN echo 'mysql-community-server mysql-community-server/root-pass password CGRateS.org' | debconf-set-selections \
+ && echo 'mysql-community-server mysql-community-server/re-root-pass password CGRateS.org' | debconf-set-selections \
+ && echo 'mysql-apt-config mysql-apt-config/select-server select mysql-8.0' | debconf-set-selections \
+ && echo 'mysql-apt-config mysql-apt-config/select-repo select mysql-8.0' | debconf-set-selections \
+ && echo 'mysql-apt-config mysql-apt-config/select-product select Apply' | debconf-set-selections
 
 # install dependencies
-RUN apt-get -y update && apt-get -y install git redis-server mysql-server python-pycurl python-mysqldb vim rsyslog ngrep curl wget
+RUN apt-get -y update && apt-get -y install git vim rsyslog ngrep curl wget lsb-release gnupg dirmngr
+
+# Preparation for mysql-server install
+#RUN wget http://repo.mysql.com/mysql-apt-config_0.8.14-1_all.deb
+#RUN dpkg -i mysql-apt-config_0.8.14-1_all.deb
+RUN apt-key adv --keyserver pool.sks-keyservers.net --recv-keys 5072E1F5
+RUN echo "deb http://repo.mysql.com/apt/debian $(lsb_release -sc) mysql-8.0" | tee /etc/apt/sources.list.d/mysql80.list && apt-get -y update
+
+#RUN apt-get -y update # && apt-cache search mysql-server mariadb-server mysql-community-server
+
+# install mysql-server 
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install redis-server mysql-server python-pycurl python-mysqldb
 
 # add cgrates user
 RUN useradd -c CGRateS -d /var/run/cgrates -s /bin/false -r cgrates
@@ -29,7 +44,12 @@ RUN mkdir -p /root/code/src/github.com/cgrates; cd /root/code/src/github.com/cgr
 
 # create link to cgrates dir
 RUN ln -s /root/code/src/github.com/cgrates/cgrates /root/cgr
-
+RUN ls -ltrah /root/cgr/
+RUN cd /root/cgr; pwd; ls -ltrah
+# Start a new workspace and create glide.yaml
+RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide create --non-interactive
+# update
+RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide up
 # get deps
 RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide install
 
