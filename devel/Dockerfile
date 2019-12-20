@@ -1,5 +1,4 @@
 FROM debian:latest
-MAINTAINER Michael Klimenko, mklimenko@golantelecom.co.il
 
 # set mysql password
 RUN echo 'mysql-server mysql-server/root_password password CGRateS.org' | debconf-set-selections && echo 'mysql-server mysql-server/root_password_again password CGRateS.org' | debconf-set-selections
