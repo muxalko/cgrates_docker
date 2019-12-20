@@ -46,14 +46,19 @@ RUN mkdir -p /root/code/src/github.com/cgrates; cd /root/code/src/github.com/cgr
 # create link to cgrates dir
 RUN ln -s /root/code/src/github.com/cgrates/cgrates /root/cgr
 
-#RUN ls -ltrah /root/cgr/
-#RUN cd /root/cgr; pwd; ls -ltrah
+# checkout to specific commit
+#RUN cd /root/cgr; git checkout 82ddc85
+
 # Start a new workspace and create glide.yaml
 #RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide create --non-interactive
-# get deps
-#RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide install
-# update
-#RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide up
+#RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide init --non-interactive
+
+# generate ssh keys
+#RUN ssh-keygen -q -t rsa -N '' -f '/root/.ssh/id_rsa'
+
+# get go deps
+#RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide up 
+#RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH glide install 
 
 # build cgrates
 RUN cd /root/cgr; GOROOT=/root/go GOPATH=/root/code PATH=$GOROOT/bin:$GOPATH/bin:$PATH ./build.sh
