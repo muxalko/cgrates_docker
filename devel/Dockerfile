@@ -1,5 +1,4 @@
 FROM debian:latest
-MAINTAINER Michael Klimenko, mklimenko@golantelecom.co.il
 
 # set mysql version and root password
 RUN echo 'mysql-community-server mysql-community-server/root-pass password CGRateS.org' | debconf-set-selections \
