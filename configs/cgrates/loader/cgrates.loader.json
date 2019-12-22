@@ -4,10 +4,10 @@
 		"data_path": "/usr/share/cgrates/golantp",						// path towards tariff plan files
 		"disable_reverse": false,				// disable reverse computing
 		"caches_conns":[						// addresses towards cacheS components for reloads
-			{"address": "*env:RALS_ADDR", "transport": "*json"}
+			"caches_address_pool"
 		],
 		"scheduler_conns": [
-			{"address": "*env:SCHD_ADDR"}
+			"scheduler_conns"
 		],
 	}
 }

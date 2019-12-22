@@ -4,15 +4,15 @@
 		"enabled": true,						// starts session manager service: <true|false>
 		//"listen_bijson": ":2014",				// address where to listen for bidirectional JSON-RPC requests
 		"chargers_conns": [						// address where to reach the charger service, empty to disable charger functionality: <""|*internal|x.y.z.y:1234>
-			{"address": "*env:RALS_ADDR","transport":"*json"}
+			"chargers_address_pool"
 		],					
 		"rals_conns": [
 			//{"address": "*internal"}			// address where to reach the RALs <""|*internal|127.0.0.1:2013>
-			{"address": "*env:RALS_ADDR","transport":"*json"}
+			"rals_address_pool"
 		],
 		"cdrs_conns": [
 			//{"address": "*internal"}			// address where to reach CDR Server, empty to disable CDR capturing <*internal|x.y.z.y:1234>
-			{"address": "*env:CDRS_ADDR","transport":"*json"}
+			"cdrs_address_pool"
 		],
 		//"resources_conns": [],				// address where to reach the ResourceS <""|*internal|127.0.0.1:2013>
 		//"thresholds_conns": [],				// address where to reach the ThresholdS <""|*internal|127.0.0.1:2013>
@@ -20,10 +20,10 @@
 		//"suppliers_conns": [],				// address where to reach the SupplierS <""|*internal|127.0.0.1:2013>
 		"attributes_conns": [
 			//{"address": "*internal"} 			// address where to reach the AttributeS <""|*internal|127.0.0.1:2013>
-			{"address": "*env:ATTR_ADDR","transport":"*json"}
+			"attributes_address_pool"
 		],					
 		"session_replication_conns": [			// replicate sessions towards these session services
-			{"address": "*env:SESS_REPL_ADDR","transport":"*json"}
+			"session_replication_address_pool"
 		],		
 		//"debit_interval": "0s",				// interval to perform debits on.
 		//"min_call_duration": "0s",			// only authorize calls with allowed duration higher than this

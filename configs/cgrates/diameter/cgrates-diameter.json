@@ -6,15 +6,14 @@
         "listen": "*env:DA_LISTEN",                                                                     // address where to listen for diameter requests <x.y.z.y:1234>
         "dictionaries_path": "/etc/cgrates/diameter/dict/",        // path towards directory holding additional dictionaries to load
         "sessions_conns": [
-          //    {"address": "*internal"}                                // connection towards SessionService
-                {"address": "*env:SESS_ADDR","transport":"*json"},
+          //    {"address": "*internal"}  
+          "sessions_address_pool"                              // connection towards SessionService
         ],                                     
         "origin_host": "*env:DA_ORIGIN_HOST",                           // diameter Origin-Host AVP used in replies
         "origin_realm": "*env:DA_ORIGIN_REALM",                         // diameter Origin-Realm AVP used in replies
         //"vendor_id": 0,                                               // diameter Vendor-Id AVP used in replies
         "product_name": "*env:DA_PRODUCT_NAME",                         // diameter Product-Name AVP used in replies
-        
-                "templates":{
+        "templates":{
             "*cca": [
                     {"tag": "SessionId",              "field_id": "Session-Id",             "type": "*composed", "value": "~*req.Session-Id",           "mandatory": true},
                     {"tag": "OriginHost",             "field_id": "Origin-Host",            "type": "*composed", "value": "~*vars.OriginHost",          "mandatory": true},
@@ -23,7 +22,7 @@
                     {"tag": "CCRequestType",          "field_id": "CC-Request-Type",        "type": "*composed", "value": "~*req.CC-Request-Type",      "mandatory": true},
                     {"tag": "CCRequestNumber",        "field_id": "CC-Request-Number",      "type": "*composed", "value": "~*req.CC-Request-Number",    "mandatory": true},
                     {"tag": "ResultCode",             "field_id": "Result-Code",            "type": "*constant", "filters": ["*rsr::~*cgrep.Error(!^$)"], "value": "5030", "blocker": true},    
-            ],
+                    ],
             "cca-custom": [
                     
                     //Try to catch more specific error

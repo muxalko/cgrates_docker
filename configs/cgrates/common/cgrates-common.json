@@ -108,4 +108,56 @@
 		  "attribute_filter_indexes" : {"limit": 0, "ttl": "", "static_ttl": false}, 				// control attribute filter indexes caching
 		  //"charger_filter_indexes" : {"limit": -1, "ttl": "", "static_ttl": false}, 					// control charger filter indexes caching
 	},
+
+	"rpc_conns": {
+		"rals_address_pool": {
+			"strategy": "*first",
+			//"conns": [{"address": "127.0.0.1:2013", "transport":"*gob"}],
+			"conns": [{"address": "*env:RALS_ADDR","transport":"*json"}],
+			
+		},
+		"cdrs_address_pool": {
+			"strategy": "*first",
+			//"conns": [{"address": "127.0.0.1:2013", "transport":"*gob"}],
+			"conns": [{"address": "*env:CDRS_ADDR","transport":"*json"}],
+			
+		},
+		"sessions_address_pool": {
+			"strategy": "*first",
+			//"conns": [{"address": "127.0.0.1:2013", "transport":"*gob"}],
+			"conns": [{"address": "*env:SESS_ADDR","transport":"*json"}],
+			
+		},
+		"chargers_address_pool": {
+			"strategy": "*first",
+			//"conns": [{"address": "127.0.0.1:2013", "transport":"*gob"}],
+			"conns": [{"address": "*env:RALS_ADDR","transport":"*json"}],
+			
+		},
+		"attributes_address_pool": {
+			"strategy": "*first",
+			//"conns": [{"address": "127.0.0.1:2013", "transport":"*gob"}],
+			"conns": [{"address": "*env:RALS_ADDR", "transport": "*json"}],
+			
+		},
+		"session_replication_address_pool": {
+			"strategy": "*first",
+			//"conns": [{"address": "127.0.0.1:2013", "transport":"*gob"}],
+			"conns": [{"address": "*env:SESS_REPL_ADDR","transport":"*json"}],
+			
+		},
+		"caches_address_pool": {
+			"strategy": "*first",
+			//"conns": [{"address": "127.0.0.1:2013", "transport":"*gob"}],
+			"conns": [{"address": "*env:RALS_ADDR", "transport": "*json"}],
+			
+		},
+		"scheduler_conns": {
+			"strategy": "*first",
+			//"conns": [{"address": "127.0.0.1:2013", "transport":"*gob"}],
+			"conns": [{"address": "*env:SCHD_ADDR","transport":"*json"}],
+			
+		},
+	},
+
 }
