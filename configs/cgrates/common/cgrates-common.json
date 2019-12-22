@@ -160,4 +160,9 @@
 		},
 	},
 
+	"apier": {
+		"caches_conns":["caches_address_pool"],
+		"scheduler_conns": ["scheduler_conns"],					// connections to SchedulerS for reloads
+		"attributes_conns": ["attributes_address_pool"],					// connections to AttributeS for CDRExporter
+	},
 }

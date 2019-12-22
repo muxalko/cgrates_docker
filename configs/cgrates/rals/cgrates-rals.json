@@ -1,12 +1,7 @@
 {
-	"apier": {
-		"caches_conns":["caches_address_pool"],
-		"scheduler_conns": ["scheduler_conns"],					// connections to SchedulerS for reloads
-		"attributes_conns": ["attributes_address_pool"],					// connections to AttributeS for CDRExporter
-	},
-	
+
 	"schedulers": {
-		"enabled": false,				// start Scheduler service: <true|false>
+		"enabled": true,				// start Scheduler service: <true|false>
 		// To be able to write *cdr_log from action
 		"cdrs_conns": [					// address where to reach CDR Server, empty to disable CDR capturing <*internal|x.y.z.y:1234>
 			"cdrs_address_pool"
