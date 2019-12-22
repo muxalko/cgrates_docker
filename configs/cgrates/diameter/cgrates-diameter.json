@@ -72,7 +72,6 @@
                     //{"tag": "OriginID",     "field_id": "OriginID",         "type": "*composed",    "value": "~*req.Session-Id:s/(\\d+);(\\d+)$/$1;$2/",      "mandatory": true},
                     //GatewayService-6-11-1.PTggsn.golantelecom.net;1542190753;303167174
                     {"tag": "RequestType",  "field_id": "RequestType",      "type": "*composed",    "value": "*prepaid",             "mandatory": true},
-                    {"tag": "Direction",    "field_id": "Direction",        "type": "*composed",    "value": "*out",                 "mandatory": true},
                     {"tag": "Tenant",       "field_id": "Tenant",           "type": "*composed",    "value": "golant",               "mandatory": true},
                     //{"tag": "Category",     "field_id": "Category",         "type": "*constant",    "value": "*attributes",           "mandatory": true},
 					{"tag": "Category",     "field_id": "Category",         "type": "*constant",    "value": "data",           "mandatory": true},
@@ -111,7 +110,6 @@
                         {"tag": "OriginHost",       "field_id": "OriginHost",     "type": "*composed", "value": "~*req.Origin-Host",             "mandatory": true},
                         {"tag": "OriginID",         "field_id": "OriginID",       "type": "*composed", "value": "~*req.Session-Id",              "mandatory": true},
                         {"tag": "RequestType",      "field_id": "RequestType",    "type": "*composed", "value": "*prepaid",                     "mandatory": true},
-                        {"tag": "Direction",        "field_id": "Direction",      "type": "*composed", "value": "*out",                         "mandatory": true},
                         {"tag": "Tenant",           "field_id": "Tenant",         "type": "*composed", "value": "golant",                       "mandatory": true},
 						//{"tag": "Category",         "field_id": "Category",       "type": "*constant", "value": "*attributes",                   "mandatory": true},
                         {"tag": "Category",         "field_id": "Category",       "type": "*constant", "value": "data",                   "mandatory": true},
@@ -151,7 +149,6 @@
                                                 {"tag": "OriginHost",                          "field_id": "OriginHost",                       "type": "*composed",     "value": "~*req.Origin-Host",   "mandatory": true},
                         {"tag": "OriginID",                            "field_id": "OriginID",                         "type": "*composed",     "value": "~*req.Session-Id",    "mandatory": true},
                         {"tag": "RequestType",                         "field_id": "RequestType",                      "type": "*composed",     "value": "*prepaid",              "mandatory": true},
-                        {"tag": "Direction",                           "field_id": "Direction",                        "type": "*composed",     "value": "*out",                  "mandatory": true},
                         {"tag": "Tenant",                              "field_id": "Tenant",                           "type": "*composed",     "value": "golant",                "mandatory": true},
 						//{"tag": "Category",                            "field_id": "Category",                         "type": "*constant",     "value": "*attributes",               "mandatory": true},
                         {"tag": "Category",                            "field_id": "Category",                         "type": "*constant",     "value": "data",               "mandatory": true},
