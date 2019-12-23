@@ -96,7 +96,7 @@
       {
                 "id": "data_update",
                     "filters": ["*string:~*vars.*cmd:CCR", "*string:~*req.CC-Request-Type:2", "*string:~*req.Service-Context-Id:008.425.13.32251@3gpp.org"],  
-                    "flags": ["*update", "*accounts"],
+                    "flags": ["*update", "*accounts", "*dryrun"],
                     "request_fields":[
                         {"tag": "TOR",              "field_id": "ToR",            "type": "*constant", "value": "*data",                         "mandatory": true},
                         {"tag": "OriginHost",       "field_id": "OriginHost",     "type": "*composed", "value": "~*req.Origin-Host",             "mandatory": true},
