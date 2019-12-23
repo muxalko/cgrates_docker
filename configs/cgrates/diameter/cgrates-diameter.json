@@ -21,7 +21,7 @@
                     {"tag": "AuthApplicationId",      "field_id": "Auth-Application-Id",    "type": "*composed", "value": "~*vars.*appid",              "mandatory": true},
                     {"tag": "CCRequestType",          "field_id": "CC-Request-Type",        "type": "*composed", "value": "~*req.CC-Request-Type",      "mandatory": true},
                     {"tag": "CCRequestNumber",        "field_id": "CC-Request-Number",      "type": "*composed", "value": "~*req.CC-Request-Number",    "mandatory": true},
-                    {"tag": "ResultCode",             "field_id": "Result-Code",            "type": "*constant", "filters": ["*rsr::~*cgrep.Error(!^$)"], "value": "5030", "blocker": true},    
+                    {"tag": "ResultCode",             "field_id": "Result-Code",            "type": "*constant", "filters": ["*rsr::~*cgrep.Error(!^$)"], "value": "5030", "blocker": true},
                     ],
             "cca-custom": [
                     
@@ -82,16 +82,8 @@
                     {"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"}
                 ],
                 "reply_fields": [
-                                //{"tag": "CCATemplate", "type": "*template", "value": "*cca"},
-				{"tag": "SessionId",              "field_id": "Session-Id",             "type": "*composed", "value": "~*req.Session-Id",           "mandatory": true},
-                    {"tag": "OriginHost",             "field_id": "Origin-Host",            "type": "*composed", "value": "~*vars.OriginHost",          "mandatory": true},
-                    {"tag": "OriginRealm",            "field_id": "Origin-Realm",           "type": "*composed", "value": "~*vars.OriginRealm",         "mandatory": true},
-                    {"tag": "AuthApplicationId",      "field_id": "Auth-Application-Id",    "type": "*composed", "value": "~*vars.*appid",              "mandatory": true},
-                    {"tag": "CCRequestType",          "field_id": "CC-Request-Type",        "type": "*composed", "value": "~*req.CC-Request-Type",      "mandatory": true},
-                    {"tag": "CCRequestNumber",        "field_id": "CC-Request-Number",      "type": "*composed", "value": "~*req.CC-Request-Number",    "mandatory": true},
-                    {"tag": "ResultCode",             "field_id": "Result-Code",            "type": "*constant", "filters": ["*rsr::~*cgrep.Error(!^$)"], "value": "5030", "blocker": true},
-
-                                //{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+                            {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
+			                   //{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
                                 //   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"],
                                 //   "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(-1)"],
                                 //   "type": "*constant", "value": "10485760", "mandatory": true},
@@ -186,7 +178,7 @@
                         //{"tag": "PDP-Context-Type",                    "field_id": "PDP-Context-Type",                 "type": "*composed",     "value": "~*req.Service-Information.PS-Information.PDP-Context-Type",                     "mandatory": false}
                     ],
                     "reply_fields": [
-                                                {"tag": "CCATemplate", "type": "*template", "value": "*cca"}
+                         {"tag": "CCATemplate", "type": "*template", "value": "*cca"}
                    ]
                 }
         ],
