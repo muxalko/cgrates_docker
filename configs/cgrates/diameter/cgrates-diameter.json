@@ -49,7 +49,7 @@
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:RESOURCE_UNAUTHORIZED"],     "type": "*constant", "value": "5030", "blocker": true},
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:NO_ACTIVE_SESSION"],         "type": "*constant", "value": "5030", "blocker": true},
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:PARTIALLY_EXECUTED"],        "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:MAX_USAGE_EXCEEDED"],        "type": "*constant", "value": "4012", "blocker": true}, // DIAMETER_CREDIT_LIMIT_REACHED              
+                    {"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:MAX_USAGE_EXCEEDED"],        "type": "*constant", "value": "4012", "blocker": true}, // DIAMETER_CREDIT_LIMIT_REACHED              
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:*cgrep.Error:UNALLOCATED_RESOURCE"],      "type": "*constant", "value": "5030", "blocker": true},
                     //Doublecheck everything is OK 
                     {"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2001"},
@@ -69,8 +69,6 @@
                     {"tag": "TOR",          "field_id": "ToR",              "type": "*constant",    "value": "*data",                 "mandatory": true},
                     {"tag": "OriginHost",   "field_id": "OriginHost",       "type": "*composed",    "value": "~*req.Origin-Host",     "mandatory": true},
                     {"tag": "OriginID",     "field_id": "OriginID",         "type": "*composed",    "value": "~*req.Session-Id",      "mandatory": true},
-                    //{"tag": "OriginID",     "field_id": "OriginID",         "type": "*composed",    "value": "~*req.Session-Id:s/(\\d+);(\\d+)$/$1;$2/",      "mandatory": true},
-                    //GatewayService-6-11-1.PTggsn.golantelecom.net;1542190753;303167174
                     {"tag": "RequestType",  "field_id": "RequestType",      "type": "*composed",    "value": "*prepaid",             "mandatory": true},
                     {"tag": "Tenant",       "field_id": "Tenant",           "type": "*composed",    "value": "golant",               "mandatory": true},
                     //{"tag": "Category",     "field_id": "Category",         "type": "*constant",    "value": "*attributes",           "mandatory": true},
@@ -94,7 +92,7 @@
                    ]
       },
       {
-                    "id": "data_update",
+                "id": "data_update",
                     "filters": ["*string:~*vars.*cmd:CCR", "*string:~*req.CC-Request-Type:2", "*string:~*req.Service-Context-Id:008.425.13.32251@3gpp.org"],  
                     "flags": ["*update", "*accounts"],
                     "request_fields":[
@@ -149,15 +147,15 @@
                         {"tag": "SetupTime",                           "field_id": "SetupTime",                        "type": "*composed",     "value": "~*req.Event-Timestamp",     "mandatory": true},
                         {"tag": "AnswerTime",                          "field_id": "AnswerTime",                       "type": "*composed",     "value": "~*req.Event-Timestamp",     "mandatory": true},
                         {"tag": "Reporting-Reason", "field_id": "Reporting-Reason", "type": "*composed", 
-                                                        "filters": ["*rsr::~*req.Multiple-Services-Credit-Control.Reporting-Reason[~Rating-Group(1)](!^$)"],
-                                                        "value": "~*req.Multiple-Services-Credit-Control.Reporting-Reason[~Rating-Group(1)]", "mandatory": true},
-                                                {"tag": "Reporting-Reason", "field_id": "Reporting-Reason", "type": "*composed", 
-                                                        "filters": ["*rsr::~*req.Multiple-Services-Credit-Control.Used-Service-Unit.Reporting-Reason[~Rating-Group(1)](!^$)"],
-                                                        "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.Reporting-Reason[~Rating-Group(1)]", "mandatory": true},
-                        {"tag": "Termination-Cause",                   "field_id": "Termination-Cause",                "type": "*composed",     "value": "~*req.Termination-Cause", "mandatory": true},
+                            "filters": ["*rsr::~*req.Multiple-Services-Credit-Control.Reporting-Reason[~Rating-Group(1)](!^$)"],
+                            "value": "~*req.Multiple-Services-Credit-Control.Reporting-Reason[~Rating-Group(1)]", "mandatory": true},
+                        {"tag": "Reporting-Reason", "field_id": "Reporting-Reason", "type": "*composed", 
+                            "filters": ["*rsr::~*req.Multiple-Services-Credit-Control.Used-Service-Unit.Reporting-Reason[~Rating-Group(1)](!^$)"],
+                            "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.Reporting-Reason[~Rating-Group(1)]", "mandatory": true},
+                        {"tag": "Termination-Cause", "field_id": "Termination-Cause", "type": "*composed", "value": "~*req.Termination-Cause", "mandatory": true},
                         {"tag": "LastUsed",     "field_id": "LastUsed",       "type": "*sum", 
-                                               "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[~Rating-Group(1)];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[~Rating-Group(1)]"}, 
-                                                {"tag": "Called-Station-Id",                   "field_id": "Called-Station-Id",                "type": "*composed",     "value": "~*req.Service-Information.PS-Information.Called-Station-Id",                    "mandatory": false},
+                          "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Input-Octets[~Rating-Group(1)];~*req.Multiple-Services-Credit-Control.Used-Service-Unit.CC-Output-Octets[~Rating-Group(1)]"}, 
+                        {"tag": "Called-Station-Id",                   "field_id": "Called-Station-Id",                "type": "*composed",     "value": "~*req.Service-Information.PS-Information.Called-Station-Id",                    "mandatory": false},
                         {"tag": "3GPP-Charging-Id",                    "field_id": "3GPP-Charging-Id",                 "type": "*composed",     "value": "~*req.Service-Information.PS-Information.3GPP-Charging-Id",                     "mandatory": false},
                         {"tag": "3GPP-GPRS-Negotiated-QoS-profile",    "field_id": "3GPP-GPRS-Negotiated-QoS-profile", "type": "*composed",     "value": "~*req.Service-Information.PS-Information.3GPP-GPRS-Negotiated-QoS-profile",     "mandatory": false},
                         {"tag": "3GPP-Charging-Characteristics",       "field_id": "3GPP-Charging-Characteristics",    "type": "*composed",     "value": "~*req.Service-Information.PS-Information.3GPP-Charging-Characteristics",        "mandatory": false},
