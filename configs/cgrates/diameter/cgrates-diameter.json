@@ -93,7 +93,7 @@
                                     //"value": "~*cgrep.MaxUsage{*duration_nanoseconds&*multiply:1048576&*round}",
                                     "mandatory": true},
                                 {"tag": "CCATemplate", "type": "*template", "value": "cca-custom"},
-                                {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4010", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(0)"]},        
+                                {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4010", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<1048576)"]},        
                    ]
       },
       {
@@ -144,7 +144,7 @@
                                             //"value": "~*cgrep.MaxUsage{*duration_nanoseconds&*multiply:1048576&*round}",
                                             "type": "*variable",  "mandatory": true},
                                     {"tag": "CCATemplate", "type": "*template", "value": "cca-custom"},
-                                    {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4012", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(0)"]},
+                                    {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4012", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<1048576)"]},
                    ]
       },
       {
