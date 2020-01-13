@@ -37,7 +37,7 @@
 	"stor_db": {								// database used to store offline tariff plans and CDRs
 		"db_type": "*env:STORDB_TYPE",			// stor database type to use: <*mongo|*mysql|*postgres|*internal>			
 		"db_host": "*env:STORDB_HOST",			// the host to connect to
-		"db_port": *env:STORDB_PORT,			// the port to reach the stordb
+		"db_port": *env:STORDB_PORT,    		// the port to reach the stordb
 		"db_name": "*env:STORDB_NAME",			// stor database name
 		"db_user": "*env:STORDB_USER",			// username to use when connecting to stordb
 		"db_password": "*env:STORDB_PASS",		// password to use when connecting to stordb
@@ -163,6 +163,6 @@
 	"apier": {
 		"caches_conns":["caches_address_pool"],
 		"scheduler_conns": ["scheduler_conns"],					// connections to SchedulerS for reloads
-		"attributes_conns": ["attributes_address_pool"],					// connections to AttributeS for CDRExporter
+		"attributes_conns": ["attributes_address_pool"],	    // connections to AttributeS for CDRExporter
 	},
 }
