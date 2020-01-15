@@ -1,4 +1,9 @@
 {
+	//Brings up Responder and Apier objects. Needed for ApierV1.ReplayFailedPosts
+	"rals": {
+		"enabled": true,						// enable Rater service: <true|false>
+	},
+
 	"cdrs": {
 		"enabled": true,						// start the CDR Server service:  <true|false>
 		//"extra_fields": [],						// extra fields to store in CDRs for non-generic CDRs
