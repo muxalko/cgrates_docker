@@ -21,11 +21,12 @@
 		"attributes_conns": [
 			//{"address": "*internal"} 			// address where to reach the AttributeS <""|*internal|127.0.0.1:2013>
 			"attributes_address_pool"
-		],					
-		"session_replication_conns": [			// replicate sessions towards these session services
+		],				
+		"replication_conns": [					// replicate sessions towards these session services
 			"session_replication_address_pool"
 		],		
 		//"debit_interval": "0s",				// interval to perform debits on.
+		"store_session_costs": false,			// enable storing of the session costs within CDRs
 		//"min_call_duration": "0s",			// only authorize calls with allowed duration higher than this
 		//"max_call_duration": "1h",				// maximum call duration a prepaid call can last
 		"session_ttl": "15m",					// time after a session with no updates is terminated, not defined by default
@@ -38,5 +39,6 @@
 		],					
 		//"client_protocol": 1.0,				// version of protocol to use when acting as JSON-PRC client <"0","1.0">
 		//"channel_sync_interval": "0",			// sync channels regularly (0 to disable sync session)
+		//"terminate_attempts": 5				// attempts to get the session before terminating it
 	}
 }
