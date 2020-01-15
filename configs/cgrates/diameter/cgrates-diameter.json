@@ -65,6 +65,7 @@
         "request_processors": [
         {
                 "id": "data_init",
+                //https://github.com/cgrates/cgrates/blob/e1c822462c43019048808932e230b00b359ed839/agents/diamagent.go#L146
                 "filters": ["*string:~*vars.*cmd:CCR", "*string:~*req.CC-Request-Type:1", "*string:~*req.Service-Context-Id:008.425.13.32251@3gpp.org"],
                 "flags": ["*initiate", "*accounts"],
                 "request_fields":[
