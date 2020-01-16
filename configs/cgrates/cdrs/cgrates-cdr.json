@@ -33,9 +33,6 @@
 			"export_path":"http://10.224.228.188/processor/api/processCdr",            // path where the exported CDRs will be placed
 			//"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*voice","*string:~*req.Category:voice"], // filter CDRs exported by this template
 			"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*voice"], // filter CDRs exported by this template
-			"header_fields": [
-			
-			],
 			"content_fields": [                                                             // template of the exported content fields
 					{"tag":"CGRID", 					"type":"*composed", "value":"~CGRID", 						"field_id":"CGRID"					},
 					{"tag":"RunID", 					"type":"*composed", "value":"~RunID", 						"field_id":"RunID"					},
@@ -53,7 +50,6 @@
 					{"tag":"Usage", 					"type":"*composed", "value":"~Usage", 						"field_id":"Usage"					},
 					{"tag":"Cost", 						"type":"*composed", "value":"~Cost", 						"field_id":"Cost"					},
 			],
-			"trailer_fields": [],
 	},
 
 	"data_exports": {
@@ -75,9 +71,7 @@
 				{"tag":"SetupTime", "type":"*composed", "value":"~SetupTime", "layout":"2006-01-02T15:04:05Z07:00", "field_id":"SetupTime"},
 				{"tag":"AnswerTime", "type":"*composed", "value":"~AnswerTime", "layout":"2006-01-02T15:04:05Z07:00", "field_id":"AnswerTime"},
 				{"tag":"Usage", "type":"*composed", "value":"~Usage", "field_id":"Usage"},
-				{"tag":"Cost", "type":"*composed", "value":"~Cost", "field_id":"Cost"},
-		],
-		"trailer_fields": [		
+				{"tag":"Cost", "type":"*composed", "value":"~Cost", "field_id":"Cost"},	
 				{"tag":"Reporting-Reason",					"field_id":"Reporting-Reason",					"type":"*composed",	"value":"~Reporting-Reason"						},
 				{"tag":"Termination-Cause",					"field_id":"Termination-Cause",					"type":"*composed",	"value":"~Termination-Cause"					},
 				{"tag":"LastUsed",							"field_id":"LastUsed",							"type":"*composed",	"value":"~LastUsed"								},
