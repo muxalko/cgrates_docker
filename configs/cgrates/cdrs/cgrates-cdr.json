@@ -23,7 +23,7 @@
 		//"cdrstats_conns": [],					// address where to reach the cdrstats service, empty to disable cdrstats functionality: <""|*internal|x.y.z.y:1234>
 		//"thresholds_conns": [],					// address where to reach the thresholds service, empty to disable thresholds functionality: <""|*internal|x.y.z.y:1234>
 		//"stats_conns": [],						// address where to reach the stat service, empty to disable stats functionality: <""|*internal|x.y.z.y:1234>
-		"online_cdr_exports":["voice_exports"] 	 // list of CDRE profiles to use for real-time CDR exports
+		"online_cdr_exports":["voice_exports","data_exports"] 	 // list of CDRE profiles to use for real-time CDR exports
 	},
 
 	
@@ -31,7 +31,8 @@
 	"voice_exports": {
 			"export_format": "*http_json_cdr",     // exportted CDRs format <*file_csv|*file_fwv|*http_post|*http_json_cdr|*http_json_map|*amqp_json_cdr|*amqp_json_map>
 			"export_path": "http://10.224.228.188/processor/api/processCdr",            // path where the exported CDRs will be placed
-			"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*voice","*string:~*req.Category:voice"], // filter CDRs exported by this template
+			//"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*voice","*string:~*req.Category:voice"], // filter CDRs exported by this template
+			"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*voice"], // filter CDRs exported by this template
 			"content_fields": [                                                             // template of the exported content fields
 					{"tag":"CGRID", "type": "*composed", "value": "~CGRID", "field_id": "CGRID"},
 					{"tag":"RunID", "type": "*composed", "value": "~RunID", "field_id": "RunID"},
@@ -57,6 +58,47 @@
 			],
 	},
 
+	"data_exports": {
+		"export_format": "*http_json_cdr",     // exportted CDRs format <*file_csv|*file_fwv|*http_post|*http_json_cdr|*http_json_map|*amqp_json_cdr|*amqp_json_map>
+		"export_path": "http://10.224.228.188/processor/api/processCdr",            // path where the exported CDRs will be placed
+		"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*data"], // filter CDRs exported by this template
+		"content_fields": [                                                             // template of the exported content fields
+				{"tag":"CGRID", "type": "*composed", "value": "~CGRID", "field_id": "CGRID"},
+				{"tag":"RunID", "type": "*composed", "value": "~RunID", "field_id": "RunID"},
+				{"tag":"TOR", "type": "*composed", "value": "~ToR", "field_id": "ToR"},
+				{"tag":"OriginID", "type": "*composed", "value": "~OriginID", "field_id": "OriginID"},
+				{"tag":"OriginHost", "type": "*composed", "value": "~OriginHost", "field_id": "OriginHost"},
+				{"tag":"RequestType", "type": "*composed", "value": "~RequestType", "field_id": "RequestType"},
+				{"tag":"Tenant", "type": "*composed", "value": "~Tenant", "field_id": "Tenant"},
+				{"tag":"Category", "type": "*composed", "value": "~Category", "field_id": "Category"},
+				{"tag":"Account", "type": "*composed", "value": "~Account", "field_id": "Account"},
+				{"tag":"Subject", "type": "*composed", "value": "~Subject", "field_id": "Subject"},
+				{"tag":"Destination", "type": "*composed", "value": "~Destination", "field_id": "Destination"},
+				{"tag":"SetupTime", "type": "*composed", "value": "~SetupTime", "layout": "2006-01-02T15:04:05Z07:00", "field_id": "SetupTime"},
+				{"tag":"AnswerTime", "type": "*composed", "value": "~AnswerTime", "layout": "2006-01-02T15:04:05Z07:00", "field_id": "AnswerTime"},
+				{"tag":"Usage", "type": "*composed", "value": "~Usage", "field_id": "Usage"},
+				{"tag":"Cost", "type": "*composed", "value": "~Cost", "field_id": "Cost"},
+				{"tag":"Reporting-Reason", "type": "*composed", "value": "~Reporting-Reason", "field_id": "Reporting-Reason"},
+				{"tag":"Termination-Cause", "type": "*composed", "value": "~Termination-Cause", "field_id": "Termination-Cause"},
+				{"tag":"LastUsed", "type": "*composed", "value": "~LastUsed", "field_id": "LastUsed"},
+				{"tag": "Called-Station-Id",                   "field_id": "Called-Station-Id",                "type": "*composed",     "value": "~Called-Station-Id"               },
+				{"tag": "3GPP-Charging-Id",                    "field_id": "3GPP-Charging-Id",                 "type": "*composed",     "value": "~3GPP-Charging-Id"                },
+				{"tag": "3GPP-GPRS-Negotiated-QoS-profile",    "field_id": "3GPP-GPRS-Negotiated-QoS-profile", "type": "*composed",     "value": "~3GPP-GPRS-Negotiated-QoS-profile"},
+				{"tag": "3GPP-Charging-Characteristics",       "field_id": "3GPP-Charging-Characteristics",    "type": "*composed",     "value": "~3GPP-Charging-Characteristics"   },
+				{"tag": "3GPP-PDP-Type",                       "field_id": "3GPP-PDP-Type",                    "type": "*composed",     "value": "~3GPP-PDP-Type"                   },
+				{"tag": "GPP-SGSN-MCC-MNC",                    "field_id": "3GPP-SGSN-MCC-MNC",                "type": "*composed",     "value": "~3GPP-SGSN-MCC-MNC"               },
+				{"tag": "3GPP-GGSN-MCC-MNC",                   "field_id": "3GPP-GGSN-MCC-MNC",                "type": "*composed",     "value": "~3GPP-GGSN-MCC-MNC"               },
+				{"tag": "3GPP-NSAPI",                          "field_id": "3GPP-NSAPI",                       "type": "*composed",     "value": "~3GPP-NSAPI"                      },
+				{"tag": "3GPP-MS-TimeZone",                    "field_id": "3GPP-MS-TimeZone",                 "type": "*composed",     "value": "~3GPP-MS-TimeZone"                },
+				{"tag": "3GPP-Selection-Mode",                 "field_id": "3GPP-Selection-Mode",              "type": "*composed",     "value": "~3GPP-Selection-Mode"             },
+				{"tag": "3GPP-RAT-Type",                       "field_id": "3GPP-RAT-Type",                    "type": "*composed",     "value": "~3GPP-RAT-Type"                   },
+				{"tag": "3GPP-User-Location-Info",             "field_id": "3GPP-User-Location-Info",          "type": "*composed",     "value": "~3GPP-User-Location-Info"         },
+				{"tag": "PDP-Address",                         "field_id": "PDP-Address",                      "type": "*composed",     "value": "~PDP-Address"                     },
+				{"tag": "3GPP-IMSI-MCC-MNC",                   "field_id": "3GPP-IMSI-MCC-MNC",                "type": "*composed",     "value": "~3GPP-IMSI-MCC-MNC"               },
+				{"tag": "GGSN-Address",                        "field_id": "GGSN-Address",                     "type": "*composed",     "value": "~GGSN-Address"                    },
+				{"tag": "SGSN-Address",                        "field_id": "SGSN-Address",                     "type": "*composed",     "value": "~SGSN-Address"                    },
+		],
+	},
 },
 
 }
