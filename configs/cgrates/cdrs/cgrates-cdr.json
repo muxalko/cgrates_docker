@@ -49,6 +49,8 @@
 					{"tag":"AnswerTime", "type": "*composed", "value": "~AnswerTime", "layout": "2006-01-02T15:04:05Z07:00", "field_id": "AnswerTime"},
 					{"tag":"Usage", "type": "*composed", "value": "~Usage", "field_id": "Usage"},
 					{"tag":"Cost", "type": "*composed", "value": "~Cost", "field_id": "Cost"},
+			],
+			"trailer_fields": [
 					{"tag":"CallAttemptElapsedTime", "type": "*composed", "value": "~CallAttemptElapsedTime", "field_id": "CallAttemptElapsedTime"},
 					{"tag":"CallConnectedElapsedTime", "type": "*composed", "value": "~CallConnectedElapsedTime", "field_id": "CallConnectedElapsedTime"},
 					{"tag":"CallStopTimeValue", "type": "*composed", "value": "~CallStopTimeValue", "field_id": "CallStopTimeValue"},
@@ -78,6 +80,8 @@
 				{"tag":"AnswerTime", "type": "*composed", "value": "~AnswerTime", "layout": "2006-01-02T15:04:05Z07:00", "field_id": "AnswerTime"},
 				{"tag":"Usage", "type": "*composed", "value": "~Usage", "field_id": "Usage"},
 				{"tag":"Cost", "type": "*composed", "value": "~Cost", "field_id": "Cost"},
+		],
+		"trailer_fields": [		
 				{"tag":"Reporting-Reason", "type": "*composed", "value": "~Reporting-Reason", "field_id": "Reporting-Reason"},
 				{"tag":"Termination-Cause", "type": "*composed", "value": "~Termination-Cause", "field_id": "Termination-Cause"},
 				{"tag":"LastUsed", "type": "*composed", "value": "~LastUsed", "field_id": "LastUsed"},
