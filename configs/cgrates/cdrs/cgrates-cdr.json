@@ -34,10 +34,7 @@
 			//"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*voice","*string:~*req.Category:voice"], // filter CDRs exported by this template
 			"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*voice"], // filter CDRs exported by this template
 			"header_fields": [
-				{"tag":"auth-login",	"field_id":"auth-login", 		"type":"*constant", 	"value": "test"				},
-				{"tag":"auth-password",	"field_id":"auth-password", 	"type":"*constant", 	"value": "secret"			},
-				{"tag":"content-type",	"field_id":"content-type", 		"type":"*constant", 	"value": "application/json"	},
-				{"tag":"cache-control", "field_id":"cache-control", 	"type":"*constant", 	"value": "no-cache"			},
+			
 			],
 			"content_fields": [                                                             // template of the exported content fields
 					{"tag":"CGRID", 				"type":"*composed", "value":"~CGRID", 				"field_id": "CGRID"					},
