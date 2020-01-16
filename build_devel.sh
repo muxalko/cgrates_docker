@@ -11,7 +11,8 @@ make build
 
 #get last git pull version from the latest cgr-engine compiled from the actual container, used in ./devel/Makefile 
 echo "$(docker run cgrates-devel /bin/sh -c "cgr-engine -version")">CGRATES_VERSION
-echo "$(cat CGRATES_VERSION | sed -r 's/^CGRateS\s[0-9]\.[0-9].[0-9]\~[a-zA-Z0-9]*\sgit\+([a-zA-Z0-9]+)\s\((.+)\)/\1/')">CGRATES_VERSION_TAG
+echo "$(cat CGRATES_VERSION | sed -r 's/^CGRateS\@v[0-9]\.[0-9].[0-9]\~[a-zA-Z0-9]+\-[0-9]+\-([0-9a-zA-Z]+)/\1/')">CGRATES_VERSION_TAG
+#echo "$(cat CGRATES_VERSION | sed -r 's/^CGRateS\s[0-9]\.[0-9].[0-9]\~[a-zA-Z0-9]*\sgit\+([a-zA-Z0-9]+)\s\((.+)\)/\1/')">CGRATES_VERSION_TAG
 
 export CGRATES_VERSION=$(cat CGRATES_VERSION)
 export CGRATES_VERSION_TAG=$(cat CGRATES_VERSION_TAG)
