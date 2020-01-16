@@ -77,9 +77,14 @@ services:
     volumes:
       - './configs/cgrates/common:/etc/cgrates/common'
       - './configs/cgrates/cdrs:/etc/cgrates/cdrs'
+      - '/var/spool/cgrates/failed_posts:/var/spool/cgrates/failed_posts'
     networks:
+      - dynomite-net
       - rals-net
       - sessions-net
+    ports:
+      - '52012:2012'
+      - '52080:2080'
     extra_hosts:
       - 'cgr-lab-ptk-01:10.224.228.188'
       - 'cgr-lab-hfa-01:10.192.196.188'
