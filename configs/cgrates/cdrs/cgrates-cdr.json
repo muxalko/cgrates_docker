@@ -11,8 +11,8 @@
 		//"sessions_cost_retries": 5,				// number of queries to sessions_costs before recalculating CDR
 		//"chargers_conns": [],					// address where to reach the charger service, empty to disable charger functionality: <""|*internal|x.y.z.y:1234>
 		"rals_conns": [
-			//{"address": "*internal"}			// address where to reach the Rater for cost calculation, empty to disable functionality: <""|*internal|x.y.z.y:1234>
-			//{"address": "*localhost"}
+			//{"address":"*internal"}			// address where to reach the Rater for cost calculation, empty to disable functionality: <""|*internal|x.y.z.y:1234>
+			//{"address":"*localhost"}
 			"rals_address_pool"
 		],
 		
@@ -29,59 +29,59 @@
 	
 "cdre": {
 	"voice_exports": {
-			"export_format": "*http_json_cdr",     // exportted CDRs format <*file_csv|*file_fwv|*http_post|*http_json_cdr|*http_json_map|*amqp_json_cdr|*amqp_json_map>
-			"export_path": "http://10.224.228.188/processor/api/processCdr",            // path where the exported CDRs will be placed
+			"export_format":"*http_json_cdr",     // exportted CDRs format <*file_csv|*file_fwv|*http_post|*http_json_cdr|*http_json_map|*amqp_json_cdr|*amqp_json_map>
+			"export_path":"http://10.224.228.188/processor/api/processCdr",            // path where the exported CDRs will be placed
 			//"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*voice","*string:~*req.Category:voice"], // filter CDRs exported by this template
 			"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*voice"], // filter CDRs exported by this template
 			"header_fields": [
 			
 			],
 			"content_fields": [                                                             // template of the exported content fields
-					{"tag":"CGRID", 				"type":"*composed", "value":"~CGRID", 				"field_id": "CGRID"					},
-					{"tag":"RunID", 				"type":"*composed", "value":"~RunID", 				"field_id": "RunID"					},
-					{"tag":"TOR", 					"type":"*composed", "value":"~ToR", 				"field_id": "ToR"					},
-					{"tag":"OriginID", 				"type":"*composed", "value":"~OriginID", 			"field_id": "OriginID"				},
-					{"tag":"OriginHost", 			"type":"*composed", "value":"~OriginHost", 			"field_id": "OriginHost"			},
-					{"tag":"RequestType", 			"type":"*composed", "value":"~RequestType", 		"field_id": "RequestType"			},
-					{"tag":"Tenant", 				"type":"*composed", "value":"~Tenant", 				"field_id": "Tenant"				},
-					{"tag":"Category", 				"type":"*composed", "value":"~Category", 			"field_id": "Category"				},
-					{"tag":"Account", 				"type":"*composed", "value":"~Account", 			"field_id": "Account"				},
-					{"tag":"Subject", 				"type":"*composed", "value":"~Subject", 			"field_id": "Subject"				},
-					{"tag":"Destination", 			"type":"*composed", "value":"~Destination", 		"field_id": "Destination"			},
-					{"tag":"SetupTime", 			"type":"*composed", "value":"~SetupTime", 		 	"field_id": "SetupTime", 	"layout": "2006-01-02T15:04:05Z07:00"},
-					{"tag":"AnswerTime", 			"type":"*composed", "value":"~AnswerTime",			"field_id": "AnswerTime", 	"layout": "2006-01-02T15:04:05Z07:00"},
-					{"tag":"Usage", 				"type":"*composed", "value":"~Usage", 				"field_id": "Usage"					},
-					{"tag":"Cost", 					"type":"*composed", "value":"~Cost", 				"field_id": "Cost"					},
-					{"tag":"CallAttemptElapsedTime", 	"type":"*composed", "value":"~CallAttemptElapsedTime", 		"field_id": "CallAttemptElapsedTime"	},
-					{"tag":"CallConnectedElapsedTime", 	"type":"*composed", "value":"~CallConnectedElapsedTime", 	"field_id": "CallConnectedElapsedTime"	},
-					{"tag":"CallStopTimeValue", 		"type":"*composed", "value":"~CallStopTimeValue", 			"field_id": "CallStopTimeValue"			},
-					{"tag":"ReleaseCauseValue", 		"type":"*composed", "value":"~ReleaseCauseValue", 			"field_id": "ReleaseCauseValue"			},
-					{"tag":"DisconnectCause", 			"type":"*composed", "value":"~DisconnectCause",				"field_id": "DisconnectCause"			},
-					{"tag":"PDD", 						"type":"*composed", "value":"~PDD", 						"field_id": "PDD"						},
+					{"tag":"CGRID", 				"type":"*composed", "value":"~CGRID", 				"field_id":"CGRID"					},
+					{"tag":"RunID", 				"type":"*composed", "value":"~RunID", 				"field_id":"RunID"					},
+					{"tag":"TOR", 					"type":"*composed", "value":"~ToR", 				"field_id":"ToR"					},
+					{"tag":"OriginID", 				"type":"*composed", "value":"~OriginID", 			"field_id":"OriginID"				},
+					{"tag":"OriginHost", 			"type":"*composed", "value":"~OriginHost", 			"field_id":"OriginHost"				},
+					{"tag":"RequestType", 			"type":"*composed", "value":"~RequestType", 		"field_id":"RequestType"			},
+					{"tag":"Tenant", 				"type":"*composed", "value":"~Tenant", 				"field_id":"Tenant"					},
+					{"tag":"Category", 				"type":"*composed", "value":"~Category", 			"field_id":"Category"				},
+					{"tag":"Account", 				"type":"*composed", "value":"~Account", 			"field_id":"Account"				},
+					{"tag":"Subject", 				"type":"*composed", "value":"~Subject", 			"field_id":"Subject"				},
+					{"tag":"Destination", 			"type":"*composed", "value":"~Destination", 		"field_id":"Destination"			},
+					{"tag":"SetupTime", 			"type":"*composed", "value":"~SetupTime", 		 	"field_id":"SetupTime", 	"layout":"2006-01-02T15:04:05Z07:00"},
+					{"tag":"AnswerTime", 			"type":"*composed", "value":"~AnswerTime",			"field_id":"AnswerTime", 	"layout":"2006-01-02T15:04:05Z07:00"},
+					{"tag":"Usage", 				"type":"*composed", "value":"~Usage", 				"field_id":"Usage"					},
+					{"tag":"Cost", 					"type":"*composed", "value":"~Cost", 				"field_id":"Cost"					},
+					{"tag":"CallAttemptElapsedTime", 	"type":"*composed", "value":"~CallAttemptElapsedTime", 		"field_id":"CallAttemptElapsedTime"	},
+					{"tag":"CallConnectedElapsedTime", 	"type":"*composed", "value":"~CallConnectedElapsedTime", 	"field_id":"CallConnectedElapsedTime"	},
+					{"tag":"CallStopTimeValue", 		"type":"*composed", "value":"~CallStopTimeValue", 			"field_id":"CallStopTimeValue"			},
+					{"tag":"ReleaseCauseValue", 		"type":"*composed", "value":"~ReleaseCauseValue", 			"field_id":"ReleaseCauseValue"			},
+					{"tag":"DisconnectCause", 			"type":"*composed", "value":"~DisconnectCause",				"field_id":"DisconnectCause"			},
+					{"tag":"PDD", 						"type":"*composed", "value":"~PDD", 						"field_id":"PDD"						},
 			],
 			"trailer_fields": [],
 	},
 
 	"data_exports": {
-		"export_format": "*http_json_cdr",     // exportted CDRs format <*file_csv|*file_fwv|*http_post|*http_json_cdr|*http_json_map|*amqp_json_cdr|*amqp_json_map>
-		"export_path": "http://10.224.228.188/processor/api/processCdr",            // path where the exported CDRs will be placed
+		"export_format":"*http_json_cdr",     // exportted CDRs format <*file_csv|*file_fwv|*http_post|*http_json_cdr|*http_json_map|*amqp_json_cdr|*amqp_json_map>
+		"export_path":"http://10.224.228.188/processor/api/processCdr",            // path where the exported CDRs will be placed
 		"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*data"], // filter CDRs exported by this template
 		"content_fields": [                                                             // template of the exported content fields
-				{"tag":"CGRID", "type": "*composed", "value": "~CGRID", "field_id": "CGRID"},
-				{"tag":"RunID", "type": "*composed", "value": "~RunID", "field_id": "RunID"},
-				{"tag":"TOR", "type": "*composed", "value": "~ToR", "field_id": "ToR"},
-				{"tag":"OriginID", "type": "*composed", "value": "~OriginID", "field_id": "OriginID"},
-				{"tag":"OriginHost", "type": "*composed", "value": "~OriginHost", "field_id": "OriginHost"},
-				{"tag":"RequestType", "type": "*composed", "value": "~RequestType", "field_id": "RequestType"},
-				{"tag":"Tenant", "type": "*composed", "value": "~Tenant", "field_id": "Tenant"},
-				{"tag":"Category", "type": "*composed", "value": "~Category", "field_id": "Category"},
-				{"tag":"Account", "type": "*composed", "value": "~Account", "field_id": "Account"},
-				{"tag":"Subject", "type": "*composed", "value": "~Subject", "field_id": "Subject"},
-				{"tag":"Destination", "type": "*composed", "value": "~Destination", "field_id": "Destination"},
-				{"tag":"SetupTime", "type": "*composed", "value": "~SetupTime", "layout": "2006-01-02T15:04:05Z07:00", "field_id": "SetupTime"},
-				{"tag":"AnswerTime", "type": "*composed", "value": "~AnswerTime", "layout": "2006-01-02T15:04:05Z07:00", "field_id": "AnswerTime"},
-				{"tag":"Usage", "type": "*composed", "value": "~Usage", "field_id": "Usage"},
-				{"tag":"Cost", "type": "*composed", "value": "~Cost", "field_id": "Cost"},
+				{"tag":"CGRID", "type":"*composed", "value":"~CGRID", "field_id":"CGRID"},
+				{"tag":"RunID", "type":"*composed", "value":"~RunID", "field_id":"RunID"},
+				{"tag":"TOR", "type":"*composed", "value":"~ToR", "field_id":"ToR"},
+				{"tag":"OriginID", "type":"*composed", "value":"~OriginID", "field_id":"OriginID"},
+				{"tag":"OriginHost", "type":"*composed", "value":"~OriginHost", "field_id":"OriginHost"},
+				{"tag":"RequestType", "type":"*composed", "value":"~RequestType", "field_id":"RequestType"},
+				{"tag":"Tenant", "type":"*composed", "value":"~Tenant", "field_id":"Tenant"},
+				{"tag":"Category", "type":"*composed", "value":"~Category", "field_id":"Category"},
+				{"tag":"Account", "type":"*composed", "value":"~Account", "field_id":"Account"},
+				{"tag":"Subject", "type":"*composed", "value":"~Subject", "field_id":"Subject"},
+				{"tag":"Destination", "type":"*composed", "value":"~Destination", "field_id":"Destination"},
+				{"tag":"SetupTime", "type":"*composed", "value":"~SetupTime", "layout":"2006-01-02T15:04:05Z07:00", "field_id":"SetupTime"},
+				{"tag":"AnswerTime", "type":"*composed", "value":"~AnswerTime", "layout":"2006-01-02T15:04:05Z07:00", "field_id":"AnswerTime"},
+				{"tag":"Usage", "type":"*composed", "value":"~Usage", "field_id":"Usage"},
+				{"tag":"Cost", "type":"*composed", "value":"~Cost", "field_id":"Cost"},
 		],
 		"trailer_fields": [		
 				{"tag":"Reporting-Reason",					"field_id":"Reporting-Reason",					"type":"*composed",	"value":"~Reporting-Reason"						},
