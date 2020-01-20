@@ -1,4 +1,7 @@
 {
+	"general": {
+		"node_id": "sessions",
+	},
 ////////////////////////////////////SMG///////////////////////////////////////////
 "sessions": {
 		"enabled": true,						// starts session manager service: <true|false>
