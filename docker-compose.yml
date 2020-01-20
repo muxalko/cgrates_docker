@@ -54,6 +54,8 @@ services:
     env_file:
       - ./env/${HOSTNAME}/common.env
     volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
       - './configs/cgrates/common:/etc/cgrates/common'
       - './configs/cgrates/rals:/etc/cgrates/rals'
     networks:
