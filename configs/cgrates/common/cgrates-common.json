@@ -12,7 +12,7 @@
 		"default_request_type": "*prepaid",						// default request type to consider when missing from requests: <""|*prepaid|*postpaid|*pseudoprepaid|*rated>
 		//"default_category": "call",								// default category to consider when missing from requests
 		"default_tenant": "golant",								// default tenant to consider when missing from requests
-		"default_timezone": "Asia/Jerusalem",							// default timezone for timestamps where not specified <""|UTC|Local|$IANA_TZ_DB>
+		//"default_timezone": "UTC",							// default timezone for timestamps where not specified <""|UTC|Local|$IANA_TZ_DB>
 		"connect_attempts": 10,									// initial server connect attempts
 		"reconnects": 3,										// number of retries in case of connection lost
 		"connect_timeout": "3s",								// consider connection unsuccessful on timeout, 0 to disable the feature
