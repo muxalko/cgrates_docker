@@ -16,7 +16,7 @@ services:
       - '/traces/redis:/bitnami/redis'
     env_file:
       - ./env/${HOSTNAME}/redis.env
-    networks:
+    networks: 
       - redis-net
     sysctls:
       net.core.somaxconn: '1024'
