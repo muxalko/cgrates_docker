@@ -83,8 +83,12 @@
                     {"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"},                   
                 ],
                 "reply_fields": [
-                               
-                   ]
+                    {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
+                    {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>102400)"]},
+                    {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4010",
+                        "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]}
+                    ],
+              
       },
         {
                 "id": "data_init",
