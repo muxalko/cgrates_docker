@@ -8,7 +8,7 @@ RUN echo 'mysql-community-server mysql-community-server/root-pass password CGRat
  && echo 'mysql-apt-config mysql-apt-config/select-product select Apply' | debconf-set-selections
 
 # install dependencies
-RUN apt-get -y update && apt-get -y install git vim rsyslog ngrep curl wget lsb-release gnupg dirmngr
+RUN apt-get -y update && apt-get -y install git vim rsyslog ngrep curl wget lsb-release gnupg dirmngr tzdata
 
 # Preparation for mysql-server install
 #RUN wget http://repo.mysql.com/mysql-apt-config_0.8.14-1_all.deb

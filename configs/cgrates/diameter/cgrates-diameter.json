@@ -26,32 +26,7 @@
                     ],
             "cca-custom": [
                     
-                    //Try to catch more specific error
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:NO_MORE_DATA"],              "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:NOT_IMPLEMENTED"],           "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:NOT_FOUND"],                 "type": "*constant", "value": "5031", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:TIMED_OUT"],                 "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:SERVER_ERROR"],              "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:MAX_RECURSION_DEPTH"],       "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:MANDATORY_IE_MISSING"],      "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:EXISTS"],                    "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:BROKEN_REFERENCE"],          "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:PARSER_ERROR"],              "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:INVALID_PATH"],              "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:INVALID_KEY"],               "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:UNAUTHORIZED_DESTINATION"],  "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:RATING_PLAN_NOT_FOUND"],     "type": "*constant", "value": "5031", "blocker": true}, // DIAMETER_RATING_FAILED                     
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:ACCOUNT_NOT_FOUND"],         "type": "*constant", "value": "5012", "blocker": true}, // DIAMETER_UNABLE_TO_COMPLY                      
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:ACCOUNT_DISABLED"],          "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:USER_NOT_FOUND"],            "type": "*constant", "value": "5030", "blocker": true}, // DIAMETER_USER_UNKNOWN                      
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:INSUFFICIENT_CREDIT"],       "type": "*constant", "value": "4010", "blocker": true}, // DIAMETER_END_USER_SERVICE_DENIED
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:NOT_CONVERTIBLE"],           "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:RESOURCE_UNAVAILABLE"],      "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:RESOURCE_UNAUTHORIZED"],     "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:NO_ACTIVE_SESSION"],         "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:PARTIALLY_EXECUTED"],        "type": "*constant", "value": "5030", "blocker": true},
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:MAX_USAGE_EXCEEDED"],        "type": "*constant", "value": "4012", "blocker": true}, // DIAMETER_CREDIT_LIMIT_REACHED              
-                    //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*string:~*cgrep.Error:UNALLOCATED_RESOURCE"],      "type": "*constant", "value": "5030", "blocker": true},
+                    
                     //Doublecheck everything is OK 
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2001"},
                     {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "2001", "filters": ["*empty:~*cgrep.Error:"]},
@@ -63,33 +38,6 @@
         },
         
         "request_processors": [
-            {
-                "id": "data_auth",
-                //https://github.com/cgrates/cgrates/blob/e1c822462c43019048808932e230b00b359ed839/agents/diamagent.go#L146
-                "filters": ["*string:~*vars.*cmd:CCR", "*string:~*req.CC-Request-Type:1", "*string:~*req.Service-Context-Id:008.425.13.32251@3gpp.org"],
-                "flags": ["*auth", "*accounts", "*continue"],
-                "request_fields":[
-                    {"tag": "TOR",          "field_id": "ToR",              "type": "*constant",    "value": "*data",                 "mandatory": true},
-                    {"tag": "OriginHost",   "field_id": "OriginHost",       "type": "*composed",    "value": "~*req.Origin-Host",     "mandatory": true},
-                    {"tag": "OriginID",     "field_id": "OriginID",         "type": "*composed",    "value": "~*req.Session-Id",      "mandatory": true},
-                    {"tag": "RequestType",  "field_id": "RequestType",      "type": "*composed",    "value": "*prepaid",             "mandatory": true},
-                    {"tag": "Tenant",       "field_id": "Tenant",           "type": "*composed",    "value": "golant",               "mandatory": true},
-                    //{"tag": "Category",     "field_id": "Category",         "type": "*constant",    "value": "*attributes",           "mandatory": true},
-					{"tag": "Category",     "field_id": "Category",         "type": "*constant",    "value": "data",           "mandatory": true},
-                    {"tag": "Account",      "field_id": "Account",          "type": "*composed",    "value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]", "mandatory": true },
-                    {"tag": "Destination",  "field_id": "Destination",      "type": "*composed",    "value": "~*req.Service-Information.PS-Information.3GPP-SGSN-MCC-MNC",     "mandatory": true},
-                    {"tag": "SetupTime",    "field_id": "SetupTime",        "type": "*composed",    "value": "~*req.Event-Timestamp", "mandatory": true},
-                    {"tag": "AnswerTime",   "field_id": "AnswerTime",       "type": "*composed",    "value": "~*req.Event-Timestamp", "mandatory": true},
-                    {"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"},                   
-                ],
-                "reply_fields": [
-                    {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
-                    {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>102400)"]},
-                    {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4010",
-                        "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]}
-                    ],
-              
-      },
         {
                 "id": "data_init",
                 //https://github.com/cgrates/cgrates/blob/e1c822462c43019048808932e230b00b359ed839/agents/diamagent.go#L146
@@ -112,7 +60,7 @@
                 "reply_fields": [
                         {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
                         {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>102400)"]},
-                        {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4010", 
+                        {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4010",  "blocker": true,
                                     "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]}, 
 			                   //{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
                                 //   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"],
