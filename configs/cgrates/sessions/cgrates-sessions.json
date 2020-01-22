@@ -43,5 +43,38 @@
 		//"client_protocol": 1.0,				// version of protocol to use when acting as JSON-PRC client <"0","1.0">
 		//"channel_sync_interval": "0",			// sync channels regularly (0 to disable sync session)
 		//"terminate_attempts": 5				// attempts to get the session before terminating it
+		"alterable_fields": [
+		//VOICE CDR EXTRA FIELDS
+				"CallAttemptElapsedTime",
+				"CallConnectedElapsedTime",
+				"CallStopTimeValue",
+				"Direction",
+				"DisconnectCause",
+				"PDD",
+				"ReleaseCauseValue",
+		//DATA CDR EXTRA FIELDS
+				"Reporting-Reason",
+				"Termination-Cause",
+				"LastUsed",
+				"Called-Station-Id",
+				"3GPP-Charging-Id",
+				"3GPP-GPRS-Negotiated-QoS-profile",
+				"3GPP-Charging-Characteristics",
+				"3GPP-PDP-Type",
+				"GPP-SGSN-MCC-MNC",
+				"3GPP-GGSN-MCC-MNC",
+				"3GPP-NSAPI",
+				"3GPP-Session-Stop-Indicator",
+				"3GPP-MS-TimeZone",
+				"3GPP-Selection-Mode",
+				"3GPP-RAT-Type",
+				"3GPP-User-Location-Info",
+				"PDP-Address",
+				"3GPP-IMSI-MCC-MNC",
+				"GGSN-Address",
+				"SGSN-Address",
+				"Charging-Rule-Base-Name",
+				"PDP-Context-Type",
+		],	
 	}
 }
