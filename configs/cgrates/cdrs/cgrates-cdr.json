@@ -37,13 +37,22 @@
 	},
 
 	"data_exports": {
-		"export_format":"*http_json_cdr",     // exportted CDRs format <*file_csv|*file_fwv|*http_post|*http_json_cdr|*http_json_map|*amqp_json_cdr|*amqp_json_map>
-		"export_path":"http://10.224.228.188/processor/api/processCdr",            // path where the exported CDRs will be placed
-		"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*data"], // filter CDRs exported by this template
+		"export_format":"*http_json_cdr",
+		"export_path":"http://10.224.228.188/processor/api/processCdr",
+		"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*data"],
 	},
+
+	"sms_exports": {
+		"export_format":"*http_json_cdr",
+		"export_path":"http://10.224.228.188/processor/api/processCdr",
+		"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*sms","*string:~*req.Category:sms"]
+	},
+
+	"credit_exports": {
+		"export_format":"*http_json_cdr",
+		"export_path":"http://10.224.228.188/processor/api/processCdr",
+		"filters" :["*string:~*req.RunID:*default","*string:~*req.ToR:*sms","*string:~*req.Category:product"]
+	}
 	
-},
-
-
-
+ }
 }
