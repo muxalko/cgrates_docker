@@ -13,6 +13,9 @@
         "origin_realm": "*env:DA_ORIGIN_REALM",                         // diameter Origin-Realm AVP used in replies
         //"vendor_id": 0,                                               // diameter Vendor-Id AVP used in replies
         "product_name": "*env:DA_PRODUCT_NAME",                         // diameter Product-Name AVP used in replies
+        //"concurrent_requests": -1,                      // limit the number of active requests processed by the server <-1|0-n>
+        //"synced_conn_requests": false,          // process one request at the time per connection
+        "asr_template": "*asr",                         // enable AbortSession message being sent to client
         "templates":{
             "*cca": [
                     {"tag": "SessionId",              "field_id": "Session-Id",             "type": "*variable",  "value": "~*req.Session-Id",           "mandatory": true},
@@ -24,9 +27,17 @@
                     //{"tag": "ResultCode",             "field_id": "Result-Code",            "type": "*constant", "filters": ["*rsr::~*cgrep.Error(!^$)"], "value": "5030", "blocker": true},
                     {"tag": "ResultCode",             "field_id": "Result-Code",            "type": "*constant", "value": "5030", "filters": ["*notempty:~*cgrep.Error:"],   "blocker": true},
                     ],
+             "*asr": [       // *asr is used to build AbortSessionRequest
+                        {"tag":"SessionId",				"path":"Session-Id",			"type":"*variable",			"mandatory":true,			"value":"~*req.Session-Id"},			
+                        {"tag":"OriginHost",			"path":"Origin-Host",			"type":"*variable",			"mandatory":true,			"value":"~*req.Destination-Host"},			
+                        {"tag":"OriginRealm",			"path":"Origin-Realm",			"type":"*variable",			"mandatory":true,			"value":"~*req.Destination-Realm"},			
+                        {"tag":"DestinationRealm",		"path":"Destination-Realm",     "type":"*variable",			"mandatory":true,			"value":"~*req.Origin-Realm"},			
+                        {"tag":"DestinationHost",		"path":"Destination-Host",      "type":"*variable",			"mandatory":true,			"value":"~*req.Origin-Host"},			
+                        {"tag":"AuthApplicationId",		"path":"Auth-Application-Id",   "type":"*variable",			"mandatory":true,			"value":"~*vars.*appid"},			
+                        {"tag":"UserName",			    "path":"User-Name",             "type":"*variable",			"mandatory":true,			"value":"~*req.User-Name"},			
+                        {"tag":"OriginStateID",			"path":"Origin-State-Id",       "type":"*constant",			"value":"1"}
+                    ],
             "cca-custom": [
-                    
-                    
                     //Doublecheck everything is OK 
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2001"},
                     {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "2001", "filters": ["*empty:~*cgrep.Error:"]},
