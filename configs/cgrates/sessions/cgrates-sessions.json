@@ -1,7 +1,4 @@
 {
-	"general": {
-		"node_id": "sessions",
-	},
 ////////////////////////////////////SMG///////////////////////////////////////////
 "sessions": {
 		"enabled": true,						// starts session manager service: <true|false>
@@ -75,6 +72,13 @@
 				"SGSN-Address",
 				"Charging-Rule-Base-Name",
 				"PDP-Context-Type",
+		//PURCHASE CDR EXTRA FIELDS
+				"ExternalSusbcriberIdA",
+				"ExternalSusbcriberIdB",
+				"Initiator",
+				"MsisdnA",
+				"MsisdnB",
+				"ResellerId",
 		],	
 	}
 }
