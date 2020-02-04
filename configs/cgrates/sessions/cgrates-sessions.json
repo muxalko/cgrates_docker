@@ -28,8 +28,9 @@
 		//"debit_interval": "0s",				// interval to perform debits on.
 		"store_session_costs": false,			// enable storing of the session costs within CDRs
 		//"min_call_duration": "0s",			// only authorize calls with allowed duration higher than this
-		//"max_call_duration": "1h",				// maximum call duration a prepaid call can last
-		"session_ttl": "1m",					// time after a session with no updates is terminated, not defined by default
+		//"max_call_duration": "1h",			// maximum call duration a prepaid call can last
+		//If, for any reason, no update will come on time - the whole balance will be charged!
+		"session_ttl": "15m",					// time after a session with no updates is terminated, not defined by default
 		//"session_ttl_max_delay": "",			// activates session_ttl randomization and limits the maximum possible delay
 		//"session_ttl_last_used": "",			// tweak LastUsed for sessions timing-out, not defined by default
 		//"session_ttl_usage": "",				// tweak Usage for sessions timing-out, not defined by default
@@ -78,7 +79,7 @@
 				"Initiator",
 				"MsisdnA",
 				"MsisdnB",
-				"ResellerId",
-		],	
+				"ResellerId"
+		]
 	}
 }
