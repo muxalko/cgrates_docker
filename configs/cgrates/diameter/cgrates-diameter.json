@@ -117,6 +117,7 @@
 
                     ],
                     "reply_fields": [
+                                    {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4012", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]},
                                     {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
                                     {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
                                         "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>0)"], 
@@ -124,7 +125,7 @@
                                         //"filters": ["*gte:~*cgrep.MaxUsage:0s"],
                                         //"value": "~*cgrep.MaxUsage{*duration_nanoseconds&*multiply:1048576&*round}",
                                         "type": "*variable",  "mandatory": true},
-                                    {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4012", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]},
+                                    
                                     //{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
                                         //"filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1 "],
                                     //"filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>0)"],
