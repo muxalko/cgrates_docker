@@ -69,6 +69,11 @@
                     {"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"},                
                 ],
                 "reply_fields": [
+                    {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+                        "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>0)"], "type": "*variable",  
+                            "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", 
+                            //"value": "~*cgrep.MaxUsage{*duration_nanoseconds&*multiply:1048576&*round}",
+                            "mandatory": true},
                         {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
                         {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>102400)"]},
                         {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4010",  "blocker": true,
@@ -77,11 +82,7 @@
                                 //   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"],
                                 //   "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(-1)"],
                                 //   "type": "*constant", "value": "10485760", "mandatory": true},
-                             {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-                                "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>0)"], "type": "*variable",  
-                                    "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", 
-                                    //"value": "~*cgrep.MaxUsage{*duration_nanoseconds&*multiply:1048576&*round}",
-                                    "mandatory": true},
+                        
                    ],
                    
       },
@@ -115,6 +116,12 @@
 
                     ],
                     "reply_fields": [
+                                    {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+                                        "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>0)"], 
+                                        "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", 
+                                        //"filters": ["*gte:~*cgrep.MaxUsage:0s"],
+                                        //"value": "~*cgrep.MaxUsage{*duration_nanoseconds&*multiply:1048576&*round}",
+                                        "type": "*variable",  "mandatory": true},
                                     {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
                                     //{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
                                         //"filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1 "],
@@ -126,12 +133,7 @@
                                     //{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets",
                                     //    "filters": ["*gte:~*cgrep.MaxUsage:0s"],
                                     //    "type": "*variable",  "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
-                                    {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-                                            "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>0)"], 
-                                            "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", 
-                                            //"filters": ["*gte:~*cgrep.MaxUsage:0s"],
-                                            //"value": "~*cgrep.MaxUsage{*duration_nanoseconds&*multiply:1048576&*round}",
-                                            "type": "*variable",  "mandatory": true},
+                                    
                                     {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]},
                                     {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4012", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]},
                    ]
