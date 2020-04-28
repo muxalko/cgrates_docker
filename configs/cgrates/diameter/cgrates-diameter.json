@@ -43,7 +43,7 @@
                     //{"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "2001", "filters": ["*empty:~*cgrep.Error:"]},
                     {"tag": "RatingGroup", "field_id": "Multiple-Services-Credit-Control.Rating-Group",            "type": "*constant", "value": "1"},
                     {"tag": "ServiceId",   "field_id": "Multiple-Services-Credit-Control.Service-Identifier",      "type": "*constant", "value": "1"},
-                    {"tag": "ValidityTime","field_id": "Multiple-Services-Credit-Control.Validity-Time",           "type": "*constant", "value": "600"},
+                    {"tag": "ValidityTime","field_id": "Multiple-Services-Credit-Control.Validity-Time",           "type": "*constant", "value": "600"}
 
             ]
         },
@@ -120,7 +120,7 @@
                     ],
                     "reply_fields": [
                                     {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
-                                    {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4010",  "blocker": true,
+                                    {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4012",  "blocker": true,
                                         "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]}, 
                                     {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "2001", "filters": ["*empty:~*cgrep.Error:"]},
                                     //{"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4012", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]},
@@ -142,7 +142,7 @@
                                     //    "filters": ["*gte:~*cgrep.MaxUsage:0s"],
                                     //    "type": "*variable",  "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
                                     
-                                    {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]},
+                                    {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]}
                                    
                    ]
       },
