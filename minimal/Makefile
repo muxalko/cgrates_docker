@@ -7,10 +7,10 @@ VERSION := $(shell ./bin/$${BIN} --version)
 #TAG	:= $(shell echo "${VERSION}" | sed -r 's/^CGRateS\@v[0-9]\.[0-9].[0-9]\~[a-zA-Z0-9]+\-[0-9]+\-([0-9a-zA-Z]+)/\1/')
 #TAG     := $(shell echo "${VERSION}" | sed -r 's/^CGRateS\s[0-9]\.[0-9].[0-9]\~[a-zA-Z0-9]*\sgit\+([a-zA-Z0-9]+)\s\((.+)\)/\1/')
 #TAG    := $(shell sed -e 's/[ \(\)\+\:]/_/g' <<< ${VERSION})
-TAG     := $(shell echo "${VERSION}" | sed -r 's/.*-([0-9a-z]+)$/\1/')
+TAG     := $(shell echo "${VERSION}" | sed -r 's/.*-([0-9a-z]+)$//\1/')
 IMG    := ${NAME}:${TAG}
 LATEST := ${NAME}:latest
-
+$(info VERSION="$(VERSION)")
 $(info IMG="$(IMG)")
 
 build:
