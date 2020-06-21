@@ -61,6 +61,7 @@ services:
       - './configs/cgrates/common:/etc/cgrates/common'
       - './configs/cgrates/rals:/etc/cgrates/rals'
     networks:
+      - redis-net
       - dynomite-net
       - rals-net
     ports:
@@ -89,6 +90,7 @@ services:
       - './configs/cgrates/cdrs:/etc/cgrates/cdrs'
       - '/var/spool/cgrates:/var/spool/cgrates'
     networks:
+      - redis-net
       - dynomite-net
       - rals-net
       - sessions-net
@@ -117,6 +119,7 @@ services:
       - './configs/cgrates/common:/etc/cgrates/common'
       - './configs/cgrates/attributes:/etc/cgrates/attributes'
     networks:
+      - redis-net
       - dynomite-net
       - rals-net
       - sessions-net
@@ -136,6 +139,7 @@ services:
       - './configs/cgrates/common:/etc/cgrates/common'
       - './configs/cgrates/sessions:/etc/cgrates/sessions'
     networks:
+      - redis-net
       - rals-net
       - sessions-net
     extra_hosts:
@@ -187,6 +191,7 @@ services:
       - '${EXPOSE_API}:2080'
     networks:
       - rals-net
+      - redis-net
       - dynomite-net
     extra_hosts:
       - 'cgr-lab-ptk-01:10.224.228.188'
