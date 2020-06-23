@@ -11,8 +11,8 @@ services:
     image: 'bitnami/redis:4.0.11'
     container_name: redis
     volumes:
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
+      - '/etc/timezone:/etc/timezone:ro'
+      - '/etc/localtime:/etc/localtime:ro'
       - '/traces/redis:/bitnami/redis'
     env_file:
       - ./env/${HOSTNAME}/redis.env
@@ -40,8 +40,8 @@ services:
     env_file:
       - ./env/${HOSTNAME}/dynomite.env
     volumes:
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
+      - '/etc/timezone:/etc/timezone:ro'
+      - '/etc/localtime:/etc/localtime:ro'
       - './configs/dynomite/${HOSTNAME}:/etc/dynomite'
     networks:
       - redis-net
@@ -67,8 +67,8 @@ services:
     env_file:
       - ./env/${HOSTNAME}/common.env
     volumes:
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
+      - '/etc/timezone:/etc/timezone:ro'
+      - '/etc/localtime:/etc/localtime:ro'
       - './configs/cgrates/common:/etc/cgrates/common'
       - './configs/cgrates/rals:/etc/cgrates/rals'
     networks:
@@ -97,6 +97,8 @@ services:
     env_file:
       - ./env/${HOSTNAME}/common.env
     volumes:
+      - '/etc/timezone:/etc/timezone:ro'
+      - '/etc/localtime:/etc/localtime:ro'
       - './configs/cgrates/common:/etc/cgrates/common'
       - './configs/cgrates/cdrs:/etc/cgrates/cdrs'
       - '/var/spool/cgrates:/var/spool/cgrates'
@@ -127,6 +129,8 @@ services:
     env_file:
       - ./env/${HOSTNAME}/common.env
     volumes:
+      - '/etc/timezone:/etc/timezone:ro'
+      - '/etc/localtime:/etc/localtime:ro'
       - './configs/cgrates/common:/etc/cgrates/common'
       - './configs/cgrates/attributes:/etc/cgrates/attributes'
     networks:
@@ -147,6 +151,8 @@ services:
     env_file:
       - ./env/${HOSTNAME}/common.env
     volumes:
+      - '/etc/timezone:/etc/timezone:ro'
+      - '/etc/localtime:/etc/localtime:ro'
       - './configs/cgrates/common:/etc/cgrates/common'
       - './configs/cgrates/sessions:/etc/cgrates/sessions'
     networks:
@@ -176,6 +182,8 @@ services:
     container_name: diameter
     restart: always
     env_file:
+      - '/etc/timezone:/etc/timezone:ro'
+      - '/etc/localtime:/etc/localtime:ro'
       - ./env/${HOSTNAME}/common.env
       - ./env/${HOSTNAME}/diameter.env
     environment:
@@ -196,6 +204,8 @@ services:
     env_file:
       - ./env/${HOSTNAME}/common.env
     volumes:
+      - '/etc/timezone:/etc/timezone:ro'
+      - '/etc/localtime:/etc/localtime:ro'
       - './configs/cgrates/common:/etc/cgrates/common'
       - './configs/cgrates/api:/etc/cgrates/api'
     ports:
