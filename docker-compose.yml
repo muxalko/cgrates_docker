@@ -176,8 +176,6 @@ services:
     container_name: diameter
     restart: always
     env_file:
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
       - ./env/${HOSTNAME}/common.env
       - ./env/${HOSTNAME}/diameter.env
     environment:
