@@ -28,15 +28,24 @@
                     {"tag": "ResultCode",             "path": "*rep.Result-Code",            "type": "*constant", "value": "5030", "filters": ["*notempty:~*cgrep.Error:"],   "blocker": true},
                     ],
              "*asr": [       // *asr is used to build AbortSessionRequest
-                        {"tag":"SessionId",				"path":"Session-Id",			"type":"*variable",			"mandatory":true,			"value":"~*req.Session-Id"},			
-                        {"tag":"OriginHost",			"path":"Origin-Host",			"type":"*variable",			"mandatory":true,			"value":"~*req.Destination-Host"},			
-                        {"tag":"OriginRealm",			"path":"Origin-Realm",			"type":"*variable",			"mandatory":true,			"value":"~*req.Destination-Realm"},			
-                        {"tag":"DestinationRealm",		"path":"Destination-Realm",     "type":"*variable",			"mandatory":true,			"value":"~*req.Origin-Realm"},			
-                        {"tag":"DestinationHost",		"path":"Destination-Host",      "type":"*variable",			"mandatory":true,			"value":"~*req.Origin-Host"},			
-                        {"tag":"AuthApplicationId",		"path":"Auth-Application-Id",   "type":"*variable",			"mandatory":true,			"value":"~*vars.*appid"},			
-                        {"tag":"UserName",			    "path":"User-Name",             "type":"*variable",			"mandatory":true,			"value":"~*req.User-Name"},			
-                        {"tag":"OriginStateID",			"path":"Origin-State-Id",       "type":"*constant",			"value":"1"}
+                        {"tag":"SessionId",				"path":"*diamreq.Session-Id",			"type":"*variable",			"mandatory":true,			"value":"~*req.Session-Id"},			
+                        {"tag":"OriginHost",			"path":"*diamreq.Origin-Host",			"type":"*variable",			"mandatory":true,			"value":"~*req.Destination-Host"},			
+                        {"tag":"OriginRealm",			"path":"*diamreq.Origin-Realm",			"type":"*variable",			"mandatory":true,			"value":"~*req.Destination-Realm"},			
+                        {"tag":"DestinationRealm",		"path":"*diamreq.Destination-Realm",     "type":"*variable",			"mandatory":true,			"value":"~*req.Origin-Realm"},			
+                        {"tag":"DestinationHost",		"path":"*diamreq.Destination-Host",      "type":"*variable",			"mandatory":true,			"value":"~*req.Origin-Host"},			
+                        {"tag":"AuthApplicationId",		"path":"*diamreq.Auth-Application-Id",   "type":"*variable",			"mandatory":true,			"value":"~*vars.*appid"},			
+                        {"tag":"UserName",			    "path":"*diamreq.User-Name",             "type":"*variable",			"mandatory":true,			"value":"~*req.User-Name"},			
+                        {"tag":"OriginStateID",			"path":"*diamreq.Origin-State-Id",       "type":"*constant",			"value":"1"}
                     ],
+                "*rar": [
+                    {"tag": "SessionId", "path": "*diamreq.Session-Id", "type": "*variable", "value": "~*req.Session-Id", "mandatory": true},
+                    {"tag": "OriginHost", "path": "*diamreq.Origin-Host", "type": "*variable", "value": "~*req.Destination-Host", "mandatory": true},
+                    {"tag": "OriginRealm", "path": "*diamreq.Origin-Realm", "type": "*variable", "value": "~*req.Destination-Realm", "mandatory": true},
+                    {"tag": "DestinationRealm", "path": "*diamreq.Destination-Realm", "type": "*variable", "value": "~*req.Origin-Realm", "mandatory": true},
+                    {"tag": "DestinationHost", "path": "*diamreq.Destination-Host", "type": "*variable", "value": "~*req.Origin-Host", "mandatory": true},
+                    {"tag": "AuthApplicationId", "path": "*diamreq.Auth-Application-Id", "type": "*variable", "value": "~*vars.*appid", "mandatory": true},
+                    {"tag": "ReAuthRequestType", "path": "*diamreq.Re-Auth-Request-Type", "type": "*constant", "value": "0"},
+                ],
             "cca-custom": [
                     //Doublecheck everything is OK 
                     //{"tag": "ResultCode",  "path": "*rep.Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2001"},
@@ -71,7 +80,7 @@
             {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
             {"tag": "ResultCode",  "path": "*rep.Result-Code", "type": "*constant", "value": "4010",  "blocker": true,
                 "filters": ["*lt:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"]}
-           ],
+           ]
       },
       {
         "id": "data_init",
@@ -151,7 +160,7 @@
                                     {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
                                     {"tag": "ResultCode",  "path": "*rep.Result-Code", "type": "*constant", "value": "4012",  "blocker": true,
                                         //"filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]}, 
-                                        "filters": ["*lt:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"]}
+                                        "filters": ["*lt:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"]},
                                     {"tag": "ResultCode",  "path": "*rep.Result-Code", "type": "*constant", "value": "2001", "filters": ["*empty:~*cgrep.Error:"]},
                                     //{"tag": "ResultCode",  "path": "Result-Code", "type": "*constant", "value": "4012", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]},
                                     {"tag": "GrantedUnits", "path": "*rep.Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
@@ -238,8 +247,8 @@
                 {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
                 {"tag": "ResultCode",  "path": "*rep.Result-Code", "type": "*constant", "value": "2001", "filters": ["*empty:~*cgrep.Error:"]},   
                ]
-        },    
+        }   
         
-    ],
+    ]
     }
 }
