@@ -50,47 +50,73 @@
         
         "request_processors": [
         {
-                "id": "data_init",
-                //https://github.com/cgrates/cgrates/blob/e1c822462c43019048808932e230b00b359ed839/agents/diamagent.go#L146
-                //"filters": ["*string:~*vars.*cmd:CCR", "*string:~*req.CC-Request-Type:1", "*string:~*req.Service-Context-Id:008.425.13.32251@3gpp.org"],
-                //"filters": ["*string:~*vars.*cmd:CCR", "*string:~*req.CC-Request-Type:1", "*string:~*req.Service-Context-Id:7.32251@3gpp.org"],
-                "filters": ["*string:~*vars.*cmd:CCR", "*string:~*req.CC-Request-Type:1"],
-                "flags": ["*initiate", "*accounts"],
-                "request_fields":[
-                    {"tag": "TOR",          "field_id": "ToR",              "type": "*constant",    "value": "*data",                 "mandatory": true},
-                    {"tag": "OriginHost",   "field_id": "OriginHost",       "type": "*variable",     "value": "~*req.Origin-Host",     "mandatory": true},
-                    {"tag": "OriginID",     "field_id": "OriginID",         "type": "*variable",     "value": "~*req.Session-Id",      "mandatory": true},
-                    {"tag": "RequestType",  "field_id": "RequestType",      "type": "*variable",     "value": "*prepaid",             "mandatory": true},
-                    {"tag": "Tenant",       "field_id": "Tenant",           "type": "*variable",     "value": "golant",               "mandatory": true},
-                    //{"tag": "Category",     "field_id": "Category",         "type": "*constant",    "value": "*attributes",           "mandatory": true},
-					{"tag": "Category",     "field_id": "Category",         "type": "*constant",    "value": "data",           "mandatory": true},
-                    {"tag": "Account",      "field_id": "Account",          "type": "*variable",     "value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]", "mandatory": true },
-                    {"tag": "Destination",  "field_id": "Destination",      "type": "*variable",    "value": "~*req.Service-Information.PS-Information.3GPP-SGSN-MCC-MNC",     "mandatory": true},
-                    {"tag": "SetupTime",    "field_id": "SetupTime",        "type": "*variable",    "value": "~*req.Event-Timestamp", "mandatory": true},
-                    {"tag": "AnswerTime",   "field_id": "AnswerTime",       "type": "*variable",    "value": "~*req.Event-Timestamp", "mandatory": true},
-                    {"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"}
-                ],
-                "reply_fields": [
-                    
-                    {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
-                    {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4010",  "blocker": true,
-                        "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]}, 
-                    {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "2001", "filters": ["*empty:~*cgrep.Error:"]},
-                    {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-                        "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>0)"], "type": "*variable",  
-                            "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", 
-                            //"value": "~*cgrep.MaxUsage{*duration_nanoseconds&*multiply:1048576&*round}",
-                            "mandatory": true},
-                        {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>102400)"]},
-                        
-			                   //{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-                                //   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"],
-                                //   "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(-1)"],
-                                //   "type": "*constant", "value": "10485760", "mandatory": true},
-                        
-                   ],
-                   
+        "id": "data_auth",
+        "filters": ["*string:~*vars.*cmd:CCR", "*string:~*req.CC-Request-Type:1"],
+        "flags": ["*auth", "*accounts","*continue"],
+        "request_fields":[
+            {"tag": "TOR",          "field_id": "ToR",              "type": "*constant",    "value": "*data",                 "mandatory": true},
+            {"tag": "OriginHost",   "field_id": "OriginHost",       "type": "*variable",     "value": "~*req.Origin-Host",     "mandatory": true},
+            {"tag": "OriginID",     "field_id": "OriginID",         "type": "*variable",     "value": "~*req.Session-Id",      "mandatory": true},
+            {"tag": "RequestType",  "field_id": "RequestType",      "type": "*variable",     "value": "*prepaid",             "mandatory": true},
+            {"tag": "Tenant",       "field_id": "Tenant",           "type": "*variable",     "value": "golant",               "mandatory": true},
+            //{"tag": "Category",     "field_id": "Category",         "type": "*constant",    "value": "*attributes",           "mandatory": true},
+            {"tag": "Category",     "field_id": "Category",         "type": "*constant",    "value": "data",           "mandatory": true},
+            {"tag": "Account",      "field_id": "Account",          "type": "*variable",     "value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]", "mandatory": true },
+            {"tag": "Destination",  "field_id": "Destination",      "type": "*variable",    "value": "~*req.Service-Information.PS-Information.3GPP-SGSN-MCC-MNC",     "mandatory": true},
+            {"tag": "SetupTime",    "field_id": "SetupTime",        "type": "*variable",    "value": "~*req.Event-Timestamp", "mandatory": true},
+            {"tag": "AnswerTime",   "field_id": "AnswerTime",       "type": "*variable",    "value": "~*req.Event-Timestamp", "mandatory": true},
+            {"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"}
+        ], 
+        "reply_fields": [
+            {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
+            {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4010",  "blocker": true,
+                "filters": ["*lt:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"]}
+           ],
       },
+      {
+        "id": "data_init",
+        //https://github.com/cgrates/cgrates/blob/e1c822462c43019048808932e230b00b359ed839/agents/diamagent.go#L146
+        //"filters": ["*string:~*vars.*cmd:CCR", "*string:~*req.CC-Request-Type:1", "*string:~*req.Service-Context-Id:008.425.13.32251@3gpp.org"],
+        //"filters": ["*string:~*vars.*cmd:CCR", "*string:~*req.CC-Request-Type:1", "*string:~*req.Service-Context-Id:7.32251@3gpp.org"],
+        "filters": ["*string:~*vars.*cmd:CCR", "*string:~*req.CC-Request-Type:1","*gt:~*cgrep.MaxUsage:0"],
+        "flags": ["*initiate", "*accounts"],
+        "request_fields":[
+            {"tag": "TOR",          "field_id": "ToR",              "type": "*constant",    "value": "*data",                 "mandatory": true},
+            {"tag": "OriginHost",   "field_id": "OriginHost",       "type": "*variable",     "value": "~*req.Origin-Host",     "mandatory": true},
+            {"tag": "OriginID",     "field_id": "OriginID",         "type": "*variable",     "value": "~*req.Session-Id",      "mandatory": true},
+            {"tag": "RequestType",  "field_id": "RequestType",      "type": "*variable",     "value": "*prepaid",             "mandatory": true},
+            {"tag": "Tenant",       "field_id": "Tenant",           "type": "*variable",     "value": "golant",               "mandatory": true},
+            //{"tag": "Category",     "field_id": "Category",         "type": "*constant",    "value": "*attributes",           "mandatory": true},
+            {"tag": "Category",     "field_id": "Category",         "type": "*constant",    "value": "data",           "mandatory": true},
+            {"tag": "Account",      "field_id": "Account",          "type": "*variable",     "value": "~*req.Subscription-Id.Subscription-Id-Data[~Subscription-Id-Type(0)]", "mandatory": true },
+            {"tag": "Destination",  "field_id": "Destination",      "type": "*variable",    "value": "~*req.Service-Information.PS-Information.3GPP-SGSN-MCC-MNC",     "mandatory": true},
+            {"tag": "SetupTime",    "field_id": "SetupTime",        "type": "*variable",    "value": "~*req.Event-Timestamp", "mandatory": true},
+            {"tag": "AnswerTime",   "field_id": "AnswerTime",       "type": "*variable",    "value": "~*req.Event-Timestamp", "mandatory": true},
+            {"tag": "Usage",        "field_id": "Usage",            "type": "*constant",    "value": "10485760"}
+        ],
+        "reply_fields": [
+            {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
+            {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "4010",  "blocker": true,
+               // "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]}, 
+               "filters": ["*lte:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"]},
+            {"tag": "ResultCode",  "field_id": "Result-Code", "type": "*constant", "value": "2001", "filters": ["*empty:~*cgrep.Error:"]},
+            {"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+                //"filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>0)"], 
+                "filters": ["*gt:~*cgrep.MaxUsage{*duration_nanoseconds}:0"], 
+                "type": "*variable", "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", 
+                    //"value": "~*cgrep.MaxUsage{*duration_nanoseconds&*multiply:1048576&*round}",
+                    "mandatory": true},
+                {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", 
+                    //"filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>102400)"]},
+                    "filters": ["*gt:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"]},
+                       //{"tag": "GrantedUnits", "field_id": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
+                        //   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"],
+                        //   "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(-1)"],
+                        //   "type": "*constant", "value": "10485760", "mandatory": true},
+                
+           ],
+           
+},
       {
                 "id": "data_update",
                     //"filters": ["*string:~*vars.*cmd:CCR", "*string:~*req.CC-Request-Type:2", "*string:~*req.Service-Context-Id:008.425.13.32251@3gpp.org"],  
