@@ -37,15 +37,15 @@
                         {"tag":"UserName",			    "path":"*diamreq.User-Name",             "type":"*variable",			"mandatory":true,			"value":"~*req.User-Name"},			
                         {"tag":"OriginStateID",			"path":"*diamreq.Origin-State-Id",       "type":"*constant",			"value":"1"}
                     ],
-                "*rar": [
-                    {"tag": "SessionId", "path": "*diamreq.Session-Id", "type": "*variable", "value": "~*req.Session-Id", "mandatory": true},
-                    {"tag": "OriginHost", "path": "*diamreq.Origin-Host", "type": "*variable", "value": "~*req.Destination-Host", "mandatory": true},
-                    {"tag": "OriginRealm", "path": "*diamreq.Origin-Realm", "type": "*variable", "value": "~*req.Destination-Realm", "mandatory": true},
-                    {"tag": "DestinationRealm", "path": "*diamreq.Destination-Realm", "type": "*variable", "value": "~*req.Origin-Realm", "mandatory": true},
-                    {"tag": "DestinationHost", "path": "*diamreq.Destination-Host", "type": "*variable", "value": "~*req.Origin-Host", "mandatory": true},
-                    {"tag": "AuthApplicationId", "path": "*diamreq.Auth-Application-Id", "type": "*variable", "value": "~*vars.*appid", "mandatory": true},
-                    {"tag": "ReAuthRequestType", "path": "*diamreq.Re-Auth-Request-Type", "type": "*constant", "value": "0"},
-                ],
+             "*rar": [
+                        {"tag": "SessionId", "path": "*diamreq.Session-Id", "type": "*variable", "value": "~*req.Session-Id", "mandatory": true},
+                        {"tag": "OriginHost", "path": "*diamreq.Origin-Host", "type": "*variable", "value": "~*req.Destination-Host", "mandatory": true},
+                        {"tag": "OriginRealm", "path": "*diamreq.Origin-Realm", "type": "*variable", "value": "~*req.Destination-Realm", "mandatory": true},
+                        {"tag": "DestinationRealm", "path": "*diamreq.Destination-Realm", "type": "*variable", "value": "~*req.Origin-Realm", "mandatory": true},
+                        {"tag": "DestinationHost", "path": "*diamreq.Destination-Host", "type": "*variable", "value": "~*req.Origin-Host", "mandatory": true},
+                        {"tag": "AuthApplicationId", "path": "*diamreq.Auth-Application-Id", "type": "*variable", "value": "~*vars.*appid", "mandatory": true},
+                        {"tag": "ReAuthRequestType", "path": "*diamreq.Re-Auth-Request-Type", "type": "*constant", "value": "0"},
+                    ],
             "cca-custom": [
                     //Doublecheck everything is OK 
                     //{"tag": "ResultCode",  "path": "*rep.Result-Code", "filters": ["*rsr::~*cgrep.Error(^$)"],      "type": "*constant", "value": "2001"},
@@ -61,7 +61,7 @@
         {
         "id": "data_auth",
         "filters": ["*string:~*vars.*cmd:CCR", "*string:~*req.CC-Request-Type:1"],
-        "flags": ["*auth", "*accounts","*continue"],
+        "flags": ["*authorize", "*accounts","*continue"],
         "request_fields":[
             {"tag": "TOR",          "path": "*cgreq.ToR",              "type": "*constant",    "value": "*data",                 "mandatory": true},
             {"tag": "OriginHost",   "path": "*cgreq.OriginHost",       "type": "*variable",     "value": "~*req.Origin-Host",     "mandatory": true},
