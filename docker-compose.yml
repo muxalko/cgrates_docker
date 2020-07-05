@@ -134,6 +134,17 @@ services:
       - dynomite-net
       - rals-net
       - sessions-net
+    extra_hosts:
+      - 'cgr-lab-ptk-01:10.224.228.188'
+      - 'cgr-lab-hfa-01:10.192.196.188'
+      - 'ocs-db-ptk-node-01:10.224.243.58'
+      - 'ocs-db-hfa-node-01:10.192.211.58'
+      - 'prepaid-01-ptk:10.224.243.141'
+      - 'prepaid-01-hfa:10.192.211.141'
+      - 'ppcc-cgr-ptk-node-01:10.224.243.54'
+      - 'ppcc-cgr-hfa-node-01:10.192.211.54'
+      - 'cgr-ptk-master:10.224.243.11'
+      - 'cgr-ptk-backup:10.224.243.12'
     ports:
       - '${EXPOSE_ATTR}:2080'
     environment:
@@ -151,6 +162,7 @@ services:
       - './configs/cgrates/sessions:/etc/cgrates/sessions'
     networks:
       - redis-net
+      - dynomite-net
       - rals-net
       - sessions-net
     extra_hosts:
@@ -186,6 +198,8 @@ services:
     ports:
       - '${EXPOSE_DA}:3868'
     networks:
+      - redis-net
+      - dynomite-net
       - sessions-net
     logging: *default-logging
     
@@ -211,6 +225,8 @@ services:
       - 'ocs-db-hfa-node-01:10.192.211.58'
       - 'prepaid-01-ptk:10.224.243.141'
       - 'prepaid-01-hfa:10.192.211.141'
+      - 'ppcc-cgr-ptk-node-01:10.224.243.54'
+      - 'ppcc-cgr-hfa-node-01:10.192.211.54'
       - 'cgr-ptk-master:10.224.243.11'
       - 'cgr-ptk-backup:10.224.243.12'
     environment:
