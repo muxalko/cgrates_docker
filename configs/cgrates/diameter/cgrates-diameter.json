@@ -108,7 +108,7 @@
                 "filters": ["*gt:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"]},
             {"tag": "ResultCode",  "path": "*rep.Result-Code", "type": "*constant", "value": "2001", "filters": ["*empty:~*cgrep.Error:"]},
             {"tag": "GrantedUnits", "path": "*rep.Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "type": "*variable",
-              "filters": ["*gte:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"], 
+              //"filters": ["*gte:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"], 
                  "value": "~*cgrep.MaxUsage{*duration_nanoseconds}",  "mandatory": true}
            ]
            
@@ -152,7 +152,7 @@
                                     //{"tag": "ResultCode",  "path": "Result-Code", "type": "*constant", "value": "4012", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]},
                                     {"tag": "GrantedUnits", "path": "*rep.Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
                                         //"filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>0)"], 
-                                        "filters": ["*gt:~*cgrep.MaxUsage{*duration_nanoseconds}:0"], 
+                                        //"filters": ["*gt:~*cgrep.MaxUsage{*duration_nanoseconds}:0"], 
                                         "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", 
                                         //"filters": ["*gte:~*cgrep.MaxUsage:0s"],
                                         //"value": "~*cgrep.MaxUsage{*duration_nanoseconds&*multiply:1048576&*round}",
