@@ -107,7 +107,7 @@
             {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", 
                 "filters": ["*gt:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"]},
             {"tag": "ResultCode",  "path": "*rep.Result-Code", "type": "*constant", "value": "2001", "filters": ["*empty:~*cgrep.Error:"]},
-            {"tag": "GrantedUnits", "path": "*rep.Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets<~Rating-Group(1)>", "type": "*variable",
+            {"tag": "GrantedUnits", "path": "*rep.Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "type": "*variable",
               "filters": ["*gt:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"], 
                  "value": "~*cgrep.MaxUsage{*duration_nanoseconds}",  "mandatory": true}
            ]
