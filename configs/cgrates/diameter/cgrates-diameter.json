@@ -104,21 +104,13 @@
             {"tag": "Usage",        "path": "*cgreq.Usage",            "type": "*constant",    "value": "10485760"}
         ],
         "reply_fields": [
+            {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", 
+                "filters": ["*gt:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"]},
             {"tag": "ResultCode",  "path": "*rep.Result-Code", "type": "*constant", "value": "2001", "filters": ["*empty:~*cgrep.Error:"]},
-            {"tag": "GrantedUnits", "path": "*rep.Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "type": "*variable",
+            {"tag": "GrantedUnits", "path": "*rep.Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets<~Rating-Group(1)>", "type": "*variable",
               "filters": ["*gt:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"], 
-                 "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", 
-                    //"value": "~*cgrep.MaxUsage{*duration_nanoseconds&*multiply:1048576&*round}",
-                    "mandatory": true},
-                {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", 
-                    //"filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>102400)"]},
-                    "filters": ["*gt:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"]},
-                       //{"tag": "GrantedUnits", "path": "*rep.Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-                        //   "filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1"],
-                        //   "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(-1)"],
-                        //   "type": "*constant", "value": "10485760", "mandatory": true},
-                
-           ],
+                 "value": "~*cgrep.MaxUsage{*duration_nanoseconds}",  "mandatory": true}
+           ]
            
 },
       {
