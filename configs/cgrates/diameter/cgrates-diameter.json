@@ -109,8 +109,7 @@
             {"tag": "ResultCode",  "path": "*rep.Result-Code", "type": "*constant", "value": "2001", "filters": ["*empty:~*cgrep.Error:"]},
             {"tag": "GrantedUnits", "path": "*rep.Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", "type": "*variable",
               "filters": ["*gt:~*cgrep.MaxUsage:102400"],
-              "value": "~*cgrep.MaxUsage",
-              //"value": "~*cgrep.MaxUsage{*duration_nanoseconds}",
+              "value": "~*cgrep.MaxUsage{*duration_nanoseconds}",
               "mandatory": true}
            ]
            
@@ -134,7 +133,7 @@
                         {"tag": "AnswerTime",       "path": "*cgreq.AnswerTime",     "type": "*variable",  "value": "~*req.Event-Timestamp",         "mandatory": true},
                         {"tag": "Reporting-Reason", "path": "*cgreq.Reporting-Reason", "type": "*variable",  
                             //"filters": ["*rsr::~*req.Multiple-Services-Credit-Control.Reporting-Reason[~Rating-Group(1)](!^$)"],
-                            "value": "~*req.Multiple-Services-Credit-Control.Reporting-Reason<~Rating-Group(1)>", "mandatory": false},
+                        "value": "~*req.Multiple-Services-Credit-Control.Reporting-Reason<~Rating-Group(1)>", "mandatory": false},
                         {"tag": "Reporting-Reason", "path": "*cgreq.Reporting-Reason", "type": "*variable",  
                            //"filters": ["*rsr::~*req.Multiple-Services-Credit-Control.Used-Service-Unit.Reporting-Reason[~Rating-Group(1)](!^$)"],
                            "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.Reporting-Reason<~Rating-Group(1)>", "mandatory": false},
@@ -148,33 +147,15 @@
                     "reply_fields": [
                                     {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
                                     {"tag": "ResultCode",  "path": "*rep.Result-Code", "type": "*constant", "value": "4012",  "blocker": true,
-                                        //"filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]}, 
-                                        "filters": ["*lt:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"]},
-                                    {"tag": "ResultCode",  "path": "*rep.Result-Code", "type": "*constant", "value": "2001", "filters": ["*empty:~*cgrep.Error:"]},
-                                    //{"tag": "ResultCode",  "path": "Result-Code", "type": "*constant", "value": "4012", "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]},
+                                        "filters": ["*lt:~*cgrep.MaxUsage:102400"]},
+                                    {"tag": "ResultCode",  "path": "*rep.Result-Code", "type": "*constant", "value": "2001", 
+                                        "filters": ["*empty:~*cgrep.Error:"]},
                                     {"tag": "GrantedUnits", "path": "*rep.Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-                                        //"filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>0)"], 
-                                        //"filters": ["*gt:~*cgrep.MaxUsage{*duration_nanoseconds}:0"], 
+                                        "filters": ["*gt:~*cgrep.MaxUsage:102400"], 
                                         "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", 
-                                        //"filters": ["*gte:~*cgrep.MaxUsage:0s"],
-                                        //"value": "~*cgrep.MaxUsage{*duration_nanoseconds&*multiply:1048576&*round}",
                                         "type": "*variable",  "mandatory": true},
-                                    
-                                    //{"tag": "GrantedUnits", "path": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-                                        //"filters": ["*string:*cgrep.MaxUsage{*duration_nanoseconds}:-1 "],
-                                    //"filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>0)"],
-                                    //      "type": "*constant", "value": "10485760", "mandatory": true},
-                                    //{"tag": "GrantedUnits", "path": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets", 
-                                    //  "filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(>0)"],
-                                    //  "type": "*variable",  "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
-                                    //{"tag": "GrantedUnits", "path": "Multiple-Services-Credit-Control.Granted-Service-Unit.CC-Total-Octets",
-                                    //    "filters": ["*gte:~*cgrep.MaxUsage:0s"],
-                                    //    "type": "*variable",  "value": "~*cgrep.MaxUsage{*duration_nanoseconds}", "mandatory": true},
-                                    
                                     {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", 
-                                        //"filters": ["*rsr::~*cgrep.MaxUsage{*duration_nanoseconds}(<102400)"]}
-                                        "filters": ["*lt:~*cgrep.MaxUsage{*duration_nanoseconds}:102400"]}
-                                   
+                                        "filters": ["*lt:~*cgrep.MaxUsage:102400"]}
                    ]
       },
       {
@@ -195,10 +176,8 @@
                         {"tag": "SetupTime",                           "path": "*cgreq.SetupTime",                        "type": "*variable",      "value": "~*req.Event-Timestamp",     "mandatory": true},
                         {"tag": "AnswerTime",                          "path": "*cgreq.AnswerTime",                       "type": "*variable",      "value": "~*req.Event-Timestamp",     "mandatory": true},
                         {"tag": "Reporting-Reason", "path": "*cgreq.Reporting-Reason", "type": "*variable",  
-                            //"filters": ["*rsr::~*req.Multiple-Services-Credit-Control.Reporting-Reason[~Rating-Group(1)](!^$)"],
                             "value": "~*req.Multiple-Services-Credit-Control.Reporting-Reason<~Rating-Group(1)>", "mandatory": false},
                         {"tag": "Reporting-Reason", "path": "*cgreq.Reporting-Reason", "type": "*variable",  
-                            //"filters": ["*rsr::~*req.Multiple-Services-Credit-Control.Used-Service-Unit.Reporting-Reason[~Rating-Group(1)](!^$)"],
                             "value": "~*req.Multiple-Services-Credit-Control.Used-Service-Unit.Reporting-Reason<~Rating-Group(1)>", "mandatory": false},
                         {"tag": "Termination-Cause", "path": "*cgreq.Termination-Cause", "type": "*variable",  "value": "~*req.Termination-Cause", "mandatory": true},
                         {"tag": "LastUsed",     "path": "*cgreq.LastUsed",       "type": "*sum", 
