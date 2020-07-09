@@ -144,7 +144,7 @@
                     "reply_fields": [
                                     {"tag": "CCATemplate", "type": "*template", "value": "*cca"},
                                     {"tag": "CCATemplate", "type": "*template", "value": "cca-custom", 
-                                        "filters": ["*gt:~*cgrep.MaxUsage:102400"]}
+                                        "filters": ["*gt:~*cgrep.MaxUsage:102400"]},
                                     {"tag": "ResultCode",  "path": "*rep.Result-Code", "type": "*constant", "value": "4012",  "blocker": true,
                                         "filters": ["*lt:~*cgrep.MaxUsage:102400"]},
                                     {"tag": "ResultCode",  "path": "*rep.Result-Code", "type": "*constant", "value": "2001", 
