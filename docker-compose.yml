@@ -29,6 +29,8 @@ services:
       - 'prepaid-01-hfa:10.192.211.141'
       - 'cgr-ptk-master:10.224.243.11'
       - 'cgr-ptk-backup:10.224.243.12'
+      - 'cgr-hfa-master:10.192.211.11'
+      - 'cgr-hfa-backup:10.192.211.12'
     sysctls:
       net.core.somaxconn: '1024'
     logging: *default-logging
@@ -58,6 +60,8 @@ services:
       - 'prepaid-01-hfa:10.192.211.141'
       - 'cgr-ptk-master:10.224.243.11'
       - 'cgr-ptk-backup:10.224.243.12'
+      - 'cgr-hfa-master:10.192.211.11'
+      - 'cgr-hfa-backup:10.192.211.12'
     logging: *default-logging
     
   rals:
@@ -86,6 +90,8 @@ services:
       - 'prepaid-01-hfa:10.192.211.141'
       - 'cgr-ptk-master:10.224.243.11'
       - 'cgr-ptk-backup:10.224.243.12'
+      - 'cgr-hfa-master:10.192.211.11'
+      - 'cgr-hfa-backup:10.192.211.12'
     environment:
       - CGR_SERVICE=rals
     logging: *default-logging
@@ -116,6 +122,8 @@ services:
       - 'prepaid-01-hfa:10.192.211.141'
       - 'cgr-ptk-master:10.224.243.11'
       - 'cgr-ptk-backup:10.224.243.12'
+      - 'cgr-hfa-master:10.192.211.11'
+      - 'cgr-hfa-backup:10.192.211.12'
     environment:
       - CGR_SERVICE=cdrs
     logging: *default-logging
@@ -145,6 +153,8 @@ services:
       - 'ppcc-cgr-hfa-node-01:10.192.211.54'
       - 'cgr-ptk-master:10.224.243.11'
       - 'cgr-ptk-backup:10.224.243.12'
+      - 'cgr-hfa-master:10.192.211.11'
+      - 'cgr-hfa-backup:10.192.211.12'
     ports:
       - '${EXPOSE_ATTR}:2080'
     environment:
@@ -176,6 +186,8 @@ services:
       - 'ppcc-cgr-hfa-node-01:10.192.211.54'
       - 'cgr-ptk-master:10.224.243.11'
       - 'cgr-ptk-backup:10.224.243.12'
+      - 'cgr-hfa-master:10.192.211.11'
+      - 'cgr-hfa-backup:10.192.211.12'
     ports:
       - '${EXPOSE_SESS}:2080'
       - '${EXPOSE_SESS_REPL}:2012'
@@ -212,6 +224,8 @@ services:
       - 'ppcc-cgr-hfa-node-01:10.192.211.54'
       - 'cgr-ptk-master:10.224.243.11'
       - 'cgr-ptk-backup:10.224.243.12'
+      - 'cgr-hfa-master:10.192.211.11'
+      - 'cgr-hfa-backup:10.192.211.12'
     logging: *default-logging
     
   api:
@@ -240,6 +254,8 @@ services:
       - 'ppcc-cgr-hfa-node-01:10.192.211.54'
       - 'cgr-ptk-master:10.224.243.11'
       - 'cgr-ptk-backup:10.224.243.12'
+      - 'cgr-hfa-master:10.192.211.11'
+      - 'cgr-hfa-backup:10.192.211.12'
     environment:
       - CGR_SERVICE=api
     logging: *default-logging
