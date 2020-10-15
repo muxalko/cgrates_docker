@@ -1,0 +1,176 @@
+version: '3.7'
+x-logging:
+  &default-logging
+  options:
+    max-size: '100m'
+    max-file: '1'
+  driver: json-file
+  
+services:
+  redis:
+    image: 'bitnami/redis:4.0.11'
+    container_name: redis
+    volumes:
+      - '/traces/redis:/bitnami/redis'
+    env_file:
+      - ./env/${HOSTNAME}/redis.env
+    networks:
+      - redis-net
+    sysctls:
+      net.core.somaxconn: '1024'
+    logging: *default-logging
+    
+  dynomite:
+    image: 'gitlab-ptk.gt.local:5005/dynomite'
+    container_name: dynomite
+    restart: always
+    env_file:
+      - ./env/${HOSTNAME}/dynomite.env
+    volumes:
+      - './configs/dynomite/${HOSTNAME}:/etc/dynomite'
+    networks:
+      - redis-net
+      - dynomite-net
+    ports:
+      - '${EXPOSE_DYNO_CLIENT}:8101'
+      - '${EXPOSE_DYNO_STATS}:22222'
+    extra_hosts:
+      - 'cgr-lab-ptk-01:10.224.228.188'
+      - 'cgr-lab-hfa-01:10.192.196.188'
+      - 'ppcc-cgr-ptk-node-01:10.224.243.54'
+      - 'ppcc-cgr-hfa-node-01:10.192.211.54'
+    logging: *default-logging
+    
+  rals:
+    image: 'gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}'
+    container_name: rals
+    restart: always
+    env_file:
+      - ./env/${HOSTNAME}/common.env
+    volumes:
+      - './configs/cgrates/common:/etc/cgrates/common'
+      - './configs/cgrates/rals:/etc/cgrates/rals'
+    networks:
+      - dynomite-net
+      - rals-net
+    ports:
+      - '${EXPOSE_RALS}:2080'
+    extra_hosts:
+      - 'cgr-lab-ptk-01:10.224.228.188'
+      - 'cgr-lab-hfa-01:10.192.196.188'
+      - 'ocs-db-ptk-node-01:10.224.243.58'
+      - 'ocs-db-hfa-node-01:10.192.211.58'
+    environment:
+      - CGR-SERVICE=rals
+    logging: *default-logging
+    
+  cdrs:
+    image: 'gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}'
+    container_name: cdrs
+    restart: always
+    env_file:
+      - ./env/${HOSTNAME}/common.env
+    volumes:
+      - './configs/cgrates/common:/etc/cgrates/common'
+      - './configs/cgrates/cdrs:/etc/cgrates/cdrs'
+    networks:
+      - rals-net
+      - sessions-net
+    extra_hosts:
+      - 'cgr-lab-ptk-01:10.224.228.188'
+      - 'cgr-lab-hfa-01:10.192.196.188'
+      - 'ocs-db-ptk-node-01:10.224.243.58'
+      - 'ocs-db-hfa-node-01:10.192.211.58'
+    environment:
+      - CGR-SERVICE=cdrs
+    logging: *default-logging
+    
+  attributes:
+    image: 'gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}'
+    container_name: attributes
+    restart: always
+    env_file:
+      - ./env/${HOSTNAME}/common.env
+    volumes:
+      - './configs/cgrates/common:/etc/cgrates/common'
+      - './configs/cgrates/attributes:/etc/cgrates/attributes'
+    networks:
+      - dynomite-net
+      - rals-net
+      - sessions-net
+    ports:
+      - '${EXPOSE_ATTR}:2080'
+    environment:
+      - CGR-SERVICE=attributes
+    logging: *default-logging
+    
+  sessions:
+    image: 'gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}'
+    container_name: sessions
+    restart: always
+    env_file:
+      - ./env/${HOSTNAME}/common.env
+    volumes:
+      - './configs/cgrates/common:/etc/cgrates/common'
+      - './configs/cgrates/sessions:/etc/cgrates/sessions'
+    networks:
+      - rals-net
+      - sessions-net
+    ports:
+      - '${EXPOSE_SESS}:2080'
+    environment:
+      - CGR-SERVICE=sessions
+    logging: *default-logging
+    
+  api:
+    image: 'gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}'
+    container_name: api
+    restart: always
+    env_file:
+      - ./env/${HOSTNAME}/common.env
+    volumes:
+      - './configs/cgrates/common:/etc/cgrates/common'
+      - './configs/cgrates/api:/etc/cgrates/api'
+    ports:
+      - '${EXPOSE_API}:2080'
+    networks:
+      - dynomite-net
+    extra_hosts:
+      - 'cgr-lab-ptk-01:10.224.228.188'
+      - 'cgr-lab-hfa-01:10.192.196.188'
+      - 'ocs-db-ptk-node-01:10.224.243.58'
+      - 'ocs-db-hfa-node-01:10.192.211.58'
+    environment:
+      - CGR-SERVICE=api
+    logging: *default-logging
+
+  diameter_wrapper:
+    image: 'gitlab-ptk.gt.local:5005/docker'
+    container_name: diameter_wrapper
+    restart: always
+    volumes: 
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - './env/${HOSTNAME}/common.env:/env/common.env'
+      - './env/${HOSTNAME}/diameter.env:/env/diameter.env'
+    networks:
+      - sessions-net
+    logging: *default-logging
+    entrypoint:
+    - docker
+    - run
+    - --rm
+    - --name=diameter
+    - --env-file=/env/common.env
+    - --env-file=/env/diameter.env
+    - -p
+    - 3868:3868/sctp
+    - --volume=/home/golan/cgrates_docker/configs/cgrates/common:/etc/cgrates/common
+    - --volume=/home/golan/cgrates_docker/configs/cgrates/diameter:/etc/cgrates/diameter
+    - --network=ppcc_sessions-net
+    - gitlab-ptk.gt.local:5005/cgr-engine:${CGRATES_VERSION_TAG}
+          
+networks:
+  dynomite-net: null
+  redis-net: null
+  rals-net: null
+  sessions-net: null

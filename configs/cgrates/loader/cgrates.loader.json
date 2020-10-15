@@ -1,0 +1,13 @@
+{
+	"loader": {									// loader for tariff plans out of .csv files
+		"tpid": "GTP",								// tariff plan identificator
+		"data_path": "/usr/share/cgrates/golantp",						// path towards tariff plan files
+		"disable_reverse": false,				// disable reverse computing
+		"caches_conns":[						// addresses towards cacheS components for reloads
+			"caches_address_pool"
+		],
+		"scheduler_conns": [
+			"scheduler_conns"
+		],
+	}
+}

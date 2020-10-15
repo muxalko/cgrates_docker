@@ -10,4 +10,4 @@
 
 git add .
 git commit -m "update version $(cat CGRATES_VERSION_TAG)" 
-git push -u origin master
+git push -u origin $(git branch | awk '/\*/ { print $2; }')
